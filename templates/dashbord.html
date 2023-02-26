@@ -1,0 +1,53 @@
+<title>حساب کاربری | مرصانا</title>
+
+{% extends 'base.html' %}
+{% load static %}
+{% block header %}
+    {% include 'partials/header.html' %}
+{% endblock %}
+
+{% block content %}
+<section class="contact-section" style="direction: rtl;text-align: right;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <ul class="list-group">
+                    <li class="list-group-item tablinks active" onclick="showData(event , 'info')">حساب کاربری</li>
+                    <li class="list-group-item tablinks" onclick="showData(event , 'orders')">سفارشات</li>
+                    <li class="list-group-item tablinks" onclick="showData(event , 'address')">آدرس</li>
+                  </ul>
+            </div>
+            <div class="col-lg-9 tab-content " id="info" >
+                <div class="card ">
+                    <div class="card-header">info</div>
+                    <div class="card-body">Content</div>
+                    <div class="card-footer">Footer</div>
+                </div>
+            </div>
+            <div class="col-lg-9 tab-content" id="orders" >
+                <div class="card">
+                    <div class="card-header">orders</div>
+                    <div class="card-body">Content</div>
+                    <div class="card-footer">Footer</div>
+                </div>
+            </div>
+            <div class="col-lg-9 tab-content" id="address" >
+                <div class="card">
+                    <div class="card-header">address</div>
+                    <div class="card-body">Content</div>
+                    <div class="card-footer">Footer</div>
+                </div>
+            </div>
+        </div>
+    
+     </div>
+</section>
+{% endblock %}
+{% block footer %}
+{% include 'partials/footer.html' %}
+<script>
+    $(document).ready(function() {
+document.getElementById('info').style.display = "block";
+})
+</script>
+{% endblock %}
