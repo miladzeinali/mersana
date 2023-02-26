@@ -5,10 +5,9 @@
 {% block header %}
     {% include 'partials/header.html' %}
 {% endblock %}
-
-{% block content %}
- 	<!-- Page info -->
-     <div class="page-top-info">
+{% block hero%}
+	<!-- Page info -->
+    <div class="page-top-info">
 		<div class="container">
 			<h4>محصولات </h4>
 			<div class="site-pagination">
@@ -18,6 +17,10 @@
 		</div>
 	</div>
 	<!-- Page info end -->
+
+    {% endblock %}
+{% block content %}
+ 
 
 
 	<!-- Category section -->

@@ -5,19 +5,22 @@
 {% block header %}
     {% include 'partials/header.html' %}
 {% endblock %}
+{% block hero%}
+<!-- Page info -->
+   <div class="page-top-info">
+    <div class="container">
+        <h4>تایید کد </h4>
+        <div class="site-pagination">
+            <a href="">خانه</a> /
+            <a href="">ورود</a>
+        </div>
+    </div>
+</div>
+<!-- Page info end -->
 
+    {% endblock %}
 {% block content %}
-    <!-- Page info -->
-	<div class="page-top-info">
-		<div class="container">
-			<h4>تایید کد </h4>
-			<div class="site-pagination">
-				<a href="">خانه</a> /
-				<a href="">ورود</a>
-			</div>
-		</div>
-	</div>
-	<!-- Page info end -->
+ 
     <section class="contact-section" style="direction: rtl;text-align: right;">
         <div class="container ">
           <div class=" d-flex justify-content-center">

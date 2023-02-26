@@ -5,9 +5,7 @@
 {% block header %}
     {% include 'partials/header.html' %}
 {% endblock %}
-
-{% block content %}
-	<!-- Header section end -->
+{% block hero%}
     <!-- Page info -->
 	<div class="page-top-info">
 		<div class="container">
@@ -19,6 +17,10 @@
 		</div>
 	</div>
 	<!-- Page info end -->
+
+    {% endblock %}
+{% block content %}
+
     <section class="contact-section" style="direction: rtl;text-align: right;">
         <div class="container ">
           <div class=" d-flex justify-content-center">
