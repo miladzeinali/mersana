@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.contrib import messages.messages
 
 
 def OrderControl(self, request):
@@ -6,6 +7,10 @@ def OrderControl(self, request):
     data = request.data
     code = data['code']
     qty = data['qty']
+    if request.method == 'POST':
+        next = request.POST['next']
+    else:
+        next = 'products.html'
     try:
         order = Order.objects.get(user=user, status='Wpay')
         product = Product.objects.get(code=code)
@@ -19,30 +24,31 @@ def OrderControl(self, request):
                     orderitem.quantity += qty
                     orderitem.save()
                 else:
-                    return Response({'orderItem Maxmized'}, status.HTTP_400_BAD_REQUEST)
+                    return redirect(next,message = 'درخواست شما از موجودی بیشتر است :(')
             except:
                 OrderItem.objects.create(order=order, product=product,
                                          quantity=qty, price=price)
-            resp = ('product Added',)
-            return Response(resp, status=status.HTTP_200_OK)
+            return redirect(next,message = 'محصول با موفقیت به سبد خرید اضافه شد :)')
         else:
-            resp = ('product sold Out',)
-            return Response(resp, status=status.HTTP_404_NOT_FOUND)
+            return redirect(next,message = 'موجودی به پایان رسیده است :(')
     except:
-        order = Order.objects.create(user=user, status='Wpay')
         product = Product.objects.get(code=code)
         if product.count != 0 and product.count >= qty:
+            order = Order.objects.create(user=user, status='Wpay')
             OrderItem.objects.create(order=order, product=product, quantity=qty)
-            return Response(('product Added!',), status=status.HTTP_200_OK)
+            return redirect(next,message = 'محصول با موفقیت به سبد خرید اضافه شد :)')
         else:
-            order.delete()
-            return Response(('product sold Out',), status=status.HTTP_404_NOT_FOUND)
+            return redirect(next,message = 'موجودی به پایان رسیده است :(')
 
 
 def OrderItemChange(self, request):
     user = request.user
     code = request.data['code']
     qty = request.data['qty']
+    if request.method == 'POST':
+        next = request.POST['next']
+    else:
+        next = 'products.html'
     try:
         order = Order.objects.get(user=user, status='Wpay')
         product = Product.objects.get(code=code)
@@ -53,28 +59,30 @@ def OrderItemChange(self, request):
                 OrderItem.objects.get(order=order)
             except:
                 order.delete()
-            return Response({'product deleted'}, status=status.HTTP_200_OK)
+            return redirect(next,message = 'محصول از سبد خرید حذف شد :(')
         if product.count > orderitem.quantity:
             orderitem.quantity += qty
+            if orderitem.quantity > product.count:
+                return redirect(next,message = 'درخواست شما بیش از موجودی ماست :(')
             orderitem.save()
-            if orderitem.quantity == '0':
-                orderitem.delete({'orderitem deleted'}, status.HTTP_200_OK)
-                return Response()
-            return Response({'orderItem Maxmized'}, status.HTTP_400_BAD_REQUEST)
-        return Response({'OrderItem modified'}, status=status.HTTP_200_OK)
+        return redirect(next,message = 'تعداد با موفقیت افزوده شد :)')
     except:
-        return Response({'error in modifing Order Item'}, status=status.HTTP_304_NOT_MODIFIED)
+        return redirect('web:home',message = 'اشکال در فرایند، با پشتیبانی تماس بگیرید !')
 
 
 def OrderItemDelete(self, request):
     user = request.user
     code = request.data['code']
+    if request.method == 'POST':
+        next = request.POST['next']
+    else:
+        next = 'products.html'
     try:
         order = Order.objects.get(user=user, status='Wpay')
         product = Product.objects.get(code=code)
         orderitem = OrderItem.objects.get(order=order, product=product)
         orderitem.delete()
         product.count += orderitem.quantity
-        return Response({'OrderItem Deleted'}, status=status.HTTP_200_OK)
+        return redirect(next)
     except:
-        return Response({'error in OrderItem Deleting'}, status=status.HTTP_304_NOT_MODIFIED)
+        return redirect(next)
