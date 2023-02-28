@@ -61,10 +61,14 @@ class Product(models.Model):
     CountryMade = models.CharField(max_length=150 ,null=True, blank=True)
     YearMade = models.CharField(max_length=150 ,null=True, blank=True)
     Capacity = models.CharField(max_length=150 ,null=True, blank=True)
+    gift = models.CharField(max_length=150 ,null=True, blank=True)
 
     def __str__(self):
         return str(self.title) + '-' + str(self.code)
 
+class ProductImages(models.Model):
+    product = models.ForeignKey(Product,on_delete=models.CASCADE,default=1)
+    img = models.ImageField(null=True, blank=True, upload_to='product-img/detail/')
 
 class Transaction(models.Model):
     choices = (('ci', 'cash_in'), ('co', 'cash_out'), ('tr', 'transfer'))

@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'web',
     'mersana',
-    'account'
+    'account',
+    'Product',
+    'cart',
 ]
 
 MIDDLEWARE = [

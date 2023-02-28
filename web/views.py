@@ -1,7 +1,13 @@
 from django.shortcuts import render
+from Product.models import *
 
 def Home(request):
     return render(request,'home.html')
+
+def Shop(request):
+    products = Product.objects.all()[0:4]
+    return render(request,'products.html',{products:'products'})
+
 
 def Userregister(request):
     if request.method == 'POST':
