@@ -1,5 +1,11 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages.messages
+from web.models import
+
+
+def Products(request):
+
+
 
 
 def OrderControl(self, request):
