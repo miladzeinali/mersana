@@ -157,82 +157,45 @@
 					</ul>
 				</div>
 			</div>
-		
+			{{products.length}}
+			{% if products %}
+
 			<div class="col-lg-9  order-1 order-lg-1 mb-5 mb-lg-0">
-				<div class="row">
+				<div class="row" style="direction: rtl;">
+					{% for product in products	%}
 					<div class="col-lg-4 col-sm-6">
 						<div class="product-item">
-							<div class="pi-pic">
-								<div class="tag-sale">فروخته شد</div>
-								<img src="{% static 'img/products/DSC_8813.png' %}" alt="">
-								<div class="pi-links">
-									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>افزودن به سبد
-											خرید</span></a>
-									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+							<a href="{%	url 'product:product' product.id %}">
+								<div class="pi-pic">
+									<div class="tag-sale">فروخته شد</div>
+									<img src="{% static 'img/products/DSC_8813.png' %}" alt="">
+									<div class="pi-links">
+										<a href="#" class="add-card"><i class="flaticon-bag"></i><span>افزودن به سبد
+												خرید</span></a>
+										<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+									</div>
 								</div>
-							</div>
+							</a>
+							
 							<div class="pi-text">
 								<h6>
-									<p>Black and </p>
+									<p>{{product.title}} </p>
 
-									<span>35,000</span>
+									<span>{{product.price}}</span>
 									تومان
 
 								</h6>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 col-sm-6">
-						<div class="product-item">
-							<div class="pi-pic">
-								<img src="{% static 'img/products/DSC_8815.png' %}" alt="">
-								<div class="pi-links">
-									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>افزودن به سبد خرید
-										</span></a>
-									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-								</div>
-							</div>
-							<div class="pi-text">
-								
-								<p>Flamboyant Pink</p>
-								<h6>
-									<span>35,000</span>
-									تومان
-
-								</h6>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-sm-6">
-						<div class="product-item">
-							<div class="pi-pic">
-								<img src="{% static 'img/products/DSC_8814.png' %}" alt="">
-								<div class="pi-links">
-									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>افزودن به سبد
-											خرید</span></a>
-									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-								</div>
-							</div>
-							<div class="pi-text">
-								<h6>
-									<p>Flamboyant Pink </p>
-
-									<span>35,000</span>
-									تومان
-
-								</h6>
-
-							</div>
-						</div>
-					</div>
-
+					{% endfor %}
 
 					<div class="text-center w-100 pt-3">
 						<button class="site-btn sb-line sb-dark">موارد بیشتر </button>
 					</div>
 				</div>
 			</div>
-	
+			{% endif %}
 		</div>
 	</div>
 </section>

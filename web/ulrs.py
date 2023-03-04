@@ -5,7 +5,7 @@ from Product.views import *
 app_name = 'web'
 urlpatterns = [
     path('', Home, name='home'),
-    path('products/',Shop,name="products"),
+    # path('products/',Shop,name="products"),
     path('register/',Userregister,name='register'),
     path('verify/',UserVerify,name='userverify'),
     path('forgetpass/',UserForgetPass,name='forgetpass'),

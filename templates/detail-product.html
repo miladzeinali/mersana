@@ -25,12 +25,12 @@
 	<section class="product-section">
 		<div class="container">
 			<div class="back-link">
-				<a href="{% url 'web:products' %}"> بازگشت به محصولات&lt;&lt;   </a>
+				<a href="{% url 'product:products' %}"> بازگشت به محصولات &raquo;   </a>
 			</div>
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="product-pic-zoom">
-						<img class="product-big-img" src="{% static 'img/products/DSC_8813.png' %}" alt="">
+						<img class="product-big-img" src="{{product.image.url}}" alt="">
 					</div>
 					<!-- <div class="product-thumbs" tabindex="1" style="overflow: hidden; outline: none;">
 						<div class="product-thumbs-track">
@@ -42,8 +42,8 @@
 					</div> -->
 				</div>
 				<div class="col-lg-6 product-details">
-					<h2 class="p-title">White peplum top</h2>
-					<h3 class="p-price">تومان39.90</h3>
+					<h2 class="p-title">{{product.title}}</h2>
+					<h3 class="p-price">تومان{{product.price}}</h3>
 					<h4 class="p-stock">موجود: <span>در فروشگاه</span></h4>
 					<div class="p-rating">
 						<i class="fa fa-star-o"></i>
@@ -90,7 +90,7 @@
 					<div id="accordion" class="accordion-area">
 						<div class="panel">
 							<div class="panel-header" id="headingOne">
-								<button class="panel-link active" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">information</button>
+								<button class="panel-link active" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">مشخصات محصول</button>
 							</div>
 							<div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 								<div class="panel-body">
@@ -103,7 +103,7 @@
 						</div>
 						<div class="panel">
 							<div class="panel-header" id="headingTwo">
-								<button class="panel-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">care details </button>
+								<button class="panel-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">توضیحات تکمیلی  </button>
 							</div>
 							<div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 								<div class="panel-body">
@@ -114,7 +114,7 @@
 						</div>
 						<div class="panel">
 							<div class="panel-header" id="headingThree">
-								<button class="panel-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">shipping & Returns</button>
+								<button class="panel-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">بازگشت کالا </button>
 							</div>
 							<div id="collapse3" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
 								<div class="panel-body">

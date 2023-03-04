@@ -5,5 +5,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('web.ulrs')),
-    # path('shop/', include('Product.ulrs')),
+    path('shop/', include('Product.urls')),
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
