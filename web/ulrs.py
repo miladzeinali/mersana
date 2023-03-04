@@ -4,7 +4,6 @@ from .views import *
 app_name = 'web'
 urlpatterns = [
     path('', Home, name='home'),
-    path('', Product, name='products'),
 
     path('register/',Userregister,name='register'),
     path('verify/',UserVerify,name='userverify'),
