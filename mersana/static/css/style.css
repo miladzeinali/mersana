@@ -1285,6 +1285,7 @@ ol {
 .page-top-info {
 	background: #f8f7f7;
 	padding: 60px 0 70px;
+	text-align: right;
 }
 
 .page-top-info h4 {
