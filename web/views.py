@@ -1,9 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from Product.models import *
+from django.contrib import messages
+from cart.models import Order,OrderItem
+from account.models import Favorits
 
 def Home(request):
     newest = Product.objects.all()
-    return render(request,'home.html',{'newest':newest})
+    orderitems = []
+    user = request.user
+    if user.is_authenticated:
+        try:
+            favorits = Favorits.objects.filter(user=user)
+            countFave = len(favorits)
+            order = Order.objects.get(user=user,status='wpay')
+            orderitems = OrderItem.objects.filter(order=order)
+        except:
+            pass
+    return render(request,'home.html',{'newest':newest,'orderitems':orderitems,'favorits':countFave})
 
 def Shop(request):
     products = Product.objects.all()[0:4]
@@ -133,11 +146,10 @@ def Dashbord(request):
             return render(request,'dashbord.html',{'profile':userProfile})
         else:
             messages.error(request, 'برای دسترسی ابتدا وارد شوید!', 'error')
-            return redirect('account:home')
+            return redirect('web:home')
     except:
         messages.error(request,'اشکال در ارتباط با داشبورد','error')
-        return render(request,'dashbord.html')
-        return redirect('account:home')
+        return redirect('web:home')
 
 def UserLogin(request):
     if request.method == "POST":

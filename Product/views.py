@@ -15,13 +15,13 @@ def ProductDetail(request,id):
 def GenMale(request):
     try:
         products = Product.objects.filter(gender=False)
-        return render(request,'GenMale.html',{'products':products})
+        return render(request,'products.html',{'products':products})
     except:
         return redirect('web:home')
 
 def GenFemale(request):
     try:
         products = Product.objects.filter(gender=True)
-        return render(request,'GenFemale.html',{'products':products})
+        return render(request,'products.html',{'products':products})
     except:
         return redirect('web:home')

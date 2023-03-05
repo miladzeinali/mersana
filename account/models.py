@@ -33,3 +33,7 @@ class ValidationCode(models.Model):
     mobile = models.CharField(max_length=11,null=True,blank=True)
     validation_code = models.CharField(max_length=5,null=True,blank=True)
     time_created = models.DateTimeField(null=True,blank=True)
+
+class Favorits(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,default=1)
+    code = models.CharField(max_length=20)
