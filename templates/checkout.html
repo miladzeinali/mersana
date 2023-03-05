@@ -7,115 +7,253 @@
 {% endblock %}
 {% block hero %}
     <!-- Page info -->
-	<div class="page-top-info">
-		<div class="container">
-			<h4>Your cart</h4>
-			<div class="site-pagination">
-				<a href="">Home</a> /
-				<a href="">Your cart</a>
-			</div>
-		</div>
-	</div>
-	<!-- Page info end -->
+
 {% endblock %}
 {% block content %}
-	<!-- checkout section  -->
-	<section class="checkout-section spad">
+<div class="page-header text-center" style="background-image: url('static/images/page-header-bg.jpg')">
+	<div class="container">
+		<h1 class="page-title">صفحه پرداخت<span>فروشگاه</span></h1>
+	</div><!-- End .container -->
+</div><!-- End .page-header -->
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
+	<div class="container">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="index-1.html">خانه</a></li>
+			<li class="breadcrumb-item"><a href="#">فروشگاه</a></li>
+			<li class="breadcrumb-item active" aria-current="page">صفحه پرداخت</li>
+		</ol>
+	</div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
+<div class="page-content">
+	<div class="checkout">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 order-2 order-lg-1">
-					<form class="checkout-form">
-						<div class="cf-title">Billing Address</div>
+			<div class="checkout-discount">
+				<form action="#">
+					<input type="text" class="form-control" required id="checkout-discount-input">
+					<label for="checkout-discount-input" class="text-truncate">کد تخفیف دارید؟ <span>برای
+							وارد کردن کد تخفیف خود اینجا کلیک کنید</span></label>
+				</form>
+			</div><!-- End .checkout-discount -->
+			<form action="#">
+				<div class="row">
+					<div class="col-lg-9">
+						<h2 class="checkout-title">جزئیات صورت حساب</h2><!-- End .checkout-title -->
 						<div class="row">
-							<div class="col-md-7">
-								<p>*Billing Information</p>
-							</div>
-							<div class="col-md-5">
-								<div class="cf-radio-btns address-rb">
-									<div class="cfr-item">
-										<input type="radio" name="pm" id="one">
-										<label for="one">Use my regular address</label>
-									</div>
-									<div class="cfr-item">
-										<input type="radio" name="pm" id="two">
-										<label for="two">Use a different address</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row address-inputs">
-							<div class="col-md-12">
-								<input type="text" placeholder="Address">
-								<input type="text" placeholder="Address line 2">
-								<input type="text" placeholder="Country">
-							</div>
-							<div class="col-md-6">
-								<input type="text" placeholder="Zip code">
-							</div>
-							<div class="col-md-6">
-								<input type="text" placeholder="Phone no.">
-							</div>
-						</div>
-						<div class="cf-title">Delievery Info</div>
-						<div class="row shipping-btns">
-							<div class="col-6">
-								<h4>Standard</h4>
-							</div>
-							<div class="col-6">
-								<div class="cf-radio-btns">
-									<div class="cfr-item">
-										<input type="radio" name="shipping" id="ship-1">
-										<label for="ship-1">Free</label>
-									</div>
-								</div>
-							</div>
-							<div class="col-6">
-								<h4>Next day delievery  </h4>
-							</div>
-							<div class="col-6">
-								<div class="cf-radio-btns">
-									<div class="cfr-item">
-										<input type="radio" name="shipping" id="ship-2">
-										<label for="ship-2">$3.45</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="cf-title">Payment</div>
-						<ul class="payment-list">
-							<li>Paypal<a href="#"><img src="img/paypal.png" alt=""></a></li>
-							<li>Credit / Debit card<a href="#"><img src="img/mastercart.png" alt=""></a></li>
-							<li>Pay when you get the package</li>
-						</ul>
-						<button class="site-btn submit-order-btn">Place Order</button>
-					</form>
-				</div>
-				<div class="col-lg-4 order-1 order-lg-2">
-					<div class="checkout-cart">
-						<h3>Your Cart</h3>
-						<ul class="product-list">
-							<li>
-								<div class="pl-thumb"><img src="img/cart/1.jpg" alt=""></div>
-								<h6>Animal Print Dress</h6>
-								<p>$45.90</p>
-							</li>
-							<li>
-								<div class="pl-thumb"><img src="img/cart/2.jpg" alt=""></div>
-								<h6>Animal Print Dress</h6>
-								<p>$45.90</p>
-							</li>
-						</ul>
-						<ul class="price-list">
-							<li>Total<span>$99.90</span></li>
-							<li>Shipping<span>free</span></li>
-							<li class="total">Total<span>$99.90</span></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- checkout section end -->
+							<div class="col-sm-6">
+								<label>نام *</label>
+								<input type="text" class="form-control" required>
+							</div><!-- End .col-sm-6 -->
+
+							<div class="col-sm-6">
+								<label>نام خانوادگی *</label>
+								<input type="text" class="form-control" required>
+							</div><!-- End .col-sm-6 -->
+						</div><!-- End .row -->
+
+						<label>نام شرکت (اختیاری)</label>
+						<input type="text" class="form-control">
+
+						<label>کشور *</label>
+						<input type="text" class="form-control" required>
+
+						<div class="row">
+							<div class="col-sm-6">
+								<label>شهر *</label>
+								<input type="text" class="form-control" required>
+
+							</div><!-- End .col-sm-6 -->
+
+							<div class="col-sm-6">
+								<label>شهرستان *</label>
+								<input type="text" class="form-control" required>
+							</div><!-- End .col-sm-6 -->
+						</div><!-- End .row -->
+						<div class="row">
+							<div class="col-sm-12">
+								<label>خیابان *</label>
+								<input type="text" class="form-control" placeholder="نام خیابان و پلاک"
+									required>
+
+							</div><!-- End .col-sm-12 -->
+
+						</div><!-- End .row -->
+
+						<div class="row">
+							<div class="col-sm-6">
+								<label>کد پستی *</label>
+								<input type="text" class="form-control" required>
+							</div><!-- End .col-sm-6 -->
+
+							<div class="col-sm-6">
+								<label>تلفن *</label>
+								<input type="tel" class="form-control" required>
+							</div><!-- End .col-sm-6 -->
+						</div><!-- End .row -->
+
+						<label>ایمیل *</label>
+						<input type="email" class="form-control" required>
+
+						<div class="custom-control custom-checkbox">
+							<input type="checkbox" class="custom-control-input" id="checkout-create-acc">
+							<label class="custom-control-label" for="checkout-create-acc">ایجاد یک حساب
+								کاربری؟</label>
+						</div><!-- End .custom-checkbox -->
+
+						<div class="custom-control custom-checkbox">
+							<input type="checkbox" class="custom-control-input" id="checkout-diff-address">
+							<label class="custom-control-label" for="checkout-diff-address">ارسال به یک آدرس
+								متفاوت؟</label>
+						</div><!-- End .custom-checkbox -->
+
+						<label>توضیحات (اختیاری)</label>
+						<textarea class="form-control" cols="30" rows="4"
+							placeholder="شما میتوانید توضیحات اضافی خود را اینجا بنویسید"></textarea>
+					</div><!-- End .col-lg-9 -->
+					<aside class="col-lg-3">
+						<div class="summary">
+							<h3 class="summary-title">سفارش شما</h3><!-- End .summary-title -->
+
+							<table class="table table-summary">
+								<thead>
+									<tr>
+										<th>محصول</th>
+										<th class="text-left">جمع</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td><a href="#">کتونی ورزشی مخصوص دویدن رنگ بژ</a></td>
+										<td class="text-left">84,000 تومان</td>
+									</tr>
+
+									<tr>
+										<td><a href="#">سارافون آبی بلند</a></td>
+										<td class="text-left">152,000 تومان</td>
+									</tr>
+									<tr class="summary-subtotal">
+										<td>جمع سبد خرید</td>
+										<td class="text-left">236,000 تومان</td>
+									</tr><!-- End .summary-subtotal -->
+									<tr>
+										<td>شیوه ارسال : </td>
+										<td class="text-left">ارسال رایگان</td>
+									</tr>
+									<tr class="summary-total">
+										<td>مبلغ قابل پرداخت :</td>
+										<td class="text-left">236,000 تومان</td>
+									</tr><!-- End .summary-total -->
+								</tbody>
+							</table><!-- End .table table-summary -->
+
+							<div class="accordion-summary" id="accordion-payment">
+								<div class="card">
+									<div class="card-header" id="heading-1">
+										<h2 class="card-title">
+											<a role="button" data-toggle="collapse" href="#collapse-1"
+												aria-expanded="true" aria-controls="collapse-1">
+												درگاه بانک ملت
+											</a>
+										</h2>
+									</div><!-- End .card-header -->
+									<div id="collapse-1" class="collapse show" aria-labelledby="heading-1"
+										data-parent="#accordion-payment">
+										<div class="card-body">
+											لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن
+											ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید
+											سادگی نامفهوم.
+										</div><!-- End .collapse -->
+									</div><!-- End .card -->
+
+									<div class="card">
+										<div class="card-header" id="heading-2">
+											<h2 class="card-title">
+												<a class="collapsed" role="button" data-toggle="collapse"
+													href="#collapse-2" aria-expanded="false"
+													aria-controls="collapse-2">
+													درگاه شاپرک
+												</a>
+											</h2>
+										</div><!-- End .card-header -->
+										<div id="collapse-2" class="collapse" aria-labelledby="heading-2"
+											data-parent="#accordion-payment">
+											<div class="card-body">
+												لورم ایپسوم متن ساختگی با تولید سادگی نامفهوملورم ایپسوم متن
+												ساختگی با تولید سادگی نامفهوم.
+											</div><!-- End .card-body -->
+										</div><!-- End .collapse -->
+									</div><!-- End .card -->
+
+									<div class="card">
+										<div class="card-header" id="heading-3">
+											<h2 class="card-title">
+												<a class="collapsed" role="button" data-toggle="collapse"
+													href="#collapse-3" aria-expanded="false"
+													aria-controls="collapse-3">
+													زرین پال <small class="float-left paypal-link">زرین پال
+														چیست؟</small>
+												</a>
+											</h2>
+										</div><!-- End .card-header -->
+										<div id="collapse-3" class="collapse" aria-labelledby="heading-3"
+											data-parent="#accordion-payment">
+											<div class="card-body">لورم ایپسوم متن ساختگی با تولید سادگی
+												نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم.
+											</div><!-- End .card-body -->
+										</div><!-- End .collapse -->
+									</div><!-- End .card -->
+
+									<div class="card">
+										<div class="card-header" id="heading-4">
+											<h2 class="card-title">
+												<a class="collapsed" role="button" data-toggle="collapse"
+													href="#collapse-4" aria-expanded="false"
+													aria-controls="collapse-4">
+													واریز بانک
+												</a>
+											</h2>
+										</div><!-- End .card-header -->
+										<div id="collapse-4" class="collapse" aria-labelledby="heading-4"
+											data-parent="#accordion-payment">
+											<div class="card-body">
+												لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم
+												متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با
+												تولید سادگی نامفهوم.
+											</div><!-- End .card-body -->
+										</div><!-- End .collapse -->
+									</div><!-- End .card -->
+
+									<div class="card">
+										<div class="card-header" id="heading-5">
+											<h2 class="card-title">
+												<a class="collapsed" role="button" data-toggle="collapse"
+													href="#collapse-5" aria-expanded="false"
+													aria-controls="collapse-5">
+													کارت به کارت
+												</a>
+											</h2>
+										</div><!-- End .card-header -->
+										<div id="collapse-5" class="collapse" aria-labelledby="heading-5"
+											data-parent="#accordion-payment">
+											<div class="card-body"> لورم ایپسوم متن ساختگی با تولید سادگی
+												نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم.
+											</div><!-- End .card-body -->
+										</div><!-- End .collapse -->
+									</div><!-- End .card -->
+								</div><!-- End .accordion -->
+
+								<button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+									<span class="btn-text">ثبت</span>
+									<span class="btn-hover-text">پرداخت</span>
+								</button>
+							</div><!-- End .summary -->
+					</aside><!-- End .col-lg-3 -->
+				</div><!-- End .row -->
+			</form>
+		</div><!-- End .container -->
+	</div><!-- End .checkout -->
+</div><!-- End .page-content -->
 {% endblock %}
 {% block footer %}
 {% include 'partials/footer.html' %}
