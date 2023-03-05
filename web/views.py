@@ -2,7 +2,8 @@ from django.shortcuts import render
 from Product.models import *
 
 def Home(request):
-    return render(request,'home.html')
+    newest = Product.objects.all()
+    return render(request,'home.html',{'newest':newest})
 
 def Shop(request):
     products = Product.objects.all()[0:4]
