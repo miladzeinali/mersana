@@ -16,7 +16,7 @@ def Home(request):
             orderitems = OrderItem.objects.filter(order=order)
         except:
             pass
-    return render(request,'home.html',{'newest':newest,'orderitems':orderitems,'favorits':countFave})
+    return render(request,'home.html',{'newest':newest,'orderitems':orderitems})
 
 def Shop(request):
     products = Product.objects.all()[0:4]

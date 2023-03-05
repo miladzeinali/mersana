@@ -21,35 +21,58 @@
     {% endblock %}
 {% block content %}
  
-    <section class="contact-section" style="direction: rtl;text-align: right;">
-        <div class="container ">
-          <div class=" d-flex justify-content-center">
-            <div class="col-lg-5">
-                <div class="card">
-                    <div class="card-header">
-                        <h4> کد تایید</h4>
-                    </div>
-                    <div class="card-body">
-                        <form class="form-inline">
-                            <div class="form-group mb-2">
-                              <label for="staticEmail2" class="sr-only">Email</label>
-                              <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
-                            </div>
-                            <div class="form-group mx-sm-3 mb-2">
-                              <label for="inputPassword2" class="sr-only">Password</label>
-                              <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
-                            </div>
-                            <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
-                          </form>
-                    </div>
-                 
-                </div>
-            </div>
-           
-          </div>
-        
-         </div>
-    </section>
+<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index-1.html">خانه</a></li>
+            <li class="breadcrumb-item"><a href="#">صفحات</a></li>
+            <li class="breadcrumb-item active" aria-current="page">ورود </li>
+        </ol>
+    </div><!-- End .container -->
+  </nav><!-- End .breadcrumb-nav -->
+  
+  <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17"
+    style="background-image: url('static/images/backgrounds/login-bg.jpg')">
+    <div class="container">
+        <div class="form-box">
+            <div class="form-tab">
+                <ul class="nav nav-pills nav-fill" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab"
+                            aria-controls="signin-2" aria-selected="true">کد تائید</a>
+                    </li>
+                  
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane  active" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
+                        <form action="#">
+                            <div class="form-group">
+                                <label for="singin-email-2">   کد تایید   *</label>
+                                <input type="text" class="form-control" id="singin-email-2"
+                                    name="singin-email" required>
+                            </div><!-- End .form-group -->
+  
+  
+  
+                            <div class="form-footer">
+                                <button type="submit" class="btn btn-outline-primary-2">
+                                    <span>ارسال</span>
+                                    <i class="icon-long-arrow-left"></i>
+                                </button>
+  
+                              
+  
+                            </div><!-- End .form-footer -->
+                        </form>
+                       
+                    </div><!-- .End .tab-pane -->
+                   
+                    <!-- .End .tab-pane -->
+                </div><!-- End .tab-content -->
+            </div><!-- End .form-tab -->
+        </div><!-- End .form-box -->
+    </div><!-- End .container -->
+  </div><!-- End .login-page section-bg -->
 {% endblock %}
 {% block footer %}
 {% include 'partials/footer.html' %}
