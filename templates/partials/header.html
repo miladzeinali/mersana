@@ -55,15 +55,15 @@
                 </div><!-- End .header-search -->
             </div>
             <div class="header-center">
-                <a href="index-1.html" class="logo">
-                    <img src="{% static 'images/demos/demo-6/logo.png' %}" alt="Molla Logo" width="82" height="20">
+                <a class="logo">
+                    <img src="{% static 'images/logo/logo.png' %}" href="{% url 'web:home' %}" alt="Molla Logo" width="82" height="20">
                 </a>
             </div><!-- End .header-left -->
 
             <div class="header-right">
                 <a href="wishlist.html" class="wishlist-link">
                     <i class="icon-heart-o"></i>
-                    <span class="wishlist-count">3</span>
+                    <span class="wishlist-count">{{ countfave }}</span>
                     <span class="wishlist-txt">علاقه مندی</span>
                 </a>
 
@@ -71,57 +71,59 @@
                     <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" data-display="static">
                         <i class="icon-shopping-cart"></i>
-                        <span class="cart-count">2</span>
-                        <span class="cart-txt">164,000 تومان</span>
+                        <span class="cart-count">{{ countitems }}</span>
+                        <span class="cart-txt">{{ total }} تومان </span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right">
+
                         <div class="dropdown-cart-products">
+                            {% for orderitem in orderitems %}
                             <div class="product">
                                 <div class="product-cart-details">
                                     <h4 class="product-title">
-                                        <a href="product.html">کتونی ورزشی مخصوص دویدن رنگ بژ</a>
+                                        <a href="">{{ orderitem.product.title }}</a>
                                     </h4>
 
                                     <span class="cart-product-info">
-                                        <span class="cart-product-qty">1 x </span>
-                                        84,000 تومان
+                                        <span class="cart-product-qty">{{orderitem.quantity}} x </span>
+                                        {{orderitem.price}} تومان
                                     </span>
                                 </div><!-- End .product-cart-details -->
 
                                 <figure class="product-image-container">
                                     <a href="product.html" class="product-image">
-                                        <img src="{% static 'images/products/cart/product-1.jpg' %}" alt="محصول">
+                                        <img src="{{ orderitem.product.image.url }}" alt="محصول">
                                     </a>
                                 </figure>
                                 <a href="#" class="btn-remove" title="حذف محصول"><i class="icon-close"></i></a>
                             </div><!-- End .product -->
-
-                            <div class="product">
-                                <div class="product-cart-details">
-                                    <h4 class="product-title">
-                                        <a href="product.html">لباس زنانه آبی</a>
-                                    </h4>
-
-                                    <span class="cart-product-info">
-                                        <span class="cart-product-qty">1 x </span>
-                                        76,000 تومان
-                                    </span>
-                                </div><!-- End .product-cart-details -->
-
-                                <figure class="product-image-container">
-                                    <a href="product.html" class="product-image">
-                                        <img src="{% static 'images/products/cart/product-2.jpg' %}" alt="محصول">
-                                    </a>
-                                </figure>
-                                <a href="#" class="btn-remove" title="حذف محصول"><i class="icon-close"></i></a>
-                            </div><!-- End .product -->
+                            {% endfor %}
+{#                            <div class="product">#}
+{#                                <div class="product-cart-details">#}
+{#                                    <h4 class="product-title">#}
+{#                                        <a href="product.html">لباس زنانه آبی</a>#}
+{#                                    </h4>#}
+{##}
+{#                                    <span class="cart-product-info">#}
+{#                                        <span class="cart-product-qty">1 x </span>#}
+{#                                        76,000 تومان#}
+{#                                    </span>#}
+{#                                </div><!-- End .product-cart-details -->#}
+{##}
+{#                                <figure class="product-image-container">#}
+{#                                    <a href="product.html" class="product-image">#}
+{#                                        <img src="{% static 'images/products/cart/product-2.jpg' %}" alt="محصول">#}
+{#                                    </a>#}
+{#                                </figure>#}
+{#                                <a href="#" class="btn-remove" title="حذف محصول"><i class="icon-close"></i></a>#}
+{#                            </div><!-- End .product -->#}
                         </div><!-- End .cart-product -->
 
                         <div class="dropdown-cart-total">
                             <span>مجموع</span>
 
-                            <span class="cart-total-price">160,000 تومان</span>
+                            <span class="cart-total-price">{{total}} تومان</span>
                         </div><!-- End .dropdown-cart-total -->
 
                         <div class="dropdown-cart-action">

@@ -7,16 +7,22 @@ from account.models import Favorits
 def Home(request):
     newest = Product.objects.all()
     orderitems = []
+    countitems = []
+    total = 0
     user = request.user
     if user.is_authenticated:
         try:
             favorits = Favorits.objects.filter(user=user)
             countFave = len(favorits)
-            order = Order.objects.get(user=user,status='wpay')
+            order = Order.objects.get(user=user,status='Wpay')
             orderitems = OrderItem.objects.filter(order=order)
+            countitems = len(orderitems)
+            for item in orderitems:
+                total += item.quantity*item.price
         except:
             pass
-    return render(request,'home.html',{'newest':newest,'orderitems':orderitems})
+    return render(request,'home.html',{'newest':newest,'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
+                                       'total':total})
 
 def Shop(request):
     products = Product.objects.all()[0:4]

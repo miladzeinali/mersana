@@ -1,45 +1,40 @@
 from django.shortcuts import render,redirect
-from django.contrib import messages.messages
-from web.models import
+from django.contrib import messages
+from web.models import *
+from Product.models import *
+from cart.models import *
 
 
-def OrderControl(self, request):
+def OrderControl(request,code):
     user = request.user
-    data = request.data
-    code = data['code']
-    qty = data['qty']
-    if request.method == 'POST':
-        next = request.POST['next']
-    else:
-        next = 'products.html'
     try:
         order = Order.objects.get(user=user, status='Wpay')
         product = Product.objects.get(code=code)
-        if product.count != 0 and product.count >= qty:
+        if product.count != 0 and product.count >= 1:
             price = product.price
             if product.Sale == True:
                 price = product.sale_price
             try:
                 orderitem = OrderItem.objects.get(order=order, product=product)
                 if product.count > orderitem.quantity:
-                    orderitem.quantity += qty
+                    orderitem.quantity += 1
                     orderitem.save()
                 else:
-                    return redirect(next,message = 'درخواست شما از موجودی بیشتر است :(')
+                    return render(request, 'detail-product.html', {'product': product})
             except:
                 OrderItem.objects.create(order=order, product=product,
-                                         quantity=qty, price=price)
-            return redirect(next,message = 'محصول با موفقیت به سبد خرید اضافه شد :)')
+                                         quantity=1, price=price)
+            return render(request,'detail-product.html',{'product':product})
         else:
-            return redirect(next,message = 'موجودی به پایان رسیده است :(')
+            return render(request,'detail-product.html',{'product':product})
     except:
         product = Product.objects.get(code=code)
-        if product.count != 0 and product.count >= qty:
+        if product.count != 0 and product.count >= 1:
             order = Order.objects.create(user=user, status='Wpay')
-            OrderItem.objects.create(order=order, product=product, quantity=qty)
-            return redirect(next,message = 'محصول با موفقیت به سبد خرید اضافه شد :)')
+            OrderItem.objects.create(order=order, product=product, quantity=1)
+            return render(request,'detail-product.html',{'product':product})
         else:
-            return redirect(next,message = 'موجودی به پایان رسیده است :(')
+            return render(request,'detail-product.html',{'product':product})
 
 
 def OrderItemChange(self, request):
