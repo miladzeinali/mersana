@@ -60,9 +60,13 @@ class Product(models.Model):
     Lnote = models.CharField(max_length=250 ,null=True, blank=True)
     CountryMade = models.CharField(max_length=150 ,null=True, blank=True)
     YearMade = models.CharField(max_length=150 ,null=True, blank=True)
-    Capacity = models.CharField(max_length=150 ,null=True, blank=True)
+    Capacity1 = models.CharField(max_length=150 ,null=True, blank=True,default=50)
+    Capacity2 = models.CharField(max_length=150 ,null=True, blank=True,default=50)
+    Capacity3 = models.CharField(max_length=150 ,null=True, blank=True,default=50)
+    Capacity4 = models.CharField(max_length=150 ,null=True, blank=True,default=50)
+    Capacity5 = models.CharField(max_length=150 ,null=True, blank=True,default=50)
     gift = models.CharField(max_length=150 ,null=True, blank=True)
-
+    about = models.TextField(max_length=500,null=True,blank=True)
     def __str__(self):
         return str(self.title) + '-' + str(self.code)
 

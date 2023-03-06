@@ -83,25 +83,24 @@
 
 				<div class="col-md-6">
 					<div class="product-details">
-						<h1 class="product-title">لباس زنانه رنگ زرد تیره</h1>
+						<h1 class="product-title">{{ product.title }}</h1>
 						<!-- End .product-title -->
 
 						<div class="ratings-container">
 							<div class="ratings">
-								<div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+								<div class="ratings-val" style="width: {{product.club_point}}%;"></div><!-- End .ratings-val -->
 							</div><!-- End .ratings -->
-							<a class="ratings-text" href="#product-review-link" id="review-link">( 2 نظر
+							<a class="ratings-text" href="#product-review-link" id="review-link">( {{product.count_sell}}  فروش
 								)</a>
 						</div><!-- End .rating-container -->
 
 						<div class="product-price">
-							84,000 تومان
+							{{product.price}} تومان
 						</div><!-- End .product-price -->
 
 						<div class="product-content">
-							<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید
-								سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن
-								ساختگی با تولید سادگی نامفهوم
+							<p>
+                                {{product.about}}
 							</p>
 						</div><!-- End .product-content -->
 
@@ -109,12 +108,13 @@
 							<label>رنگ : </label>
 
 							<div class="product-nav product-nav-thumbs">
-								<a href="#" class="active">
-									<img src="assets/images/products/single/1-thumb.jpg" alt="product desc">
-								</a>
-								<a href="#">
-									<img src="assets/images/products/single/2-thumb.jpg" alt="product desc">
-								</a>
+                                {{ product.color }}
+{#								<a href="#" class="active">#}
+{#									<img src="assets/images/products/single/1-thumb.jpg" alt="product desc">#}
+{#								</a>#}
+{#								<a href="#">#}
+{#									<img src="assets/images/products/single/2-thumb.jpg" alt="product desc">#}
+{#								</a>#}
 							</div><!-- End .product-nav -->
 						</div><!-- End .details-filter-row -->
 
@@ -123,10 +123,11 @@
 							<div class="select-custom">
 								<select name="size" id="size" class="form-control">
 									<option value="#" selected="selected">سایز را انتخاب کنید</option>
-									<option value="s">کوچک (Small)</option>
-									<option value="m">متوسط (Medium)</option>
-									<option value="l">بزرگ (Large)</option>
-									<option value="xl">خیلی بزرگ (XLarge)</option>
+									<option value="s">{{ product.Capacity1 }}</option>
+									<option value="s">{{ product.Capacity2 }}</option>
+									<option value="s">{{ product.Capacity3 }}</option>
+									<option value="s">{{ product.Capacity4 }}</option>
+									<option value="s">{{ product.Capacity5 }}</option>
 								</select>
 							</div><!-- End .select-custom -->
 
@@ -137,7 +138,7 @@
 							<label for="qty">تعداد : </label>
 							<div class="product-details-quantity">
 								<input type="number" id="qty" class="form-control" value="1" min="1"
-									max="10" step="1" data-decimals="0" required>
+									max="10" step="1" data-decimals="0" name="qty" required>
 							</div><!-- End .product-details-quantity -->
 						</div><!-- End .details-filter-row -->
 
@@ -145,7 +146,7 @@
 							<a href="#" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></a>
 
 							<div class="details-action-wrapper">
-								<a href="#" class="btn-product btn-wishlist"
+								<a href="{% url 'account:favorits' product.code %}" class="btn-product btn-wishlist"
 									title="لیست علاقه مندی"><span>افزودن
 										به
 										علاقه مندی</span></a>
@@ -364,7 +365,7 @@
 					</a>
 
 					<div class="product-action-vertical">
-						<a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>افزودن به
+						<a href="{% url 'account:favorits' product.code %}" class="btn-product-icon btn-wishlist btn-expandable"><span>افزودن به
 								لیست علاقه مندی</span></a>
 						<a href="popup/quickView.html" class="btn-product-icon btn-quickview"
 							title="مشاهده سریع"><span>مشاهده سریع</span></a>
@@ -417,7 +418,7 @@
 					</a>
 
 					<div class="product-action-vertical">
-						<a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>افزودن به
+						<a href="{% url 'account:favorits' product.code %}" class="btn-product-icon btn-wishlist btn-expandable"><span>افزودن به
 								لیست علاقه مندی</span></a>
 						<a href="popup/quickView.html" class="btn-product-icon btn-quickview"
 							title="مشاهده سریع"><span>مشاهده سریع</span></a>
@@ -457,7 +458,7 @@
 					</a>
 
 					<div class="product-action-vertical">
-						<a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>افزودن به
+						<a href="{% url 'account:favorits' product.code %}" class="btn-product-icon btn-wishlist btn-expandable"><span>افزودن به
 								لیست علاقه مندی</span></a>
 						<a href="popup/quickView.html" class="btn-product-icon btn-quickview"
 							title="مشاهده سریع"><span>مشاهده سریع</span></a>
@@ -510,7 +511,7 @@
 					</a>
 
 					<div class="product-action-vertical">
-						<a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>افزودن به
+						<a href="{% url 'account:favorits' product.code %}" class="btn-product-icon btn-wishlist btn-expandable"><span>افزودن به
 								لیست علاقه مندی</span></a>
 						<a href="popup/quickView.html" class="btn-product-icon btn-quickview"
 							title="مشاهده سریع"><span>مشاهده سریع</span></a>
@@ -525,7 +526,7 @@
 
 				<div class="product-body">
 					<div class="product-cat text-center">
-						<a href="#">لباس زنانه</a>
+						<a href="#">{{ product.title }}</a>
 					</div><!-- End .product-cat -->
 					<h3 class="product-title text-center"><a href="product.html">لباس زنانه دکمه دار رنگ
 							زرد</a></h3>
@@ -550,7 +551,7 @@
 					</a>
 
 					<div class="product-action-vertical">
-						<a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>افزودن به
+						<a href="{% url 'account:favorits' product.code %}" class="btn-product-icon btn-wishlist btn-expandable"><span>افزودن به
 								لیست علاقه مندی</span></a>
 						<a href="popup/quickView.html" class="btn-product-icon btn-quickview"
 							title="مشاهده سریع"><span>مشاهده سریع</span></a>
