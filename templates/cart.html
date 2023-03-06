@@ -65,8 +65,8 @@
 									</div><!-- End .cart-product-quantity -->
 								</td>
 {#								<td class="total-col">84,000</td>#}
-								<td class="remove-col"><button class="btn-remove"><i
-											class="icon-close"></i></button></td>
+								<td class="remove-col"><a href="{% url 'cart:deleteitem' item.product.id %}" class="btn-remove"><i
+											class="icon-close"></i></a></td>
 							</tr>
                             {% endfor %}
 						</tbody>

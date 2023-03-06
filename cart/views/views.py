@@ -68,19 +68,14 @@ def OrderItemChange(request):
     #     return redirect('web:home',message = 'اشکال در فرایند، با پشتیبانی تماس بگیرید !')
 
 
-def OrderItemDelete(self, request):
+def OrderItemDelete(request,id):
     user = request.user
-    code = request.data['code']
-    if request.method == 'POST':
-        next = request.POST['next']
-    else:
-        next = 'products.html'
     try:
         order = Order.objects.get(user=user, status='Wpay')
-        product = Product.objects.get(code=code)
+        product = Product.objects.get(id=id)
         orderitem = OrderItem.objects.get(order=order, product=product)
         orderitem.delete()
         product.count += orderitem.quantity
-        return redirect(next)
     except:
-        return redirect(next)
+        pass
+    return redirect('web:dashbord')
