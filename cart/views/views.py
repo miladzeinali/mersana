@@ -39,27 +39,27 @@ def OrderControl(request,code):
 
 def OrderItemChange(request,id):
     user = request.user
-    qty = request.POST['qty']
+    # qty = request.POST['qty']
     print(request.POST)
     try:
         order = Order.objects.get(user=user, status='Wpay')
         product = Product.objects.get(id=id)
         orderitem = OrderItem.objects.get(order=order, product=product)
-        if orderitem.quantity == 1 and qty < 1:
+        if orderitem.quantity == 1:
             orderitem.delete()
             try:
                 OrderItem.objects.get(order=order)
             except:
                 order.delete()
-            return redirect(next,message = 'محصول از سبد خرید حذف شد :(')
+            return redirect('web:home')
         if product.count > orderitem.quantity:
             orderitem.quantity += qty
             if orderitem.quantity > product.count:
-                return redirect(next,message = 'درخواست شما بیش از موجودی ماست :(')
+                return redirect('web:home')
             orderitem.save()
         return redirect(next,message = 'تعداد با موفقیت افزوده شد :)')
     except:
-        return redirect('web:home',message = 'اشکال در فرایند، با پشتیبانی تماس بگیرید !')
+        return redirect('web:home')
 
 
 def OrderItemDelete(request,id):
