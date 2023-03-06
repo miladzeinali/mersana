@@ -39,7 +39,7 @@ def OrderControl(request,code):
 
 def OrderItemChange(request,id):
     user = request.user
-    # qty = request.POST['qty']
+    qty = request.POST['qty']
     print(request.POST)
     try:
         order = Order.objects.get(user=user, status='Wpay')
