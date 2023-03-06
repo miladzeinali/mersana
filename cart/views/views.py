@@ -51,15 +51,15 @@ def OrderItemChange(request,id):
                 OrderItem.objects.get(order=order)
             except:
                 order.delete()
-            return redirect(next,message = 'محصول از سبد خرید حذف شد :(')
+            return redirect('web:dashbord')
         if product.count > orderitem.quantity:
             orderitem.quantity += qty
             if orderitem.quantity > product.count:
-                return redirect(next,message = 'درخواست شما بیش از موجودی ماست :(')
+                return redirect('web:dashbord')
             orderitem.save()
-        return redirect(next,message = 'تعداد با موفقیت افزوده شد :)')
+        return redirect('web:dashbord')
     except:
-        return redirect('web:home',message = 'اشکال در فرایند، با پشتیبانی تماس بگیرید !')
+        return redirect('web:dashbord')
 
 
 def OrderItemDelete(request,id):

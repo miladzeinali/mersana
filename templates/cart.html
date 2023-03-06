@@ -59,7 +59,7 @@
 									</div><!-- End .product -->
 								</td>
 								<td class="price-col">{{ item.price }}</td>
-									<form action="{% url 'cart:orderchange' %}" class="form-inline">
+									<form action="{% url 'cart:orderchange' item.product.id %}" class="form-inline">
 										<td class="quantity-col">
 
 									<div class="cart-product-quantity">
@@ -78,8 +78,8 @@
 							</form>
 
 {#								<td class="total-col">84,000</td>#}
-								<td class="remove-col"><button class="btn-remove"><i
-											class="icon-close"></i></button></td>
+								<td class="remove-col"><a href="{% url 'cart:deleteitem' item.product.id %}" class="btn-remove"><i
+											class="icon-close"></i></a></td>
 							</tr>
                             {% endfor %}
 						</tbody>
@@ -111,7 +111,7 @@
 							<tbody>
 								<tr class="summary-subtotal">
 									<td>جمع کل سبد خرید : </td>
-									<td class="text-left">236,000 تومان</td>
+									<td class="text-left">{{total}} تومان</td>
 								</tr><!-- End .summary-subtotal -->
 								<tr class="summary-shipping">
 									<td>شیوه ارسال : </td>
