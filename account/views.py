@@ -1,44 +1,55 @@
 from django.shortcuts import render,redirect
-from .models import Favorits
+from .models import Favorits,ValidationCode
 from Product.models import Product
+from django.contrib.messages.views import messages
+from random import randint
+import requests
 
 def Userregister(request):
     if request.method == 'POST':
         form = request.POST
+        print(form)
         if form['mobile']:
-            rule = re.compile(r'(^0)[\d]{10}$')
-            if not rule.search(form['mobile']):
-                messages.error(request,'شماره موبایل معتبر نیست!','error')
-                return redirect('web:register')
             mobile = form['mobile']
+            print(mobile)
             try:
                 Userprofile.objects.get(mobile=mobile)
                 messages.error(request,'این شماره قبلا در سامانه ثبت شده است!','error')
                 return render(request,'register.html')
             except:
                 try:
-                    try:
-                        ValidOqbject = ValidationCode.objects.get(mobile=mobile)
-                        code = ValidOqbject.validation_code
+                    # try:
+                    #     ValidOqbject = ValidationCode.objects.get(mobile=mobile)
+                    #     code = ValidOqbject.validation_code
                         # send code to user
-                        params = (('receptor',f'{mobile}'),('token',f'{code}'),('template','SendCode'))
-                        requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
-                                      params = params)
-                        r = {
-                            'mobile': mobile,
-                        }
-                        resp = []
-                        resp.insert(0, r)
-                        request.session['r'] = r
-                        print(code)
-                        return render(request,'userverify.html')
-                    except:
+                        # print('23')
+                        # params = (('receptor',f'{mobile}'),('token',f'{code}'),('template','SendCode'))
+                        # print('25')
+                        #
+                        # requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
+                        #               params = params)
+                        # print('29')
+                        #
+                        # r = {
+                        #     'mobile': mobile,
+                        # }
+                        # print('34')
+                        #
+                        # resp = []
+                        # resp.insert(0, r)
+                        # request.session['r'] = r
+                        # print(code)
+                        # return render(request,'userverify.html')
+                    # except:
+                        print('42')
                         code = randint(100000,999999)
                         ValidationCode.objects.create(mobile=mobile,validation_code=code)
+                        print('45')
                         # send sms to user
                         params = (('receptor', f'{mobile}'), ('token', f'{code}'), ('template', 'SendCode'))
                         requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
                                       params = params)
+                        print('50')
                         r = {
                             'mobile': mobile,
                         }

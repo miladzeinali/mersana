@@ -35,11 +35,12 @@
               </ul>
               <div class="tab-content">
                   <div class="tab-pane  active" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
-                      <form action="#">
+                      <form action="{% url 'account:register' %}" method="post">
+                          {% csrf_token %}
                           <div class="form-group">
                               <label for="singin-email-2">  شماره موبایل   *</label>
                               <input type="text" class="form-control" id="singin-email-2"
-                                  name="singin-email" required>
+                                  name="mobile" required>
                           </div><!-- End .form-group -->
 
 
