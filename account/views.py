@@ -210,6 +210,22 @@ def Favorit(request,code):
         else:
             return redirect('account:login')
 
+def Favorit(request,code):
+        user = request.user
+        if user.is_authenticated:
+            try:
+                try:
+                    Favorits.objects.get(user=user,code=code)
+                except:
+                    Favorits.objects.create(user=user,code=code)
+                    product = Product.objects.get(code=code)
+                return render(request, 'detail-product.html', {'product': product})
+            except:
+                product = Product.objects.get(code=code)
+                return render(request,'detail-product.html',{'product':product})
+        else:
+            return redirect('account:login')
+
 def UserLogout(request):
     logout(request)
     messages.success(request, "شما با موفقیت خارج شدید!", 'success')
