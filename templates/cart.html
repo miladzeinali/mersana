@@ -61,7 +61,9 @@
 								<td class="price-col">{{ item.price }}</td>
 								<td class="quantity-col">
 									<div class="cart-product-quantity">
-										<form action="{% url 'cart:orderchange' item.product.id %}" class="form-inline">
+										<form action="{% url 'cart:orderchange' %}" class="form-inline">
+											{% csrf_token %}
+											<input type="hidden" name="id" value="{{item.product.id}}">
 											<input type="number" class="form-control" name="qty" value="{{ item.quantity }}" min="1" max="10"
 											step="1" data-decimals="0" required>
 											<button type="submit" class="btn btn-outline-dark-2">اعمال</button>
