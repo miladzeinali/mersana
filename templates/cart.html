@@ -59,17 +59,28 @@
 									</div><!-- End .product -->
 								</td>
 								<td class="price-col">{{ item.price }}</td>
-								<td class="quantity-col">
+									<form action="{% url 'cart:orderchange' %}" class="form-inline">
+										<td class="quantity-col">
+
 									<div class="cart-product-quantity">
+<<<<<<< HEAD
 										<form action="{% url 'cart:orderchange' item.product.id %}" class="form-inline">
+=======
+											{% csrf_token %}
+											<input type="hidden" name="id" value="{{item.product.id}}">
+>>>>>>> 5b98f174f1803d20bae55887a7e43290db7ac44e
 											<input type="number" class="form-control" name="qty" value="{{ item.quantity }}" min="1" max="10"
 											step="1" data-decimals="0" required>
-											<button type="submit" class="btn btn-outline-dark-2">اعمال</button>
+											
+										</div>
+										</td>
+										<td>
+										<button type="submit" class="btn btn-outline-dark-2">اعمال</button>
 
-										</form>
-									
-									</div><!-- End .cart-product-quantity -->
+									<!-- End .cart-product-quantity -->
 								</td>
+							</form>
+
 {#								<td class="total-col">84,000</td>#}
 								<td class="remove-col"><button class="btn-remove"><i
 											class="icon-close"></i></button></td>
