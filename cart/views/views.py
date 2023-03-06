@@ -37,50 +37,39 @@ def OrderControl(request,code):
             return render(request,'detail-product.html',{'product':product})
 
 
-def OrderItemChange(request):
+def OrderItemChange(request,id):
     user = request.user
-    print(user)
+    qty = request.POST['qty']
     print(request.POST)
-    # code = request.data['code']
-    # qty = request.data['qty']
-    # if request.method == 'POST':
-    #     next = request.POST['next']
-    # else:
-    #     next = 'products.html'
-    # try:
-    #     order = Order.objects.get(user=user, status='Wpay')
-    #     product = Product.objects.get(code=code)
-    #     orderitem = OrderItem.objects.get(order=order, product=product)
-    #     if orderitem.quantity == 1 and qty < 1:
-    #         orderitem.delete()
-    #         try:
-    #             OrderItem.objects.get(order=order)
-    #         except:
-    #             order.delete()
-    #         return redirect(next,message = 'محصول از سبد خرید حذف شد :(')
-    #     if product.count > orderitem.quantity:
-    #         orderitem.quantity += qty
-    #         if orderitem.quantity > product.count:
-    #             return redirect(next,message = 'درخواست شما بیش از موجودی ماست :(')
-    #         orderitem.save()
-    #     return redirect(next,message = 'تعداد با موفقیت افزوده شد :)')
-    # except:
-    #     return redirect('web:home',message = 'اشکال در فرایند، با پشتیبانی تماس بگیرید !')
-
-
-def OrderItemDelete(self, request):
-    user = request.user
-    code = request.data['code']
-    if request.method == 'POST':
-        next = request.POST['next']
-    else:
-        next = 'products.html'
     try:
         order = Order.objects.get(user=user, status='Wpay')
-        product = Product.objects.get(code=code)
+        product = Product.objects.get(id=id)
+        orderitem = OrderItem.objects.get(order=order, product=product)
+        if orderitem.quantity == 1 and qty < 1:
+            orderitem.delete()
+            try:
+                OrderItem.objects.get(order=order)
+            except:
+                order.delete()
+            return redirect(next,message = 'محصول از سبد خرید حذف شد :(')
+        if product.count > orderitem.quantity:
+            orderitem.quantity += qty
+            if orderitem.quantity > product.count:
+                return redirect(next,message = 'درخواست شما بیش از موجودی ماست :(')
+            orderitem.save()
+        return redirect(next,message = 'تعداد با موفقیت افزوده شد :)')
+    except:
+        return redirect('web:home',message = 'اشکال در فرایند، با پشتیبانی تماس بگیرید !')
+
+
+def OrderItemDelete(request,id):
+    user = request.user
+    try:
+        order = Order.objects.get(user=user, status='Wpay')
+        product = Product.objects.get(id=id)
         orderitem = OrderItem.objects.get(order=order, product=product)
         orderitem.delete()
         product.count += orderitem.quantity
-        return redirect(next)
     except:
-        return redirect(next)
+        pass
+    return redirect('web:dashbord')

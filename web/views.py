@@ -2,7 +2,8 @@ from django.shortcuts import render,redirect
 from Product.models import *
 from django.contrib import messages
 from cart.models import Order,OrderItem
-from account.models import Favorits
+from account.models import Favorits,Userprofile
+from django.contrib.auth.models import User
 
 def Home(request):
     newest = Product.objects.all()
@@ -36,10 +37,10 @@ def Userregister(request):
             rule = re.compile(r'(^0)[\d]{10}$')
             if not rule.search(form['mobile']):
                 messages.error(request,'شماره موبایل معتبر نیست!','error')
-                return redirect('account:register')
+                return redirect('web:register')
             mobile = form['mobile']
             try:
-                Userprofile.objects.get(father_phone=mobile)
+                Userprofile.objects.get(mobile=mobile)
                 messages.error(request,'این شماره قبلا در سامانه ثبت شده است!','error')
                 return render(request,'register.html')
             except:
@@ -78,7 +79,7 @@ def Userregister(request):
                     messages.error(request,'در فرآیند ثبت نام مشکلی پیش آمده است، با پشتیبانی سایت تماس بگیرید','error')
                     return render(request,'register.html')
         else:
-            return redirect('account:register')
+            return redirect('web:register')
     else:
         return render(request,'register.html')
 
@@ -94,20 +95,20 @@ def UserVerify(request):
                     user.save()
                     login(request,user)
                     messages.success(request,'به مرسانا خوش آمدید!','success')
-                    return redirect('account:dashbord')
+                    return redirect('web:dashbord')
                 except:
                     if form['next']:
                         next = form['next']
                         messages.error(request,'رمز را به صورت صحیح وارد نمایید!','error')
                         return redirect(next)
                     else:
-                        return redirect('account:home')
+                        return redirect('web:home')
             else:
                 messages.error(request,'مشکلی در فرآیند ثبت نام پیش آمده است!','error')
-                return redirect('account:home')
+                return redirect('web:home')
         except:
             messages.error(request, 'مشکلی در فرآیند ثبت نام پیش آمده است!', 'error')
-            return redirect('account:home')
+            return redirect('web:home')
 
 def UserForgetPass(request):
     if request.method == 'POST':
