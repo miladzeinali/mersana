@@ -35,64 +35,40 @@
 								<th>محصول</th>
 								<th>قیمت</th>
 								<th>تعداد</th>
-								<th>مجموع</th>
+								<th>حذف</th>
 								<th></th>
 							</tr>
 						</thead>
 
 						<tbody>
 							<tr>
+                                {% for item in orderitems %}
 								<td class="product-col">
 									<div class="product">
 										<figure class="product-media">
 											<a href="#">
-												<img src="assets/images/products/table/product-1.jpg"
+												<img src="{{ item.product.image.url }}"
 													alt="تصویر محصول">
 											</a>
 										</figure>
 
 										<h3 class="product-title">
-											<a href="#">کتونی ورزشی مخصوص دویدن رنگ بژ</a>
+											<a href="{% url 'product:product' item.product.id %}">{{ item.product.title }}</a>
 										</h3><!-- End .product-title -->
 									</div><!-- End .product -->
 								</td>
-								<td class="price-col">84,000</td>
+								<td class="price-col">{{ item.price }}</td>
 								<td class="quantity-col">
 									<div class="cart-product-quantity">
-										<input type="number" class="form-control" value="1" min="1" max="10"
+										<input type="number" class="form-control" value="{{ item.quantity }}" min="1" max="10"
 											step="1" data-decimals="0" required>
 									</div><!-- End .cart-product-quantity -->
 								</td>
-								<td class="total-col">84,000</td>
+{#								<td class="total-col">84,000</td>#}
 								<td class="remove-col"><button class="btn-remove"><i
 											class="icon-close"></i></button></td>
 							</tr>
-							<tr>
-								<td class="product-col">
-									<div class="product">
-										<figure class="product-media">
-											<a href="#">
-												<img src="assets/images/products/table/product-2.jpg"
-													alt="تصویر محصول">
-											</a>
-										</figure>
-
-										<h3 class="product-title">
-											<a href="#">لباس زنانه آبی</a>
-										</h3><!-- End .product-title -->
-									</div><!-- End .product -->
-								</td>
-								<td class="price-col">76,000</td>
-								<td class="quantity-col">
-									<div class="cart-product-quantity">
-										<input type="number" class="form-control" value="2" min="1" max="10"
-											step="1" data-decimals="0" required>
-									</div><!-- End .cart-product-quantity -->
-								</td>
-								<td class="total-col">152,000</td>
-								<td class="remove-col"><button class="btn-remove"><i
-											class="icon-close"></i></button></td>
-							</tr>
+                            {% endfor %}
 						</tbody>
 					</table><!-- End .table table-wishlist -->
 
@@ -109,10 +85,11 @@
 							</form>
 						</div><!-- End .cart-discount -->
 
-						<a href="#" class="btn btn-outline-dark-2"><span>به روز رسانی سبد خرید</span><i
+						<a href="{% url 'cart:orderchange' %}" class="btn btn-outline-dark-2"><span>به روز رسانی سبد خرید</span><i
 								class="icon-refresh"></i></a>
 					</div><!-- End .cart-bottom -->
 				</div><!-- End .col-lg-9 -->
+
 				<aside class="col-lg-3">
 					<div class="summary summary-cart">
 						<h3 class="summary-title">جمع سبد خرید</h3><!-- End .summary-title -->

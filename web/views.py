@@ -145,17 +145,23 @@ def UserForgetPass(request):
         return render(request,'forgetpass.html')
 
 def Dashbord(request):
-    try:
-        user =request.user
-        if user.is_authenticated:
-            userProfile = Userprofile.objects.get(user=user.id)
-            return render(request,'dashbord.html',{'profile':userProfile})
-        else:
-            messages.error(request, 'برای دسترسی ابتدا وارد شوید!', 'error')
-            return redirect('web:home')
-    except:
-        messages.error(request,'اشکال در ارتباط با داشبورد','error')
-        return redirect('web:home')
+    orderitems = []
+    countitems = []
+    total = 0
+    user = request.user
+    if user.is_authenticated:
+        try:
+            favorits = Favorits.objects.filter(user=user)
+            countFave = len(favorits)
+            order = Order.objects.get(user=user,status='Wpay')
+            orderitems = OrderItem.objects.filter(order=order)
+            countitems = len(orderitems)
+            for item in orderitems:
+                total += item.quantity*item.price
+        except:
+            pass
+    return render(request,'cart.html',{'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
+                                       'total':total})
 
 def UserLogin(request):
     if request.method == "POST":
