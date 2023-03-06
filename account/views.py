@@ -8,57 +8,6 @@ from django.contrib.auth import login,logout
 from django.contrib.auth.models import User
 import time
 
-def Userregister(request):
-    if request.method == 'POST':
-        form = request.POST
-        print(form)
-        if form['mobile']:
-            mobile = form['mobile']
-            try:
-                Userprofile.objects.get(mobile=mobile)
-                messages.error(request,'این شماره قبلا در سامانه ثبت شده است!','error')
-                return render(request,'register.html')
-            except:
-                try:
-                    try:
-                        ValidOqbject = ValidationCode.objects.get(mobile=mobile)
-                        code = ValidOqbject.validation_code
-                        # send code to user
-                        params = (('receptor',f'{mobile}'),('token',f'{code}'),('template','SendCode'))
-                        requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
-                                      params = params)
-                        r = {
-                            'mobile': mobile,
-                            'code': code,
-                        }
-                        resp = []
-                        resp.insert(0, r)
-                        request.session['r'] = r
-                        return render(request,'userverify.html')
-                    except:
-                        code = randint(100000,999999)
-                        ValidationCode.objects.create(mobile=mobile,validation_code=code)
-                        # send sms to user
-                        params = (('receptor', f'{mobile}'), ('token', f'{code}'), ('template', 'sendmersana'))
-                        requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
-                                      params = params)
-                        r = {
-                            'mobile': mobile,
-                            'code': code,
-                        }
-                        resp = []
-                        resp.insert(0, r)
-                        request.session['r'] = r
-                        print(code)
-                        return render(request,'userverify.html')
-                except:
-                    messages.error(request,'در فرآیند ثبت نام مشکلی پیش آمده است، با پشتیبانی سایت تماس بگیرید','error')
-                    return render(request,'register.html')
-        else:
-            return redirect('web:register')
-    else:
-        return render(request,'register.html')
-
 def UserVerify(request):
         # try:
             mobile = request.session['r']['mobile']
@@ -163,7 +112,7 @@ def Userregister(request):
                 #     messages.error(request,'در فرآیند ثبت نام مشکلی پیش آمده است، با پشتیبانی سایت تماس بگیرید','error')
                 #       return render(request,'register.html')
     else:
-        return render(request,'register.html')
+        return render(request,'login.html')
 
 def UserVerify(request):
         try:
@@ -209,37 +158,6 @@ def Favorit(request,code):
                 return render(request,'detail-product.html',{'product':product})
         else:
             return redirect('account:login')
-
-def UserLogin(request):
-    if request.method == "POST":
-        try:
-            mobile = request.POST['mobile']
-            password = request.POST['password']
-            try:
-                profile = Userprofile.objects.get(father_phone=mobile)
-                user = profile.user
-                userLogin = authenticate(request,username = mobile,password = password)
-                if userLogin is not None:
-                    login(request,user)
-                    user.last_login = datetime.datetime.now()
-                    user.save()
-                    if profile.name:
-                        messages.success(request,f' عزیز شما با موفقیت وارد شدید!{profile.name}','success')
-                    else:
-                        messages.success(request,'شما با موفقیت وارد شدید!','success')
-                    return redirect('account:dashbord')
-                else:
-                    messages.error(request,'لطفا رمز را به صورت صحیح وارد کنید!','error')
-                    return render(request,'login.html')
-            except:
-                messages.error(request,'نوآموزی با این شماره موبایل ثبت نام نشده است!','error')
-                return render(request,'login.html')
-        except:
-            messages.error(request,'لطفا مقادیر را به صورت صحیح وارد نمایید!','error')
-            return render(request,'login.html')
-    else:
-        return render(request,'login.html')
-
 
 def UserLogout(request):
     logout(request)
