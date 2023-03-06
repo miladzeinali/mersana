@@ -210,6 +210,37 @@ def Favorit(request,code):
         else:
             return redirect('account:login')
 
+def UserLogin(request):
+    if request.method == "POST":
+        try:
+            mobile = request.POST['mobile']
+            password = request.POST['password']
+            try:
+                profile = Userprofile.objects.get(father_phone=mobile)
+                user = profile.user
+                userLogin = authenticate(request,username = mobile,password = password)
+                if userLogin is not None:
+                    login(request,user)
+                    user.last_login = datetime.datetime.now()
+                    user.save()
+                    if profile.name:
+                        messages.success(request,f' عزیز شما با موفقیت وارد شدید!{profile.name}','success')
+                    else:
+                        messages.success(request,'شما با موفقیت وارد شدید!','success')
+                    return redirect('account:dashbord')
+                else:
+                    messages.error(request,'لطفا رمز را به صورت صحیح وارد کنید!','error')
+                    return render(request,'login.html')
+            except:
+                messages.error(request,'نوآموزی با این شماره موبایل ثبت نام نشده است!','error')
+                return render(request,'login.html')
+        except:
+            messages.error(request,'لطفا مقادیر را به صورت صحیح وارد نمایید!','error')
+            return render(request,'login.html')
+    else:
+        return render(request,'login.html')
+
+
 def UserLogout(request):
     logout(request)
     messages.success(request, "شما با موفقیت خارج شدید!", 'success')
