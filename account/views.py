@@ -125,19 +125,21 @@ def Favorit(request,code):
             return redirect('account:login')
 
 def FavoriteReport(request):
-     user = request.user
-     if user.is_authenticated:
-          try:
-               products = []
-               favorits = Favorit.objects.filter(user=user)
-               for favorit in favorits:
-                    product = Product.objects.get(favorit.code)
+        user = request.user
+        if user.is_authenticated:
+            try:
+                products = []
+                favorits = Favorits.objects.filter(user=user)
+                print(favorits)
+                for favorit in favorits:
+                    print(favorit.code)
+                    product = Product.objects.get(code=favorit.code)
                     products.append(product)
-                return render(request,'wishlist.html',{'products':products})
-            except:
-               return redirect('product:products')
-     else:
-          return redirect('account:register')
+                return render(request,'wishlist.html',{'products':products})            
+            except:  
+                return redirect('product:products')
+        else:
+            return redirect('account:register')
     
 def UserLogout(request):
     logout(request)
