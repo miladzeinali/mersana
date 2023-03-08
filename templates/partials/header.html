@@ -25,7 +25,8 @@
                     <a href="#" class="social-icon social-instagram" title="پینترست" target="_blank"><i
                             class="icon-instagram"></i></a>
                 </div><!-- End .soial-icons -->
-                <ul class="top-menu top-link-menu">
+                {% if user.is_authenticated%}
+                <ul class="top-menu top-link-menu" >
                     <li>
                         <a href="#">لینک ها</a>
                         <ul>
@@ -35,7 +36,17 @@
                     </li>
                 </ul><!-- End .top-menu -->
 
-             
+             {% else %}
+                <div class="header-dropdown">
+                    <a href="#">حساب کاربری</a>
+                    <div class="header-menu">
+                        <ul>
+                            <li><a href="#">داشبورد</a></li>
+                            <li><a href="#">خروج</a></li>
+                        </ul>
+                    </div><!-- End .header-menu -->
+                </div><!-- End .header-dropdown -->
+                {% endif %}
             </div><!-- End .header-right -->
         </div>
     </div>
@@ -59,9 +70,8 @@
                     <img src="{% static 'images/logo/logo.png' %}" href="{% url 'web:home' %}" alt="Molla Logo" width="82" height="20">
                 </a>
             </div><!-- End .header-left -->
-
             <div class="header-right">
-                <a href="wishlist.html" class="wishlist-link">
+                <a href="{% url 'account:favelist' %}" class="wishlist-link">
                     <i class="icon-heart-o"></i>
                     <span class="wishlist-count">{{ countfave }}</span>
                     <span class="wishlist-txt">علاقه مندی</span>

@@ -7,34 +7,37 @@ from cart.models import *
 
 def OrderControl(request,code):
     user = request.user
-    try:
-        order = Order.objects.get(user=user, status='Wpay')
-        product = Product.objects.get(code=code)
-        if product.count != 0 and product.count >= 1:
-            price = product.price
-            if product.Sale == True:
-                price = product.sale_price
-            try:
-                orderitem = OrderItem.objects.get(order=order, product=product)
-                if product.count > orderitem.quantity:
-                    orderitem.quantity += 1
-                    orderitem.save()
-                else:
-                    return render(request, 'detail-product.html', {'product': product})
-            except:
-                OrderItem.objects.create(order=order, product=product,
-                                         quantity=1, price=price)
-            return render(request,'detail-product.html',{'product':product})
-        else:
-            return render(request,'detail-product.html',{'product':product})
-    except:
-        product = Product.objects.get(code=code)
-        if product.count != 0 and product.count >= 1:
-            order = Order.objects.create(user=user, status='Wpay')
-            OrderItem.objects.create(order=order, product=product, quantity=1)
-            return render(request,'detail-product.html',{'product':product})
-        else:
-            return render(request,'detail-product.html',{'product':product})
+    if user.is_authenticated:
+        try:
+            order = Order.objects.get(user=user, status='Wpay')
+            product = Product.objects.get(code=code)
+            if product.count != 0 and product.count >= 1:
+                price = product.price
+                if product.Sale == True:
+                    price = product.sale_price
+                try:
+                    orderitem = OrderItem.objects.get(order=order, product=product)
+                    if product.count > orderitem.quantity:
+                        orderitem.quantity += 1
+                        orderitem.save()
+                    else:
+                        return render(request, 'detail-product.html', {'product': product})
+                except:
+                    OrderItem.objects.create(order=order, product=product,
+                                            quantity=1, price=price)
+                return render(request,'detail-product.html',{'product':product})
+            else:
+                return render(request,'detail-product.html',{'product':product})
+        except:
+            product = Product.objects.get(code=code)
+            if product.count != 0 and product.count >= 1:
+                order = Order.objects.create(user=user, status='Wpay')
+                OrderItem.objects.create(order=order, product=product, quantity=1)
+                return render(request,'detail-product.html',{'product':product})
+            else:
+                return render(request,'detail-product.html',{'product':product})
+    else:
+        return redirect('account:register')
 
 
 def OrderItemChange(request,id):

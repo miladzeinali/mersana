@@ -41,9 +41,9 @@
                       <form action="{% url 'account:register' %}" method="post">
                           {% csrf_token %}
                           <div class="form-group">
-                              <label for="singin-email-2">  شماره موبایل   *</label>
+                              <label for="singin-email-2"> شماره موبایل   * (لطفا اعداد به صورت انگلیسی وارد شود)</label>
                               <input type="text" class="form-control" id="singin-email-2"
-                                  name="mobile" required>
+                                  name="mobile" placeholder="09000000" required>
                           </div><!-- End .form-group -->
 
 
