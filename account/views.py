@@ -6,7 +6,8 @@ from random import randint
 import requests
 from django.contrib.auth import login,logout
 from django.contrib.auth.models import User
-import time
+from cart.models import Order,OrderItem
+import re
 
 def UserVerify(request):
         try:
@@ -16,15 +17,10 @@ def UserVerify(request):
                 try:
                     print(mobile)
                     ValidationCode.objects.get(mobile=mobile,validation_code=code)
-                    print('69')
                     user = User.objects.create(username=mobile,password=code)
-                    print('71')
                     Userprofile.objects.create(mobile=mobile,user = user)
-                    print('73')
                     user.save()
-                    print('75')
                     login(request,user)
-                    print('77')
                     messages.success(request,'به مرسانا خوش آمدید!','success')
                     return redirect('web:dashbord')
                 except:
@@ -41,6 +37,10 @@ def Userregister(request):
     if request.method == 'POST':
         form = request.POST
         if form['mobile']:
+                rule = re.compile(r'(^0)[\d]{10}$')
+                if not rule.search(form['mobile']):
+                    messages.error(request,'شماره موبایل معتبر نیست!','error')
+                    return redirect('account:register')
                 mobile = form['mobile']
                 try:
                     try:
@@ -52,7 +52,6 @@ def Userregister(request):
                                       params = params)
                         r = {
                             'mobile': mobile,
-                            'code': code,
                         }
                         request.session['r'] = r
                         print(code)
@@ -66,7 +65,6 @@ def Userregister(request):
                                       params = params)
                         r = {
                             'mobile': mobile,
-                            'code': code,
                         }
                         resp = []
                         resp.insert(0, r)
@@ -75,38 +73,38 @@ def Userregister(request):
                         return render(request,'userverify.html')
                 except:
                     messages.error(request,'در فرآیند ثبت نام مشکلی پیش آمده است، با پشتیبانی سایت تماس بگیرید','error')
-                    return render(request,'register.html')
+                    return render(request,'login.html')
     else:
         return render(request,'login.html')
 
 def UserVerify(request):
         try:
             mobile = request.session['r']['mobile']
-            code = request.session['r']['code']
+            code = request.POST['code']
+            print(code)
             if mobile:
                 try:
+                    mobile = ValidationCode.objects.get(mobile=mobile,validation_code=code).mobile
                     try:
-                        mobile = ValidationCode.objects.get(mobile=mobile,validation_code=code)
-                        user = Userprofile.objects.get(mobile=mobile.mobile)
-                        login(request,user.user)
-
-                        return redirect('web:dashbord')
-                    except:
-                        ValidationCode.objects.get(mobile=mobile,validation_code=code)
-                        user = User.objects.create(username=mobile,password=str(code))
-                        Userprofile.objects.create(mobile=mobile,user = user)
-                        user.save()
+                        user = Userprofile.objects.get(mobile=mobile).user
                         login(request,user)
                         messages.success(request,'به مرسانا خوش آمدید!','success')
                         return redirect('web:dashbord')
+                    except:
+                        user = User.objects.create_user(username=mobile,password=code)
+                        Userprofile.objects.create(user=user,mobile=mobile)
+                        user.save()
+                        login(request,user)
+                        return redirect('account:register')
                 except:
-                    return redirect('web:home')
+                    messages.success(request,'رمز به صورت صحیح وارد نشده است !','error')
+                    return redirect('account:register')
             else:
                 messages.error(request,'مشکلی در فرآیند ثبت نام پیش آمده است!','error')
                 return redirect('web:home')
         except:
             messages.error(request, 'مشکلی در فرآیند ثبت نام پیش آمده است!', 'error')
-            return redirect('web:dashbord')
+            return redirect('account:register')
 
 def Favorit(request,code):
         user = request.user
@@ -122,20 +120,30 @@ def Favorit(request,code):
                 product = Product.objects.get(code=code)
                 return render(request,'detail-product.html',{'product':product})
         else:
-            return redirect('account:login')
+            return redirect('account:register')
 
 def FavoriteReport(request):
         user = request.user
         if user.is_authenticated:
             try:
                 products = []
+                orderitems = []
+                countitems = []
+                total = 0
+                countFave = []
                 favorits = Favorits.objects.filter(user=user)
-                print(favorits)
                 for favorit in favorits:
-                    print(favorit.code)
                     product = Product.objects.get(code=favorit.code)
                     products.append(product)
-                return render(request,'wishlist.html',{'products':products})            
+                favorits = Favorits.objects.filter(user=user)
+                countFave = len(favorits)
+                order = Order.objects.get(user=user,status='Wpay')
+                orderitems = OrderItem.objects.filter(order=order)
+                countitems = len(orderitems)
+                for item in orderitems:
+                    total += item.quantity*item.price
+                return render(request,'wishlist.html',{'products':products,'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
+                                       'total':total})            
             except:  
                 return redirect('product:products')
         else:
@@ -144,5 +152,5 @@ def FavoriteReport(request):
 def UserLogout(request):
     logout(request)
     messages.success(request, "شما با موفقیت خارج شدید!", 'success')
-    return redirect('account:home')
+    return redirect('web:home')
 

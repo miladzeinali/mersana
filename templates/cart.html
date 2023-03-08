@@ -59,7 +59,7 @@
 									</div><!-- End .product -->
 								</td>
 								<td class="price-col">{{ item.price }}</td>
-								<form action="{% url 'cart:orderchange' %}" class="form-inline">
+								<form action="{% url 'cart:orderchange' item.product.id %}" class="form-inline">
 									<td class="quantity-col">
 
 										<div class="cart-product-quantity">
@@ -99,10 +99,10 @@
 							</form>
 						</div><!-- End .cart-discount -->
 
-						{# <a href="{% url 'cart:orderchange'  %}" class="btn btn-outline-dark-2"><span>به روز رسانی سبد
+						{% comment %} <a href="{% url 'cart:orderchange' item.product.id  %}" class="btn btn-outline-dark-2"><span>به روز رسانی سبد {% endcomment %}
 								خرید</span>
-							<i#} {# class="icon-refresh"></i>
-						</a>#}
+							<i class="icon-refresh"></i>
+						</a>
 					</div><!-- End .cart-bottom -->
 				</div><!-- End .col-lg-9 -->
 
