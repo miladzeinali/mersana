@@ -9,11 +9,11 @@ from django.contrib.auth.models import User
 import time
 
 def UserVerify(request):
-        # try:
+        try:
             mobile = request.session['r']['mobile']
             code = request.session['code']
             if mobile:
-                # try:
+                try:
                     print(mobile)
                     ValidationCode.objects.get(mobile=mobile,validation_code=code)
                     print('69')
@@ -27,49 +27,14 @@ def UserVerify(request):
                     print('77')
                     messages.success(request,'به مرسانا خوش آمدید!','success')
                     return redirect('web:dashbord')
-                # except:
-                #     return redirect('account:userverify')
+                except:
+                    return redirect('account:userverify')
             else:
                 messages.error(request,'مشکلی در فرآیند ثبت نام پیش آمده است!','error')
                 return redirect('account:register')
-        # except:
-        #     messages.error(request, 'مشکلی در فرآیند ثبت نام پیش آمده است!', 'error')
-        #     return redirect('account:register')
-
-def UserForgetPass(request):
-    if request.method == 'POST':
-        form = request.POST
-        if form['mobile']:
-            try:
-                mobile = form['mobile']
-                rule = re.compile(r'(^0)[\d]{10}$')
-                if not rule.search(form['mobile']):
-                    messages.error(request, 'شماره موبایل معتبر نیست!', 'error')
-                    return redirect('account:forgetpass')
-                User.objects.get(username=mobile)
-                code = ValidationCode.objects.get(mobile=mobile).validation_code
-                print(code)
-                r = {
-                    'mobile': mobile,
-                }
-                resp = []
-                resp.insert(0, r)
-                request.session['r'] = r
-
-                # send code for sms
-                params = (('receptor', f'{mobile}'), ('token', f'{code}'), ('template', 'SendCode'))
-                requests.post(
-                    'https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
-                    params=params)
-                return redirect('account:userverify')
-            except:
-                messages.error(request,'کاربری با این شماره ثیت نشده است!','error')
-                return redirect('account:forgetpass')
-        else:
-            messages.error(request,'لطفا شماره موبایل را وارد نمایید!','error')
-            return redirect('account:forgetpass')
-    else:
-        return render(request,'forgetpass.html')
+        except:
+            messages.error(request, 'مشکلی در فرآیند ثبت نام پیش آمده است!', 'error')
+            return redirect('account:register')
 
 
 def Userregister(request):
