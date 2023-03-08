@@ -47,8 +47,10 @@ def Dashbord(request):
                 total += item.quantity*item.price
         except:
             pass
-    return render(request,'cart.html',{'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
+        return render(request,'cart.html',{'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
                                        'total':total})
+    else:
+        return redirect('account:register')
 
 def about(request):
    return render(request,'about.html')

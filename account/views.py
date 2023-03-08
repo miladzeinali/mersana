@@ -124,6 +124,21 @@ def Favorit(request,code):
         else:
             return redirect('account:login')
 
+def FavoriteReport(request):
+     user = request.user
+     if user.is_authenticated:
+          try:
+               products = []
+               favorits = Favorit.objects.filter(user=user)
+               for favorit in favorits:
+                    product = Product.objects.get(favorit.code)
+                    products.append(product)
+                return render(request,'wishlist.html',{'products':products})
+            except:
+               return redirect('product:products')
+     else:
+          return redirect('account:register')
+    
 def UserLogout(request):
     logout(request)
     messages.success(request, "شما با موفقیت خارج شدید!", 'success')

@@ -8,7 +8,6 @@ from cart.models import *
 def OrderControl(request,code):
     user = request.user
     if user.is_authenticated:
-        
         try:
             order = Order.objects.get(user=user, status='Wpay')
             product = Product.objects.get(code=code)
