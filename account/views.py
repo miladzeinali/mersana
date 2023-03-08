@@ -41,15 +41,15 @@ def Userregister(request):
     if request.method == 'POST':
         form = request.POST
         if form['mobile']:
-                        mobile = form['mobile']
-                # try:
-                    # try:
+                mobile = form['mobile']
+                try:
+                    try:
                         ValidOqbject = ValidationCode.objects.get(mobile=mobile)
                         code = ValidOqbject.validation_code
                         # send code to user
-                        # params = (('receptor',f'{mobile}'),('token',f'{code}'),('template','sendmersana'))
-                        # requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
-                        #               params = params)
+                        params = (('receptor',f'{mobile}'),('token',f'{code}'),('template','sendmersana'))
+                        requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
+                                      params = params)
                         r = {
                             'mobile': mobile,
                             'code': code,
@@ -57,25 +57,25 @@ def Userregister(request):
                         request.session['r'] = r
                         print(code)
                         return render(request,'userverify.html')
-                    # except:
-                    #     code = randint(100000,999999)
-                    #     ValidationCode.objects.create(mobile=mobile,validation_code=code)
+                    except:
+                        code = randint(100000,999999)
+                        ValidationCode.objects.create(mobile=mobile,validation_code=code)
                         # send sms to user
-                        # params = (('receptor', f'{mobile}'), ('token', f'{code}'), ('template', 'sendmersana'))
-                        # requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
-                        #               params = params)
-                        # r = {
-                        #     'mobile': mobile,
-                        #     'code': code,
-                        # }
-                        # resp = []
-                        # resp.insert(0, r)
-                        # request.session['r'] = r
-                        # print(code)
-                        # return render(request,'userverify.html')
-                # except:
-                #     messages.error(request,'در فرآیند ثبت نام مشکلی پیش آمده است، با پشتیبانی سایت تماس بگیرید','error')
-                #       return render(request,'register.html')
+                        params = (('receptor', f'{mobile}'), ('token', f'{code}'), ('template', 'sendmersana'))
+                        requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
+                                      params = params)
+                        r = {
+                            'mobile': mobile,
+                            'code': code,
+                        }
+                        resp = []
+                        resp.insert(0, r)
+                        request.session['r'] = r
+                        print(code)
+                        return render(request,'userverify.html')
+                except:
+                    messages.error(request,'در فرآیند ثبت نام مشکلی پیش آمده است، با پشتیبانی سایت تماس بگیرید','error')
+                    return render(request,'register.html')
     else:
         return render(request,'login.html')
 
