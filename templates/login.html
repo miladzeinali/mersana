@@ -3,7 +3,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block header %}
-    {% include 'partials/header.html' %}
+    {% include 'partials/header2.html' %}
 {% endblock %}
 {% block hero%}
 
@@ -25,6 +25,9 @@
   style="background-image: url(static/images/backgrounds/login-bg.jpg)">
   <div class="container">
       <div class="form-box">
+        <div class="d-flex justify-content-center">
+            <img src="{% static 'images/logo/logo.png' %}" style="width:19%" alt="">
+        </div>
           <div class="form-tab">
               <ul class="nav nav-pills nav-fill" role="tablist">
                   <li class="nav-item">

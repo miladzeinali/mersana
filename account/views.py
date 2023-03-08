@@ -8,57 +8,6 @@ from django.contrib.auth import login,logout
 from django.contrib.auth.models import User
 import time
 
-def Userregister(request):
-    if request.method == 'POST':
-        form = request.POST
-        print(form)
-        if form['mobile']:
-            mobile = form['mobile']
-            try:
-                Userprofile.objects.get(mobile=mobile)
-                messages.error(request,'این شماره قبلا در سامانه ثبت شده است!','error')
-                return render(request,'register.html')
-            except:
-                try:
-                    try:
-                        ValidOqbject = ValidationCode.objects.get(mobile=mobile)
-                        code = ValidOqbject.validation_code
-                        # send code to user
-                        params = (('receptor',f'{mobile}'),('token',f'{code}'),('template','SendCode'))
-                        requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
-                                      params = params)
-                        r = {
-                            'mobile': mobile,
-                            'code': code,
-                        }
-                        resp = []
-                        resp.insert(0, r)
-                        request.session['r'] = r
-                        return render(request,'userverify.html')
-                    except:
-                        code = randint(100000,999999)
-                        ValidationCode.objects.create(mobile=mobile,validation_code=code)
-                        # send sms to user
-                        params = (('receptor', f'{mobile}'), ('token', f'{code}'), ('template', 'sendmersana'))
-                        requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
-                                      params = params)
-                        r = {
-                            'mobile': mobile,
-                            'code': code,
-                        }
-                        resp = []
-                        resp.insert(0, r)
-                        request.session['r'] = r
-                        print(code)
-                        return render(request,'userverify.html')
-                except:
-                    messages.error(request,'در فرآیند ثبت نام مشکلی پیش آمده است، با پشتیبانی سایت تماس بگیرید','error')
-                    return render(request,'register.html')
-        else:
-            return redirect('web:register')
-    else:
-        return render(request,'register.html')
-
 def UserVerify(request):
         # try:
             mobile = request.session['r']['mobile']
@@ -163,7 +112,7 @@ def Userregister(request):
                 #     messages.error(request,'در فرآیند ثبت نام مشکلی پیش آمده است، با پشتیبانی سایت تماس بگیرید','error')
                 #       return render(request,'register.html')
     else:
-        return render(request,'register.html')
+        return render(request,'login.html')
 
 def UserVerify(request):
         try:
@@ -193,22 +142,6 @@ def UserVerify(request):
         except:
             messages.error(request, 'مشکلی در فرآیند ثبت نام پیش آمده است!', 'error')
             return redirect('web:dashbord')
-
-def Favorit(request,code):
-        user = request.user
-        if user.is_authenticated:
-            try:
-                try:
-                    Favorits.objects.get(user=user,code=code)
-                except:
-                    Favorits.objects.create(user=user,code=code)
-                    product = Product.objects.get(code=code)
-                return render(request, 'detail-product.html', {'product': product})
-            except:
-                product = Product.objects.get(code=code)
-                return render(request,'detail-product.html',{'product':product})
-        else:
-            return redirect('account:login')
 
 def Favorit(request,code):
         user = request.user

@@ -3,62 +3,55 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block header %}
-    {% include 'partials/header.html' %}
+    {% include 'partials/header2.html' %}
 {% endblock %}
 {% block hero%}
-<!-- Page info -->
-   <div class="page-top-info">
-    <div class="container">
-        <h4>تایید کد </h4>
-        <div class="site-pagination">
-            <a href="">خانه</a> /
-            <a href="">ورود</a>
-        </div>
-    </div>
-</div>
-<!-- Page info end -->
+
 
     {% endblock %}
 {% block content %}
- 
 <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
     <div class="container">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index-1.html">خانه</a></li>
             <li class="breadcrumb-item"><a href="#">صفحات</a></li>
-            <li class="breadcrumb-item active" aria-current="page">ورود </li>
+            <li class="breadcrumb-item active" aria-current="page">کد تائید </li>
         </ol>
     </div><!-- End .container -->
   </nav><!-- End .breadcrumb-nav -->
   
   <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17"
-    style="background-image: url('static/images/backgrounds/login-bg.jpg')">
+    style="background-image: url(static/images/backgrounds/login-bg.jpg)">
     <div class="container">
         <div class="form-box">
+          <div class="d-flex justify-content-center">
+              <img src="{% static 'images/logo/logo.png' %}" style="width:19%" alt="">
+          </div>
             <div class="form-tab">
                 <ul class="nav nav-pills nav-fill" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab"
-                            aria-controls="signin-2" aria-selected="true">کد تائید</a>
+                            aria-controls="signin-2" aria-selected="true">ارسال کد</a>
                     </li>
                   
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane  active" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
-                        <form action="#">
+                        <form action="{% url 'account:register' %}" method="post">
+                            {% csrf_token %}
                             <div class="form-group">
-                                <label for="singin-email-2">   کد تایید   *</label>
+                                <label for="singin-email-2">  شماره موبایل   *</label>
                                 <input type="text" class="form-control" id="singin-email-2"
-                                    name="singin-email" required>
+                                    name="mobile" required>
                             </div><!-- End .form-group -->
   
   
   
                             <div class="form-footer">
-                                <a href="{% url 'account:userverify' %}"  type="submit" class="btn btn-outline-primary-2">
+                                <button type="submit" class="btn btn-outline-primary-2">
                                     <span>ارسال</span>
                                     <i class="icon-long-arrow-left"></i>
-                                </a>
+                                </button>
   
                               
   
@@ -73,6 +66,7 @@
         </div><!-- End .form-box -->
     </div><!-- End .container -->
   </div><!-- End .login-page section-bg -->
+
 {% endblock %}
 {% block footer %}
 {% include 'partials/footer.html' %}
