@@ -144,7 +144,7 @@
 						</div><!-- End .details-filter-row -->
 
 						<div class="product-details-action">
-							<a href="#" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></a>
+							<a href="{% url 'cart:ordercontrol' product.code %}" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></a>
 
 							<div class="details-action-wrapper">
 								<a href="{% url 'account:favorits' product.code %}" class="btn-product btn-wishlist"

@@ -53,8 +53,7 @@
 										</figure>
 
 										<h3 class="product-title">
-											<a href="{% url 'product:product' item.product.id %}">{{ item.product.title
-												}}</a>
+											<a href="{% url 'product:product' item.product.id %}">{{ item.product.title}}</a>
 										</h3><!-- End .product-title -->
 									</div><!-- End .product -->
 								</td>
@@ -65,9 +64,7 @@
 										<div class="cart-product-quantity">
 											{% csrf_token %}
 											<input type="hidden" name="id" value="{{item.product.id}}">
-											<input type="number" class="form-control" name="qty"
-												value="{{ item.quantity }}" min="1" max="10" step="1" data-decimals="0"
-												required>
+											<input class="form-control" name="qty" value={{item.quantity}}>
 
 										</div>
 									</td>
@@ -79,7 +76,7 @@
 								</form>
 
 								{# <td class="total-col">84,000</td>#}
-								<td class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button>
+								<td class="remove-col"><a href={% url 'cart:deleteitem' item.id %} class="btn-remove"><i class="icon-close"></i></a>
 								</td>
 							</tr>
 							{% endfor %}

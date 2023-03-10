@@ -1,4 +1,4 @@
-<title>  دریافت کد تایید | مرصانا</title>
+<title>  علاقه مندی ها | مرصانا</title>
 
 {% extends 'base.html' %}
 {% load static %}
@@ -41,22 +41,27 @@
                         </thead>
 
                         <tbody>
+                            {% for product in products %}
                             <tr>
                                 <td class="product-col">
                                     <div class="product">
                                         <figure class="product-media">
-                                            <a href="#">
-                                                <img src="assets/images/products/table/product-1.jpg" alt="تصویر محصول">
+                                            <a href="{% url 'product:product' product.id %}">
+                                                <img src="{{product.image.url}}" alt="تصویر محصول">
                                             </a>
                                         </figure>
 
                                         <h3 class="product-title">
-                                            <a href="#">کتونی ورزشی مخصوص دویدن رنگ بژ</a>
+                                            <a href="{% url 'product:product' product.id %}">{{ product.title}}</a>
                                         </h3><!-- End .product-title -->
                                     </div><!-- End .product -->
                                 </td>
-                                <td class="price-col">84,000 تومان</td>
+                                <td class="price-col">{{product.price}} تومان</td>
+                                {% if product.count %}
                                 <td class="stock-col"><span class="in-stock">موجود</span></td>
+                                {% else %}
+                                <td class="stock-col"><span class="in-stock">ناموجود</span></td>
+                                {% endif %}
                                 <td class="action-col">
                                     <div class="dropdown">
                                         <button class="btn btn-block btn-outline-primary-2" data-toggle="dropdown"
@@ -74,51 +79,7 @@
                                 <td class="remove-col text-left"><button class="btn-remove"><i
                                             class="icon-close"></i></button></td>
                             </tr>
-                            <tr>
-                                <td class="product-col">
-                                    <div class="product">
-                                        <figure class="product-media">
-                                            <a href="#">
-                                                <img src="assets/images/products/table/product-2.jpg" alt="تصویر محصول">
-                                            </a>
-                                        </figure>
-
-                                        <h3 class="product-title">
-                                            <a href="#">لباس زنانه آبی</a>
-                                        </h3><!-- End .product-title -->
-                                    </div><!-- End .product -->
-                                </td>
-                                <td class="price-col">76,000 تومان</td>
-                                <td class="stock-col"><span class="in-stock">موجود</span></td>
-                                <td class="action-col">
-                                    <button class="btn btn-block btn-outline-primary-2"><i
-                                            class="icon-cart-plus"></i>افزودن به سبد خرید</button>
-                                </td>
-                                <td class="remove-col text-left"><button class="btn-remove"><i
-                                            class="icon-close"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="product-col">
-                                    <div class="product">
-                                        <figure class="product-media">
-                                            <a href="#">
-                                                <img src="assets/images/products/table/product-3.jpg" alt="تصویر محصول">
-                                            </a>
-                                        </figure>
-
-                                        <h3 class="product-title">
-                                            <a href="#">کیف زنانه با بند زنجیری</a>
-                                        </h3><!-- End .product-title -->
-                                    </div><!-- End .product -->
-                                </td>
-                                <td class="price-col">52,000 تومان</td>
-                                <td class="stock-col"><span class="out-of-stock">ناموجود</span></td>
-                                <td class="action-col">
-                                    <button class="btn btn-block btn-outline-primary-2 disabled">ناموجود</button>
-                                </td>
-                                <td class="remove-col text-left"><button class="btn-remove"><i
-                                            class="icon-close"></i></button></td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table><!-- End .table table-wishlist -->
                     <div class="wishlist-share">
