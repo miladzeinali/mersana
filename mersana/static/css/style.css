@@ -2179,7 +2179,7 @@ blockquote.text-white cite span {
 
 .menu.sf-arrows .sf-with-ul::after {
   font-family: 'molla';
-  content: '\f110';
+  content: '';
   position: absolute;
   left: 0;
   top: 50%;

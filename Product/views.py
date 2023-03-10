@@ -1,7 +1,9 @@
+from django.http import JsonResponse
 from django.shortcuts import render,redirect
 from .models import Product
 from account.models import Favorits
 from cart.models import Order,OrderItem
+from django.template.loader import render_to_string
 
 def Products(request):
     products = Product.objects.all()
@@ -100,3 +102,14 @@ def GenFemale(request):
         return render(request,'products.html',{'products':products})
     except:
         return redirect('web:home')
+
+def filter_data (request):
+    categoris = request.GET.getlist('category[]')
+    brands = request.GET.getlist('brand[]')
+    allProducts = Product.objects.all()
+    if len(brands) > 0:
+        print('hello')
+        allProducts = allProducts.filter(brand__Brand__in = brands)
+        print(allProducts)
+    t = render_to_string('ajax/product-list.html',{'data':allProducts})
+    return JsonResponse({'data': t})
