@@ -20,8 +20,8 @@
             <nav aria-label="breadcrumb" class="breadcrumb-nav">
                 <div class="container">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index-1.html">خانه</a></li>
-                        <li class="breadcrumb-item"><a href="#">فروشگاه</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'web:home' %}">خانه</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'product:products' %}">فروشگاه</a></li>
                         <li class="breadcrumb-item active" aria-current="page">لیست علاقه مندی</li>
                     </ol>
                 </div><!-- End .container -->
@@ -63,7 +63,7 @@
                                 <td class="stock-col"><span class="in-stock">ناموجود</span></td>
                                 {% endif %}
                                 <td class="action-col">
-                                    <div class="dropdown">
+                                    {% comment %} <div class="dropdown">
                                         <button class="btn btn-block btn-outline-primary-2" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
                                             <i class="icon-list-alt"></i>انتخاب گزینه ها
@@ -74,10 +74,10 @@
                                             <a class="dropdown-item" href="#">گزینه 2</a>
                                             <a class="dropdown-item" href="#">گزینه 3</a>
                                         </div>
-                                    </div>
+                                    </div> {% endcomment %}
                                 </td>
-                                <td class="remove-col text-left"><button class="btn-remove"><i
-                                            class="icon-close"></i></button></td>
+                                <td class="remove-col text-left"><a href="{% url 'account:deletefave' product.code %}" class="btn-remove"><i
+                                            class="icon-close"></i></a></td>
                             </tr>
                             {% endfor %}
                         </tbody>

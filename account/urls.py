@@ -8,4 +8,7 @@ urlpatterns = [
     path('verify/', UserVerify, name='userverify'),
     path('logout/', UserLogout, name='logout'),
     path('favorits/', FavoriteReport, name='favelist'),
+    path('deletefave/<str:code>/', deleteFavorits, name='deletefave'),
+    
+    path('dashboard/', Dashboard, name='dashboard'),
 ]

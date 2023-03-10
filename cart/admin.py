@@ -10,7 +10,7 @@ class OrderItemAdmin(admin.ModelAdmin):
     search_fields = ('id','product','quantity')
 
 class OrderManagementsAdmin(admin.ModelAdmin):
-    list_display = ('id','user','status','city','code','postcode')
+    list_display = ('id','user','status','city','code','postcode','order')
     search_fields = ('id','user','postcode','code','city')
 
 class TransactionsAdmin(admin.ModelAdmin):

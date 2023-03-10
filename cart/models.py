@@ -55,15 +55,18 @@ class OrderManagement(models.Model):
     offpercent = models.CharField(max_length=35, null=True, blank=True)
     sendcost = models.CharField(max_length=35, null=True, blank=True)
     count = models.CharField(max_length=10, null=True, blank=True)
-    extramobile = models.CharField(max_length=11, null=True, blank=True)
-    telephone = models.CharField(max_length=11, null=True, blank=True)
+    extramobile = models.CharField(max_length=15, null=True, blank=True)
+    telephone = models.CharField(max_length=15, null=True, blank=True)
     tracking = models.CharField(max_length=50, null=True, blank=True)
     date = models.CharField(max_length=50,null=True,blank=True)
     time = models.CharField(max_length=50,null=True,blank=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(choices=STATUS_CHOICES, max_length=20, default='Wpay')
     tax = models.CharField(max_length=30,null=True,blank=True)
+    season = models.CharField(max_length=30,null=True,blank=True)
     explain = models.TextField(max_length=300,null=True,blank=True)
+    email = models.CharField(max_length=50,null=True,blank=True)
+    tax = models.CharField(max_length=20,null=True,blank=True)
 
 
 class Transaction(models.Model):

@@ -1,6 +1,6 @@
 from django.urls import path
 from .views.views import *
-from .views.ordermange import checkout
+from .views.ordermange import *
 
 app_name = 'cart'
 urlpatterns = [
@@ -9,4 +9,8 @@ urlpatterns = [
     path('deleteproduct/<int:id>/',OrderItemDelete,name='deleteitem'),
     
     path('checkout/',checkout,name='checkout'),
+    
+    #zarinpal
+    path('topay/',ordertopay,name='topay'),
+    path('payed/',orderpayed,name='payed'),
 ]

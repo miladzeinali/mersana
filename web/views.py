@@ -38,7 +38,6 @@ def Shop(request):
 def Dashbord(request):
     orderitems = []
     countitems = []
-    address = []
     total = 0
     orderitems = []
     countFave = 0

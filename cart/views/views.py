@@ -33,7 +33,10 @@ def OrderControl(request,code):
             product = Product.objects.get(code=code)
             if product.count != 0 and product.count >= 1:
                 order = Order.objects.create(user=user, status='Wpay')
-                OrderItem.objects.create(order=order, product=product, quantity=1)
+                price = product.price
+                if product.Sale == True:
+                    price = product.sale_price
+                OrderItem.objects.create(order=order, product=product, quantity=1,price=price)
                 return render(request,'detail-product.html',{'product':product})
             else:
                 return render(request,'detail-product.html',{'product':product})
@@ -66,16 +69,16 @@ def OrderItemChange(request,id):
 
 
 def OrderItemDelete(request,id):
-        user = request.user
-    # try:
-        order = Order.objects.get(user=user, status='Wpay')
+    user = request.user
+    try:
+        Order.objects.get(user=user, status='Wpay')
         orderitem = OrderItem.objects.get(id=id)
         product = orderitem.product
         orderitem.delete()
         product.count += orderitem.quantity
-    # except:
-        # pass
-        return redirect('web:dashbord')
-
+        product.save()
+    except:
+        pass
+    return redirect('web:dashbord')
 
     

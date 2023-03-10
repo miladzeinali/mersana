@@ -49,7 +49,7 @@ def Userregister(request):
                         # send code to user
                         # params = (('receptor',f'{mobile}'),('token',f'{code}'),('template','sendmersana'))
                         # requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
-                                    #   params = params)
+                        #               params = params)
                         r = {
                             'mobile': mobile,
                         }
@@ -62,7 +62,7 @@ def Userregister(request):
                         # send sms to user
                         # params = (('receptor', f'{mobile}'), ('token', f'{code}'), ('template', 'sendmersana'))
                         # requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
-                                    #   params = params)
+                        #               params = params)
                         r = {
                             'mobile': mobile,
                         }
@@ -121,6 +121,21 @@ def Favorit(request,code):
                 return render(request,'detail-product.html',{'product':product})
         else:
             return redirect('account:register')
+        
+def deleteFavorits(request,code):
+        user = request.user
+        if user.is_authenticated:
+            try:
+                try:
+                    favorit = Favorits.objects.get(user=user,code=code)
+                    favorit.delete()
+                except:
+                    pass
+                return redirect('account:favelist')
+            except:
+                pass
+        else:
+            return redirect('account:register')
 
 def FavoriteReport(request):
         user = request.user
@@ -154,3 +169,8 @@ def UserLogout(request):
     messages.success(request, "شما با موفقیت خارج شدید!", 'success')
     return redirect('web:home')
 
+
+def Dashboard(request):
+    user = request.user
+    if user.is_authenticated:
+        return render(request,'dashboard.html')
