@@ -126,12 +126,12 @@
 											<input type="radio" id="free-shipping" name="shipping"
 												class="custom-control-input">
 											<label class="custom-control-label" for="free-shipping">
-												تیپاکس</label>
+												 (پس کرایه)تیپاکس</label>
 										</div><!-- End .custom-control -->
 									</td>
-									<td class="text-left">
+									{% comment %} <td class="text-left">
 										پس کرایه
-									</td>
+									</td> {% endcomment %}
 								</tr><!-- End .summary-shipping-row -->
 
 								{% comment %} <tr class="summary-shipping-row">
@@ -158,7 +158,7 @@
 									<td class="text-left">20,000 تومان</td>
 								</tr><!-- End .summary-shipping-row --> {% endcomment %}
 
-								<tr class="summary-shipping-estimate">
+								{% comment %} <tr class="summary-shipping-estimate">
 									<td>آدرس<br> </td>
 									{% if add in address  %}
 									<td>{{ add.province }}</td>
@@ -171,7 +171,7 @@
 								</br>
 
 									{% endif %}
-								</tr><!-- End .summary-shipping-estimate -->
+								</tr><!-- End .summary-shipping-estimate --> {% endcomment %}
 
 								<tr class="summary-total">
 									<td>مبلغ قابل پرداخت :</td>
@@ -180,12 +180,10 @@
 							</tbody>
 						</table><!-- End .table table-summary -->
 
-						<a href="{% url 'cart:checkout' %}" class="btn btn-outline-primary-2 btn-order btn-block">رفتن
-							به صفحه پرداخت</a>
+						<a href="{% url 'cart:checkout' %}" class="btn btn-outline-primary-2 btn-order btn-block">
+							 ادامه فرآیند خرید </a>
 					</div><!-- End .summary -->
 
-					<a href="category.html" class="btn btn-outline-dark-2 btn-block mb-3"><span>ادامه
-							خرید</span><i class="icon-refresh"></i></a>
 				</aside><!-- End .col-lg-3 -->
 			</div><!-- End .row -->
 		</div><!-- End .container -->
