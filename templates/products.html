@@ -98,7 +98,7 @@
 
 				<div class="products mb-3" id="filterProducts">
 					<p class="ajaxLoader">در حال بارگذاری</p>
-					<div class="row justify-content-center">
+					<div class="row justify-content-start">
 						{% for  product in products %}
 						<div class="col-6 col-md-4 col-lg-4">
 							<div class="product product-7 text-center">
@@ -211,160 +211,22 @@
 						<div class="collapse show" id="widget-1">
 							<div class="widget-body">
 								<div class="filter-items filter-items-count">
+									{% for category in categorys %}
 									<div class="filter-item">
 										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="cat-1">
-											<label class="custom-control-label" for="cat-1">لباس</label>
+											<input type="checkbox" data-filter="category" value="{{category.Category}}" class="custom-control-input filter-checkbox" id="cat-{{category.Category}}">
+											<label class="custom-control-label" for="cat-{{category.Category}}">{{category.Category}}</label>
 										</div><!-- End .custom-checkbox -->
-										<span class="item-count">3</span>
+										{% comment %} <span class="item-count">3</span> {% endcomment %}
 									</div><!-- End .filter-item -->
+									{% endfor %}							
+									
 
-									<div class="filter-item">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="cat-2">
-											<label class="custom-control-label" for="cat-2">تی شرت</label>
-										</div><!-- End .custom-checkbox -->
-										<span class="item-count">0</span>
-									</div><!-- End .filter-item -->
-
-									<div class="filter-item">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="cat-3">
-											<label class="custom-control-label" for="cat-3">کیف</label>
-										</div><!-- End .custom-checkbox -->
-										<span class="item-count">4</span>
-									</div><!-- End .filter-item -->
-
-									<div class="filter-item">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="cat-4">
-											<label class="custom-control-label" for="cat-4">ژاکت</label>
-										</div><!-- End .custom-checkbox -->
-										<span class="item-count">2</span>
-									</div><!-- End .filter-item -->
-
-									<div class="filter-item">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="cat-5">
-											<label class="custom-control-label" for="cat-5">کفش</label>
-										</div><!-- End .custom-checkbox -->
-										<span class="item-count">2</span>
-									</div><!-- End .filter-item -->
-
-									<div class="filter-item">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="cat-6">
-											<label class="custom-control-label" for="cat-6">شال و
-												روسری</label>
-										</div><!-- End .custom-checkbox -->
-										<span class="item-count">1</span>
-									</div><!-- End .filter-item -->
-
-									<div class="filter-item">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="cat-7">
-											<label class="custom-control-label" for="cat-7">لی</label>
-										</div><!-- End .custom-checkbox -->
-										<span class="item-count">1</span>
-									</div><!-- End .filter-item -->
-
-									<div class="filter-item">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="cat-8">
-											<label class="custom-control-label" for="cat-8">لباس
-												ورزشی</label>
-										</div><!-- End .custom-checkbox -->
-										<span class="item-count">0</span>
-									</div><!-- End .filter-item -->
+									
 								</div><!-- End .filter-items -->
 							</div><!-- End .widget-body -->
 						</div><!-- End .collapse -->
 					</div><!-- End .widget -->
-
-					<div class="widget widget-collapsible">
-						<h3 class="widget-title">
-							<a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true"
-								aria-controls="widget-2">
-								سایز
-							</a>
-						</h3><!-- End .widget-title -->
-
-						<div class="collapse show" id="widget-2">
-							<div class="widget-body">
-								<div class="filter-items">
-									<div class="filter-item">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="size-1">
-											<label class="custom-control-label" for="size-1">XS</label>
-										</div><!-- End .custom-checkbox -->
-									</div><!-- End .filter-item -->
-
-									<div class="filter-item">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="size-2">
-											<label class="custom-control-label" for="size-2">S</label>
-										</div><!-- End .custom-checkbox -->
-									</div><!-- End .filter-item -->
-
-									<div class="filter-item">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" checked
-												id="size-3">
-											<label class="custom-control-label" for="size-3">M</label>
-										</div><!-- End .custom-checkbox -->
-									</div><!-- End .filter-item -->
-
-									<div class="filter-item">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" checked
-												id="size-4">
-											<label class="custom-control-label" for="size-4">L</label>
-										</div><!-- End .custom-checkbox -->
-									</div><!-- End .filter-item -->
-
-									<div class="filter-item">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="size-5">
-											<label class="custom-control-label" for="size-5">XL</label>
-										</div><!-- End .custom-checkbox -->
-									</div><!-- End .filter-item -->
-
-									<div class="filter-item">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="size-6">
-											<label class="custom-control-label" for="size-6">XXL</label>
-										</div><!-- End .custom-checkbox -->
-									</div><!-- End .filter-item -->
-								</div><!-- End .filter-items -->
-							</div><!-- End .widget-body -->
-						</div><!-- End .collapse -->
-					</div><!-- End .widget -->
-
-					<div class="widget widget-collapsible">
-						<h3 class="widget-title">
-							<a data-toggle="collapse" href="#widget-3" role="button" aria-expanded="true"
-								aria-controls="widget-3">
-								رنگ
-							</a>
-						</h3><!-- End .widget-title -->
-
-						<div class="collapse show" id="widget-3">
-							<div class="widget-body">
-								<div class="filter-colors">
-									<a href="#" style="background: #b87145;"><span class="sr-only">نام رنگ</span></a>
-									<a href="#" style="background: #f0c04a;"><span class="sr-only">نام رنگ</span></a>
-									<a href="#" style="background: #333333;"><span class="sr-only">نام رنگ</span></a>
-									<a href="#" class="selected" style="background: #cc3333;"><span
-											class="sr-only">نام رنگ</span></a>
-									<a href="#" style="background: #3399cc;"><span class="sr-only">نام رنگ</span></a>
-									<a href="#" style="background: #669933;"><span class="sr-only">نام رنگ</span></a>
-									<a href="#" style="background: #f2719c;"><span class="sr-only">نام رنگ</span></a>
-									<a href="#" style="background: #ebebeb;"><span class="sr-only">نام رنگ</span></a>
-								</div><!-- End .filter-colors -->
-							</div><!-- End .widget-body -->
-						</div><!-- End .collapse -->
-					</div><!-- End .widget -->
-
 					<div class="widget widget-collapsible">
 						<h3 class="widget-title">
 							<a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true"
@@ -376,29 +238,17 @@
 						<div class="collapse show" id="widget-4">
 							<div class="widget-body">
 								<div class="filter-items">
+									{% for brand in brands %}
 									<div class="filter-item">
 										<div class="custom-control custom-checkbox">
 											<input data-filter = "brand" type="checkbox" class="custom-control-input filter-checkbox"
-												id="brand-1" value="دیور">
-											<label class="custom-control-label" for="brand-1">نکست</label>
+												id="brand-{{brand.Brand}}" value="{{brand.Brand}}">
+											<label class="custom-control-label" for="brand-{{brand.Brand}}"> {{brand.Brand}}</label>
 										</div><!-- End .custom-checkbox -->
+										<span class="item-count">{{brand.BrandEnglish}}</span>
 									</div><!-- End .filter-item -->
-
-									<div class="filter-item">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input filter-checkbox"
-											data-filter ="brand" id="brand-2" value="ریور ایسلند">
-											<label class="custom-control-label" for="brand-2">ریور ایسلند</label>
-										</div><!-- End .custom-checkbox -->
-									</div><!-- End .filter-item -->
-
-									<div class="filter-item">
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input filter-checkbox"
-											data-filter ="color" id="brand-3" value="جیوکس">
-											<label class="custom-control-label" for="brand-3">جیوکس</label>
-										</div><!-- End .custom-checkbox -->
-									</div><!-- End .filter-item -->
+									{% endfor %}
+								
 
 								
 
@@ -407,15 +257,15 @@
 						</div><!-- End .collapse -->
 					</div><!-- End .widget -->
 
-					<div class="widget widget-collapsible">
+					{% comment %} <div class="widget widget-collapsible">
 						<h3 class="widget-title">
 							<a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true"
 								aria-controls="widget-5">
 								قیمت
 							</a>
-						</h3><!-- End .widget-title -->
+						</h3><!-- End .widget-title --> {% endcomment %}
 
-						<div class="collapse show" id="widget-5">
+						{% comment %} <div class="collapse show" id="widget-5">
 							<div class="widget-body">
 								<div class="filter-price">
 									<div class="filter-price-text">
@@ -426,7 +276,7 @@
 									<div id="price-slider"></div><!-- End #price-slider -->
 								</div><!-- End .filter-price -->
 							</div><!-- End .widget-body -->
-						</div><!-- End .collapse -->
+						</div><!-- End .collapse --> {% endcomment %}
 					</div><!-- End .widget -->
 				</div><!-- End .sidebar sidebar-shop -->
 			</aside><!-- End .col-lg-3 -->

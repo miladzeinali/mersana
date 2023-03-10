@@ -36,7 +36,16 @@ def checkout(request):
     else:
         return redirect('account:register')
 
-def ordertopay(request):
-    user = request.user
-    if user.is_authenticated:
-            pass
+# def ordertopay(request):
+#     user = request.user
+#     if request.method = 'POST':
+#         try:
+#             form = request.POST
+#         if user.is_authenticated and form['name']:
+#             order = Order.objects.get(user=user,status='Wpay')
+#             OrderManagement.objects.create(order=order,user=user,province=form['province',city=form['city'],
+#                                                     district=form['district'],postcode=form['postcode'])
+            
+        
+    
+

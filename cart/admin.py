@@ -2,8 +2,8 @@ from django.contrib import admin
 from .models import *
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id','user','status','city','code','postcode')
-    search_fields = ('id','user','postcode','code','city')
+    list_display = ('id','user','status','postcode')
+    search_fields = ('id','user','postcode')
 
 class OrderItemAdmin(admin.ModelAdmin):
     list_display = ('id','order','product','quantity')
