@@ -1,14 +1,14 @@
-<title>  دریافت کد تایید | مرصانا</title>
+<title> دریافت کد تایید | مرصانا</title>
 
 {% extends 'base.html' %}
 {% load static %}
 {% block header %}
-    {% include 'partials/header2.html' %}
+{% include 'partials/header2.html' %}
 {% endblock %}
 {% block hero%}
 
 
-    {% endblock %}
+{% endblock %}
 {% block content %}
 <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
     <div class="container">
@@ -18,55 +18,81 @@
             <li class="breadcrumb-item active" aria-current="page">کد تائید </li>
         </ol>
     </div><!-- End .container -->
-  </nav><!-- End .breadcrumb-nav -->
-  
-  <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17"
+</nav><!-- End .breadcrumb-nav -->
+
+<div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17"
     style="background-image: url(static/images/backgrounds/login-bg.jpg)">
     <div class="container">
         <div class="form-box">
-          <div class="d-flex justify-content-center">
-              <img src="{% static 'images/logo/logo.png' %}" style="width:19%" alt="">
-          </div>
+            <div class="d-flex justify-content-center">
+                <img src="{% static 'images/logo/logo.png' %}" style="width:19%" alt="">
+            </div>
             <div class="form-tab">
                 <ul class="nav nav-pills nav-fill" role="tablist">
                     {% comment %} <li class="nav-item">
                         <a class="nav-link" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab"
                             aria-controls="signin-2" aria-selected="true">ارسال کد</a>
                     </li>
-                   {% endcomment %}
+                    {% endcomment %}
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane  active" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
                         <form action="{% url 'account:userverify' %}" method="post">
                             {% csrf_token %}
                             <div class="form-group">
-                                <label for="singin-email-2">کد تایید ( تا یک دقیقه دیگر برای شما ارسال خواهد شد) </label>
-                                <input type="text" class="form-control" id="singin-email-2"
-                                    name="code" required>
+                                <label for="singin-email-2">کد تایید ( تا یک دقیقه دیگر برای شما ارسال خواهد شد)
+                                </label>
+                                <input type="text" class="form-control" id="singin-email-2" name="code" required>
                             </div><!-- End .form-group -->
-  
-  
-  
-                            <div class="form-footer">
+
+
+
+                            <div class="form-footer d-flex row justify-content-start">
                                 <button type="submit" class="btn btn-outline-primary-2">
                                     <span>تایید</span>
                                     <i class="icon-long-arrow-left"></i>
                                 </button>
-  
-                              
-  
+
+                                <div class="forgot-link">
+                                    <button class="btn btn-outline-primary-2" id="count"></button>
+                                </div>
+
                             </div><!-- End .form-footer -->
                         </form>
-                       
+
+
+
                     </div><!-- .End .tab-pane -->
-                   
+
                     <!-- .End .tab-pane -->
                 </div><!-- End .tab-content -->
             </div><!-- End .form-tab -->
         </div><!-- End .form-box -->
     </div><!-- End .container -->
-  </div><!-- End .login-page section-bg -->
+</div><!-- End .login-page section-bg -->
+<script>
+    var counter = 60;
+    var mode = "Workout";
+    var rounds = 1;
 
+    var interval = setInterval(function () {
+        counter--;
+
+       
+        id = document.getElementById("count");
+        id.innerHTML =  counter + " " + "ثانیه تا دریافت کد "  ;
+        
+
+        if (counter === 0) {
+            id.innerHTML = "ارسال مجدد کد";
+            $("#count").on('click',function(){
+                window.location.reload()
+            })
+            clearInterval(interval)
+            // counter = 5;
+        }
+    }, 1000);
+</script>
 {% endblock %}
 {% block footer %}
 {% include 'partials/footer.html' %}
