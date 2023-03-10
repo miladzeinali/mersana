@@ -140,13 +140,15 @@
 						<div class="details-filter-row details-row-size">
 							<label for="qty">تعداد : </label>
 							<div class="product-details-quantity">
-								<input type="number" id="qty" class="form-control" value="1" min="1"
+								<input type="number" id="qty" class="form-control product-quantity" value="1" min="1"
 									max="10" step="1" data-decimals="0" name="qty" required>
 							</div><!-- End .product-details-quantity -->
 						</div><!-- End .details-filter-row -->
 
 						<div class="product-details-action">
 							<a href="{% url 'cart:ordercontrol' product.code %}" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></a>
+							<!-- <input type="hidden" value="{{product.code}}" id="product-code">
+							<button id="addtocart"  class="btn-product btn-cart"><span>افزودن به سبد خرید</span></button> -->
 
 							<div class="details-action-wrapper">
 								<a href="{% url 'account:favorits' product.code %}" class="btn-product btn-wishlist"

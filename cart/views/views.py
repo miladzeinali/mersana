@@ -3,6 +3,7 @@ from django.contrib import messages
 from web.models import *
 from Product.models import *
 from cart.models import *
+from django.http import JsonResponse
 
 
 def OrderControl(request,code):
@@ -75,3 +76,6 @@ def OrderItemDelete(request,id):
     # except:
         # pass
         return redirect('web:dashbord')
+
+
+    
