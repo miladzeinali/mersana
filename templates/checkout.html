@@ -35,7 +35,7 @@
 							{% comment %} وارد کردن کد تخفیف خود اینجا کلیک کنید</span></label> {% endcomment %}
 				</form>
 			</div><!-- End .checkout-discount -->
-			<form action="#">
+			<form action="">
 				<div class="row">
 					<div class="col-lg-9">
 						<h2 class="checkout-title">جزئیات صورت حساب</h2><!-- End .checkout-title -->
@@ -53,9 +53,9 @@
 
 						<label>نام شرکت (اختیاری)</label>
 						<input type="text" class="form-control">
-
+{% comment %} 
 						<label>کشور *</label>
-						<input type="text" class="form-control" required>
+						<input type="text" class="form-control" required> {% endcomment %}
 
 						<div class="row">
 							<div class="col-sm-6">
@@ -90,21 +90,30 @@
 								<input type="tel" class="form-control" required>
 							</div><!-- End .col-sm-6 -->
 						</div><!-- End .row -->
+						
+						<div class="row">
+							<div class="col-sm-6">
+								<label>ایمیل </label>
+								<input type="text" class="form-control">
+							</div><!-- End .col-sm-6 -->
 
-						<label>ایمیل *</label>
-						<input type="email" class="form-control" required>
+							<div class="col-sm-6">
+								<label>موبایل اضافی </label>
+								<input type="tel" class="form-control" >
+							</div><!-- End .col-sm-6 -->
+						</div><!-- End .row -->
 
-						<div class="custom-control custom-checkbox">
+						{% comment %} <div class="custom-control custom-checkbox">
 							<input type="checkbox" class="custom-control-input" id="checkout-create-acc">
 							<label class="custom-control-label" for="checkout-create-acc">ایجاد یک حساب
 								کاربری؟</label>
-						</div><!-- End .custom-checkbox -->
+						</div><!-- End .custom-checkbox --> {% endcomment %}
 
-						<div class="custom-control custom-checkbox">
+						{% comment %} <div class="custom-control custom-checkbox">
 							<input type="checkbox" class="custom-control-input" id="checkout-diff-address">
 							<label class="custom-control-label" for="checkout-diff-address">ارسال به یک آدرس
 								متفاوت؟</label>
-						</div><!-- End .custom-checkbox -->
+						</div><!-- End .custom-checkbox --> {% endcomment %}
 
 						<label>توضیحات (اختیاری)</label>
 						<textarea class="form-control" cols="30" rows="4"
@@ -133,7 +142,7 @@
 									<tr class="summary-subtotal">
 										<td>جمع سبد خرید</td>
 										<td></td>
-										<td class="text-left">{{total}} تومان</td>
+										<td class="text-left" type="number">{{total}} تومان</td>
 									</tr><!-- End .summary-subtotal -->
 									<tr>
 										<td>شیوه ارسال: </td>

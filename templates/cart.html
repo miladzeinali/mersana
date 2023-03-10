@@ -157,7 +157,7 @@
 									<td class="text-left">20,000 تومان</td>
 								</tr><!-- End .summary-shipping-row --> {% endcomment %}
 
-								<tr class="summary-shipping-estimate">
+								{% comment %} <tr class="summary-shipping-estimate">
 									<td>آدرس<br> </td>
 									{% if add in address  %}
 									<td>{{ add.province }}</td>
@@ -170,7 +170,7 @@
 								</br>
 
 									{% endif %}
-								</tr><!-- End .summary-shipping-estimate -->
+								</tr><!-- End .summary-shipping-estimate --> {% endcomment %}
 
 								<tr class="summary-total">
 									<td>مبلغ قابل پرداخت :</td>
