@@ -36,6 +36,7 @@
 				</form>
 			</div><!-- End .checkout-discount -->
 			<form action="">
+				{%csrf_token%}
 				<div class="row">
 					<div class="col-lg-9">
 						<h2 class="checkout-title">جزئیات صورت حساب</h2><!-- End .checkout-title -->
@@ -59,7 +60,7 @@
 
 						<div class="row">
 							<div class="col-sm-6">
-								<label>شهر *</label>
+								<label>استان *</label>
 								<input type="text" class="form-control" required>
 
 							</div><!-- End .col-sm-6 -->
@@ -86,7 +87,7 @@
 							</div><!-- End .col-sm-6 -->
 
 							<div class="col-sm-6">
-								<label>تلفن *</label>
+								<label>تلفن ثابت*</label>
 								<input type="tel" class="form-control" required>
 							</div><!-- End .col-sm-6 -->
 						</div><!-- End .row -->

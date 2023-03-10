@@ -31,7 +31,14 @@ def checkout(request):
             totaltax = (total*0.09) + total
         else:
             return redirect('account:register')
-    return render(request,'checkout.html',{'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
+        return render(request,'checkout.html',{'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
                                        'total':total,'totaltax':totaltax,'tax':tax})
+    else:
+        return redirect('account:register')
+
+def ordertopay(request):
+    user = request.user
+    if user.is_authenticated:
+        
     
 

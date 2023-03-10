@@ -42,6 +42,9 @@ def Dashbord(request):
     total = 0
     orderitems = []
     countFave = 0
+    favorits = []
+    countitems = len(orderitems)
+    countFave = len(favorits)
     user = request.user
     if user.is_authenticated:
         try:
@@ -55,12 +58,10 @@ def Dashbord(request):
             countitems = len(orderitems)
             for item in orderitems:
                 total += item.quantity*item.price
-            address = Address.objects.filter(user=user)
-            print(address)
         except:
             pass
         return render(request,'cart.html',{'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
-                                       'total':total,'address':address})
+                                       'total':total})
     else:
         return redirect('account:register')
 
