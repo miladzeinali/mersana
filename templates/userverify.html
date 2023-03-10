@@ -40,7 +40,7 @@
                         <form action="{% url 'account:userverify' %}" method="post">
                             {% csrf_token %}
                             <div class="form-group">
-                                <label for="singin-email-2">  کد تایید</label>
+                                <label for="singin-email-2">کد تایید ( تا یک دقیقه دیگر برای شما ارسال خواهد شد) </label>
                                 <input type="text" class="form-control" id="singin-email-2"
                                     name="code" required>
                             </div><!-- End .form-group -->
