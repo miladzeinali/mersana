@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render,redirect
-from .models import Product
+from .models import Product,Brand,Category
 from account.models import Favorits
 from cart.models import Order,OrderItem
 from django.template.loader import render_to_string
@@ -15,6 +15,8 @@ def Products(request):
     user = request.user
     countitems = len(orderitems)
     countFave = len(favorits)
+    brands = Brand.objects.all()
+    categorys = Category.objects.all()
     if user.is_authenticated:
         try:
             favorits = Favorits.objects.filter(user=user)
@@ -30,7 +32,7 @@ def Products(request):
         except:
             pass
     return render(request,'products.html',{'products':products,'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
-                                       'total':total})
+                                       'total':total,'brands':brands,'categorys':categorys})
 
 def SaleProducts(request):
     products = Product.objects.filter(Sale = True)
