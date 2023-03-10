@@ -6,4 +6,6 @@ urlpatterns = [
     path('ordercontrol/<str:code>/',OrderControl,name='ordercontrol'),
     path('updatecart/<int:id>/',OrderItemChange,name='orderchange'),
     path('deleteproduct/<int:id>/',OrderItemDelete,name='deleteitem'),
+    
+    path('checkout/',checkout,name='checkout'),
 ]
