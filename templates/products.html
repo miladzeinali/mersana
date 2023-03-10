@@ -104,7 +104,7 @@
 							<div class="product product-7 text-center">
 								<figure class="product-media">
 									<span class="product-label label-new">جدید</span>
-									<a href% ="{urlproductproduct', product.id}" %>
+									<a href="{% url 'product:product' product.id %}">
 										<img src="{{product.image.url}}" href="" alt="تصویر محصول"
 											class="product-image">
 									</a>
@@ -136,7 +136,7 @@
                                             {% endif %}
                                         </a>
 									</div><!-- End .product-cat -->
-									<h3 class="product-title text-center"><a href% ="{urlproductproduct', product.id}" %>{{ product.title }}
+									<h3 class="product-title text-center"><a href="{% url 'product:product' product.id %}">{{ product.title }}
 											</a></h3><!-- End .product-title -->
 									<div class="product-price">
 										 تومان{{ product.price }}

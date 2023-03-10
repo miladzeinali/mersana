@@ -42,7 +42,6 @@ def OrderControl(request,code):
 
 def OrderItemChange(request,id):
     user = request.user
-    qty = request.POST['qty']
     print(request.POST)
     try:
         order = Order.objects.get(user=user, status='Wpay')
@@ -66,13 +65,13 @@ def OrderItemChange(request,id):
 
 
 def OrderItemDelete(request,id):
-    user = request.user
-    try:
+        user = request.user
+    # try:
         order = Order.objects.get(user=user, status='Wpay')
-        product = Product.objects.get(id=id)
-        orderitem = OrderItem.objects.get(order=order, product=product)
+        orderitem = OrderItem.objects.get(id=id)
+        product = orderitem.product
         orderitem.delete()
         product.count += orderitem.quantity
-    except:
-        pass
-    return redirect('web:dashbord')
+    # except:
+        # pass
+        return redirect('web:dashbord')

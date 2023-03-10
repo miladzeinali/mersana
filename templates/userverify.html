@@ -29,27 +29,27 @@
           </div>
             <div class="form-tab">
                 <ul class="nav nav-pills nav-fill" role="tablist">
-                    <li class="nav-item">
+                    {% comment %} <li class="nav-item">
                         <a class="nav-link" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab"
                             aria-controls="signin-2" aria-selected="true">ارسال کد</a>
                     </li>
-                  
+                   {% endcomment %}
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane  active" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
-                        <form action="{% url 'account:register' %}" method="post">
+                        <form action="{% url 'account:userverify' %}" method="post">
                             {% csrf_token %}
                             <div class="form-group">
-                                <label for="singin-email-2">  شماره موبایل   *</label>
+                                <label for="singin-email-2">کد تایید ( تا یک دقیقه دیگر برای شما ارسال خواهد شد) </label>
                                 <input type="text" class="form-control" id="singin-email-2"
-                                    name="mobile" required>
+                                    name="code" required>
                             </div><!-- End .form-group -->
   
   
   
                             <div class="form-footer">
                                 <button type="submit" class="btn btn-outline-primary-2">
-                                    <span>ارسال</span>
+                                    <span>تایید</span>
                                     <i class="icon-long-arrow-left"></i>
                                 </button>
   

@@ -54,21 +54,18 @@
 										</figure>
 
 										<h3 class="product-title">
-											<a href="{% url 'product:product' item.product.id %}">{{ item.product.title
-												}}</a>
+											<a href="{% url 'product:product' item.product.id %}">{{ item.product.title}}</a>
 										</h3><!-- End .product-title -->
 									</div><!-- End .product -->
 								</td>
 								<td class="price-col">{{ item.price }}</td>
-								<form action="{% url 'cart:orderchange' %}" class="form-inline">
+								<form action="{% url 'cart:orderchange' item.product.id %}" class="form-inline">
 									<td class="quantity-col">
 
 										<div class="cart-product-quantity">
 											{% csrf_token %}
 											<input type="hidden" name="id" value="{{item.product.id}}">
-											<input type="number" class="form-control" name="qty"
-												value="{{ item.quantity }}" min="1" max="10" step="1" data-decimals="0"
-												required>
+											<input class="form-control" name="qty" value={{item.quantity}}>
 
 										</div>
 									</td>
@@ -80,30 +77,31 @@
 								</form>
 
 								{# <td class="total-col">84,000</td>#}
-								<td class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button>
+								<td class="remove-col"><a href={% url 'cart:deleteitem' item.id %} class="btn-remove"><i class="icon-close"></i></a>
 								</td>
 							</tr>
 							{% endfor %}
 						</tbody>
+					
 					</table><!-- End .table table-wishlist -->
 
 					<div class="cart-bottom">
 						<div class="cart-discount">
 							<form action="#">
-								<div class="input-group">
+								{% comment %} <div class="input-group">
 									<input type="text" class="form-control" required placeholder="کد تخفیف">
 									<div class="input-group-append">
 										<button class="btn btn-outline-primary-2" type="submit"><i
 												class="icon-long-arrow-left"></i></button>
 									</div><!-- .End .input-group-append -->
-								</div><!-- End .input-group -->
+								</div><!-- End .input-group --> {% endcomment %}
 							</form>
 						</div><!-- End .cart-discount -->
 
-						{# <a href="{% url 'cart:orderchange'  %}" class="btn btn-outline-dark-2"><span>به روز رسانی سبد
-								خرید</span>
-							<i#} {# class="icon-refresh"></i>
-						</a>#}
+						{% comment %} <a href="{% url 'cart:orderchange' item.product.id  %}" class="btn btn-outline-dark-2"><span>به روز رسانی سبد {% endcomment %}
+								{% comment %} خرید</span>
+							<i class="icon-refresh"></i> {% endcomment %}
+						</a>
 					</div><!-- End .cart-bottom -->
 				</div><!-- End .col-lg-9 -->
 
@@ -115,7 +113,7 @@
 							<tbody>
 								<tr class="summary-subtotal">
 									<td>جمع کل سبد خرید : </td>
-									<td class="text-left">236,000 تومان</td>
+									<td class="text-left">{{total}} تومان</td>
 								</tr><!-- End .summary-subtotal -->
 								<tr class="summary-shipping">
 									<td>شیوه ارسال : </td>
@@ -127,14 +125,16 @@
 										<div class="custom-control custom-radio">
 											<input type="radio" id="free-shipping" name="shipping"
 												class="custom-control-input">
-											<label class="custom-control-label" for="free-shipping">ارسال
-												رایگان</label>
+											<label class="custom-control-label" for="free-shipping">
+												تیپاکس</label>
 										</div><!-- End .custom-control -->
 									</td>
-									<td class="text-left">0,000 تومان</td>
+									<td class="text-left">
+										پس کرایه
+									</td>
 								</tr><!-- End .summary-shipping-row -->
 
-								<tr class="summary-shipping-row">
+								{% comment %} <tr class="summary-shipping-row">
 									<td>
 										<div class="custom-control custom-radio">
 											<input type="radio" id="standart-shipping" name="shipping"
@@ -143,8 +143,8 @@
 												سفارشی :</label>
 										</div><!-- End .custom-control -->
 									</td>
-									<td class="text-left">10,000 تومان</td>
-								</tr><!-- End .summary-shipping-row -->
+									<td class="text-left">10,000 تومان</td> {% endcomment %}
+								{% comment %} </tr><!-- End .summary-shipping-row -->
 
 								<tr class="summary-shipping-row">
 									<td>
@@ -156,21 +156,31 @@
 										</div><!-- End .custom-control -->
 									</td>
 									<td class="text-left">20,000 تومان</td>
-								</tr><!-- End .summary-shipping-row -->
+								</tr><!-- End .summary-shipping-row --> {% endcomment %}
 
 								<tr class="summary-shipping-estimate">
-									<td>آدرس<br> <a href="dashboard.html">تغییر آدرس</a></td>
-									<td>&nbsp;</td>
+									<td>آدرس<br> </td>
+									{% if add in address  %}
+									<td>{{ add.province }}</td>
+									<td>{{ add.city }}</td>
+									<td>{{ add.district }}</td>
+								</br>
+
+									{% else %}
+									<td><a> ایجاد ادرس</a></td>
+								</br>
+
+									{% endif %}
 								</tr><!-- End .summary-shipping-estimate -->
 
 								<tr class="summary-total">
 									<td>مبلغ قابل پرداخت :</td>
-									<td class="text-left">236,000 تومان</td>
+									<td class="text-left">{{total}} تومان</td>
 								</tr><!-- End .summary-total -->
 							</tbody>
 						</table><!-- End .table table-summary -->
 
-						<a href="checkout.html" class="btn btn-outline-primary-2 btn-order btn-block">رفتن
+						<a href="{% url 'cart:checkout' %}" class="btn btn-outline-primary-2 btn-order btn-block">رفتن
 							به صفحه پرداخت</a>
 					</div><!-- End .summary -->
 
