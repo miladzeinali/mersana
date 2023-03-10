@@ -41,7 +41,7 @@ class Product(models.Model):
     code = models.CharField(max_length=15)
     title = models.CharField(max_length=150)
     image = models.ImageField(null=True, blank=True, upload_to='product-img/')
-    price = models.FloatField(default=0)
+    price = models.PositiveIntegerField(default=0)
     off_percent = models.IntegerField(default=0, null=True, blank=True)
     club_point = models.IntegerField(default=0, null=True, blank=True)
     color = models.ForeignKey(Color, on_delete=models.CASCADE, null=True, blank=True)

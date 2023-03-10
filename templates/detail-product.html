@@ -2,6 +2,7 @@
 
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block header %}
     {% include 'partials/header.html' %}
 {% endblock %}
@@ -96,7 +97,8 @@
 						</div><!-- End .rating-container -->
 
 						<div class="product-price">
-							{{product.price}} تومان
+							{{product.price |intcomma}} تومان
+							
 						</div><!-- End .product-price -->
 
 						<div class="product-content">
