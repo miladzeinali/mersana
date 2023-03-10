@@ -47,9 +47,9 @@ def Userregister(request):
                         ValidOqbject = ValidationCode.objects.get(mobile=mobile)
                         code = ValidOqbject.validation_code
                         # send code to user
-                        params = (('receptor',f'{mobile}'),('token',f'{code}'),('template','sendmersana'))
-                        requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
-                                      params = params)
+                        # params = (('receptor',f'{mobile}'),('token',f'{code}'),('template','sendmersana'))
+                        # requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
+                                    #   params = params)
                         r = {
                             'mobile': mobile,
                         }
@@ -60,9 +60,9 @@ def Userregister(request):
                         code = randint(100000,999999)
                         ValidationCode.objects.create(mobile=mobile,validation_code=code)
                         # send sms to user
-                        params = (('receptor', f'{mobile}'), ('token', f'{code}'), ('template', 'sendmersana'))
-                        requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
-                                      params = params)
+                        # params = (('receptor', f'{mobile}'), ('token', f'{code}'), ('template', 'sendmersana'))
+                        # requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
+                                    #   params = params)
                         r = {
                             'mobile': mobile,
                         }
@@ -72,7 +72,7 @@ def Userregister(request):
                         print(code)
                         return render(request,'userverify.html')
                 except:
-                    messages.error(request,'در فرآیند ثبت نام مشکلی پیش آمده است، با پشتیبانی سایت تماس بگیرید','error')
+                    messages.error(request,'در فرآیند ثبت نام مشکلی پیش آمده است،   لطفا چند دقیقه دیگر امتحان کنید  ','error')
                     return render(request,'login.html')
     else:
         return render(request,'login.html')

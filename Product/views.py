@@ -7,15 +7,21 @@ def Products(request):
     products = Product.objects.all()
     orderitems = []
     countitems = []
+    favorits = []
     total = 0
     countFave = []
     user = request.user
+    countitems = len(orderitems)
+    countFave = len(favorits)
     if user.is_authenticated:
         try:
             favorits = Favorits.objects.filter(user=user)
             countFave = len(favorits)
-            order = Order.objects.get(user=user,status='Wpay')
-            orderitems = OrderItem.objects.filter(order=order)
+            try:
+                order = Order.objects.get(user=user,status='Wpay')
+                orderitems = OrderItem.objects.filter(order=order)
+            except:
+                pass
             countitems = len(orderitems)
             for item in orderitems:
                 total += item.quantity*item.price

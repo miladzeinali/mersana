@@ -1,7 +1,7 @@
 import requests
 from ..models import *
+from django.shortcuts import render,redirect
 
-def OrderManage(request):
-    user = request.user
-    if user.is_authenticated:
-    
+
+def checkout(request):
+    return render(request,'check')

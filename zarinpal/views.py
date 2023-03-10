@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from zeep import Client
 from django.contrib import messages
-from account.views import Webpaycontrol
 
 MERCHANT = 'bdae3de6-ef15-49e6-903b-34cc18e656cb'
 client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
@@ -27,10 +26,8 @@ def verify(request):
     if request.GET.get('Status') == 'OK':
         result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], amount)
         if result.Status == 100:
-            Webpaycontrol(request)
             return redirect('web:dashbord')
         elif result.Status==101:
-            Webpaycontrol(request)
             return redirect('web:dashbord')
         else:
             messages.error(request,'فرآیند پرداخت موفقیت آمیز نبود !','error')

@@ -16,13 +16,7 @@
 
             <div class="header-right">
                 <div class="social-icons social-icons-color">
-                    <a href="#" class="social-icon social-facebook" title="فیسبوک" target="_blank"><i
-                            class="icon-facebook-f"></i></a>
-                    <a href="#" class="social-icon social-twitter" title="توییتر" target="_blank"><i
-                            class="icon-twitter"></i></a>
-                    <a href="#" class="social-icon social-pinterest" title="اینستاگرام" target="_blank"><i
-                            class="icon-pinterest-p"></i></a>
-                    <a href="#" class="social-icon social-instagram" title="پینترست" target="_blank"><i
+                    <a href="#" class="social-icon social-instagram" title="اینستاگرام" target="_blank"><i
                             class="icon-instagram"></i></a>
                 </div><!-- End .soial-icons -->
                 {% if not user.is_authenticated%}
@@ -154,8 +148,6 @@
                     <ul class="menu ">
                         <li class="">
                             <a href="{% url 'web:home' %}" class="sf-with-ul">خانه</a>
-
-                            
                         </li>
                         <li>
                             <a href="{% url 'product:products' %}" class="sf-with-ul">فروشگاه</a>
@@ -164,17 +156,9 @@
                         </li>
                        
                         <li>
-                            <a href="#" class="sf-with-ul">صفحات </a>
+                            <a href="#" class="sf-with-ul">درباره ما </a>
 
                             <ul>
-                                <li>
-                                    <a href="about.html" class="sf-with-ul">درباره ما</a>
-
-                                    <ul>
-                                        <li><a href="about.html">درباره ما 01</a></li>
-                                        <li><a href="about-2.html">درباره ما 02</a></li>
-                                    </ul>
-                                </li>
                                 <li>
                                     <a href="contact.html" class="sf-with-ul">تماس با ما</a>
 
