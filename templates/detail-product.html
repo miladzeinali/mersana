@@ -41,32 +41,35 @@
 							</figure><!-- End .product-main-image -->
 
 							<div id="product-zoom-gallery" class="product-image-gallery">
-								<a class="product-gallery-item active" href="#"
-									data-image="assets/images/products/single/1.jpg"
-									data-zoom-image="assets/images/products/single/1-big.jpg">
-									<img src="assets/images/products/single/1-small.jpg"
+                                {% for image in images %}
+								<a class="product-gallery-item active" href=""
+									data-image=""
+									data-zoom-image="">
+									<img src="{{image.img.url}}"
 										alt="توضیحات تصویر">
 								</a>
+                                {% endfor %}
 
-								<a class="product-gallery-item" href="#"
-									data-image="assets/images/products/single/2.jpg"
-									data-zoom-image="assets/images/products/single/2-big.jpg">
-									<img src="assets/images/products/single/2-small.jpg"
-										alt="توضیحات تصویر">
-								</a>
+{#								<a class="product-gallery-item" href="#"#}
+{#									data-image="assets/images/products/single/2.jpg"#}
+{#									data-zoom-image="assets/images/products/single/2-big.jpg">#}
+{#									<img src="assets/images/products/single/2-small.jpg"#}
+{#										alt="توضیحات تصویر">#}
+{#								</a>#}
+{##}
+{#								<a class="product-gallery-item" href="#"#}
+{#									data-image="assets/images/products/single/3.jpg"#}
+{#									data-zoom-image="assets/images/products/single/3-big.jpg">#}
+{#									<img src="assets/images/products/single/3-small.jpg"#}
+{#										alt="توضیحات تصویر">#}
+{#								</a>#}
+{##}
+{#								<a class="product-gallery-item" href="#"#}
+{#									data-image="assets/images/products/single/4.jpg"#}
+{#									data-zoom-image="assets/images/products/single/4-big.jpg">#}
+{#									<img src="assets/images/products/single/4-small.jpg" alt="product back">#}
+{#								</a>#}
 
-								<a class="product-gallery-item" href="#"
-									data-image="assets/images/products/single/3.jpg"
-									data-zoom-image="assets/images/products/single/3-big.jpg">
-									<img src="assets/images/products/single/3-small.jpg"
-										alt="توضیحات تصویر">
-								</a>
-
-								<a class="product-gallery-item" href="#"
-									data-image="assets/images/products/single/4.jpg"
-									data-zoom-image="assets/images/products/single/4-big.jpg">
-									<img src="assets/images/products/single/4-small.jpg" alt="product back">
-								</a>
 							</div><!-- End .product-image-gallery -->
 						</div><!-- End .row -->
 					</div><!-- End .product-gallery -->
@@ -156,31 +159,82 @@
 						</div><!-- End .product-details-action -->
 
 						<div class="product-details-footer">
-							<!-- <div class="product-cat text-center">
-								<span>دسته بندی : </span>
-								<a href="#">زنانه</a>،
-								<a href="#">لباس</a>،
-								<a href="#">زرد</a>
-							</div> -->
-							<!-- End .product-cat -->
+							<div class="product-details-tab">
+                        <ul class="nav nav-pills justify-content-center" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="product-desc-link" data-toggle="tab"
+                                    href="#product-desc-tab" role="tab" aria-controls="product-desc-tab"
+                                    aria-selected="true">توضیحات</a>
+                            </li>
 
-							<!-- <div class="social-icons social-icons-sm">
-								<span class="social-label">اشتراک گذاری : </span>
-								<a href="#" class="social-icon" title="فیسبوک" target="_blank"><i
-										class="icon-facebook-f"></i></a>
-								<a href="#" class="social-icon" title="توییتر" target="_blank"><i
-										class="icon-twitter"></i></a>
-								<a href="#" class="social-icon" title="اینستاگرام" target="_blank"><i
-										class="icon-instagram"></i></a>
-								<a href="#" class="social-icon" title="پینترست" target="_blank"><i
-										class="icon-pinterest"></i></a>
-							</div> -->
-						</div>
-						<!-- End .product-details-footer -->
-					</div><!-- End .product-details -->
-				</div><!-- End .col-md-6 -->
-			</div><!-- End .row -->
-		</div><!-- End .product-details-top -->
+                            <li class="nav-item">
+                                <a class="nav-link" id="product-shipping-link" data-toggle="tab"
+                                    href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab"
+                                    aria-selected="false">ارسال و بازگشت</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel"
+                                aria-labelledby="product-desc-link">
+                                <div class="product-desc-content">
+                                    <h3>اطلاعات محصول</h3>
+                                    <p>{{ product.about  }}</p>
+{#                                    <ul>#}
+{#                                        <li>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم </li>#}
+{#                                        <li>لورم ایپسوم متن ساختگی با تولید سادگی.</li>#}
+{#                                        <li>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم</li>#}
+{#                                    </ul>#}
+
+{#                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید#}
+{#                                        سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوملورم ایپسوم متن#}
+{#                                        ساختگی با تولید سادگی نامفهوم، لورم ایپسوم متن ساختگی با تولید سادگی نامفهوملورم#}
+{#                                        ایپسوم متن ساختگی با تولید سادگی نامفهوملورم ایپسوم متن ساختگی با تولید سادگی#}
+{#                                        نامفهوملورم ایپسوم متن ساختگی با تولید سادگی نامفهوم. </p>#}
+                                </div><!-- End .product-desc-content -->
+                            </div><!-- .End .tab-pane -->
+                            <div class="tab-pane fade" id="product-info-tab" role="tabpanel"
+                                aria-labelledby="product-info-link">
+                                <div class="product-desc-content">
+                                    <h3>اطلاعات</h3>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن  </p>
+
+                                    <h3>اطلاعات بیشتر</h3>
+                                    <ul>
+                                        <li>لورم ایپسوم متن ساختگی</li>
+                                        <li>لورم ایپسوم متن ساختگی با تولید سادگی</li>
+                                        <li>لورم ایپسوم</li>
+                                        <li>لورم ایپسوم متن ساختگی </li>
+                                        <li>لورم ایپسوم متن ساختگی با تولید سادگی</li>
+                                        <li> ارتفاع: 31سانتی متر; عرض: 32سانتی متر; عمق: 12سانتی متر</li>
+                                    </ul>
+
+                                    <h3>سایز</h3>
+                                    <p>تک سایز</p>
+                                </div><!-- End .product-desc-content -->
+                            </div><!-- .End .tab-pane -->
+                            <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel"
+                                aria-labelledby="product-shipping-link">
+                                <div class="product-desc-content">
+                                    <h3>ارسال و بازگشت</h3>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید
+                                        سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن
+                                        ساختگی با تولید سادگی نامفهوم<br>
+                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید
+                                        سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوملورم ایپسوم متن
+                                        ساختگی با تولید سادگی نامفهوملورم ایپسوم متن ساختگی با تولید سادگی نامفهوم.</a>
+                                    </p>
+                                </div><!-- End .product-desc-content -->
+                            </div><!-- .End .tab-pane -->
+
+
+
+                                            </div><!-- End .col-auto -->
+                                        </div><!-- End .row -->
+                                    </div><!-- End .review -->
+                                </div><!-- End .نظر -->
+                            </div><!-- .End .tab-pane -->
+                        </div><!-- End .tab-content -->
+                    </div><!-- End .product-details-tab -->
 
 		
 		<!-- End .product-details-tab -->
