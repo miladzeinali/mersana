@@ -36,10 +36,10 @@
                                             href="#tab-dashboard" role="tab" aria-controls="tab-dashboard"
                                             aria-selected="true">داشبورد</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders"
-                                            role="tab" aria-controls="tab-orders" aria-selected="false">سفارشات</a>
-                                    </li>
+{#                                    <li class="nav-item">#}
+{#                                        <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders"#}
+{#                                            role="tab" aria-controls="tab-orders" aria-selected="false">سفارشات</a>#}
+{#                                    </li>#}
 {#                                    <li class="nav-item">#}
 {#                                        <a class="nav-link" id="tab-downloads-link" data-toggle="tab"#}
 {#                                            href="#tab-downloads" role="tab" aria-controls="tab-downloads"#}
@@ -55,7 +55,7 @@
 {#                                            کاربری</a>#}
 {#                                    </li>#}
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">خروج از حساب کاربری</a>
+                                        <a class="nav-link" href="{% url 'account:logout' %}">خروج از حساب کاربری</a>
                                     </li>
                                 </ul>
                             </aside><!-- End .col-lg-3 -->
@@ -82,7 +82,8 @@
 							<tr>
 								<th>کد سفارش </th>
 								<th>جمع فاکتور</th>
-								<th>تاریخ | زمان</th>
+								<th>تاریخ </th>
+								<th>زمان</th>
 								<th>جزییات</th>
 								<th></th>
 							</tr>
@@ -90,55 +91,45 @@
 
 						<tbody>
 							<tr>
-								{% for item in orderitems %}
+                                {% for ordermanage in ordermanages %}
+                                {% for detail in ordermanage %}
+
 								<td class="product-col">
 									<div class="product">
-										<figure class="product-media">
-											<a href="#">
-												<img src="{{ item.product.image.url }}" alt="تصویر محصول">
-											</a>
-										</figure>
 
 										<h3 class="product-title">
-											<a href="{% url 'product:product' item.product.id %}">{{ item.product.title}}</a>
+											<a>{{ detail.id }}</a>
 										</h3><!-- End .product-title -->
-									</div><!-- End .product -->
 								</td>
-								<td class="price-col">{{ item.price }}</td>
-								<form action="{% url 'cart:orderchange' item.product.id %}" class="form-inline">
+								<td class="price-col">{{detail.totalprice}}</td>
 									<td class="quantity-col">
-
-										<div class="cart-product-quantity">
-											{% csrf_token %}
-											<input type="hidden" name="id" value="{{item.product.id}}">
-											<input class="form-control" name="qty" value={{item.quantity}}>
-
-										</div>
+                                                {{detail.date}}
 									</td>
 									<td>
-										<button type="submit" class="btn btn-outline-dark-2">اعمال</button>
+                                    {{ detail.time }}
 
 										<!-- End .cart-product-quantity -->
 									</td>
-								</form>
 
 								{# <td class="total-col">84,000</td>#}
-								<td class="remove-col"><a href={% url 'cart:deleteitem' item.id %} class="btn-remove"><i class="icon-close"></i></a>
+								<td class="remove-col"><a href="{% url '' %}" class="btn-remove">مشاهده</a>
 								</td>
+                                {% endfor %}
+                                {% endfor %}
+
 							</tr>
-							{% endfor %}
 						</tbody>
 
 					</table><!-- End .table table-wishlist -->
                 </div>
                                     </div><!-- .End .tab-pane -->
 
-                                    <div class="tab-pane fade" id="tab-orders" role="tabpanel"
-                                        aria-labelledby="tab-orders-link">
-                                        <p>سفارش جدیدی وجود ندارد</p>
-                                        <a href="category.html" class="btn btn-outline-primary-2"><span>رفتن به
-                                                فروشگاه</span><i class="icon-long-arrow-left"></i></a>
-                                    </div><!-- .End .tab-pane -->
+{#                                    <div class="tab-pane fade" id="tab-orders" role="tabpanel"#}
+{#                                        aria-labelledby="tab-orders-link">#}
+{#                                        <p>سفارش جدیدی وجود ندارد</p>#}
+{#                                        <a href="category.html" class="btn btn-outline-primary-2"><span>رفتن به#}
+{#                                                فروشگاه</span><i class="icon-long-arrow-left"></i></a>#}
+{#                                    </div><!-- .End .tab-pane -->#}
 
                                     <div class="tab-pane fade" id="tab-downloads" role="tabpanel"
                                         aria-labelledby="tab-downloads-link">

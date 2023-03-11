@@ -42,7 +42,7 @@ def checkout(request):
 def ordertopay(request):
     user = request.user
     if request.method == 'POST':
-        # try:
+        try:
             form = request.POST
             print(form)
             if user.is_authenticated and form['first_name'] :
@@ -62,15 +62,15 @@ def ordertopay(request):
                                             totalprice=form['totalprice'],tax=form['tax'],extramobile=form['extramobile'],telephone=form['telephone'],
                                             explain=form['explain'],time=time,date=date,email=form['email'],season=season)
                 return redirect('zarinpal:request')
-        # except:
-        #     return redirect('web:dashbord')
+        except:
+            return redirect('web:dashbord')
     else:
         return redirect('web:home')
 
 def orderpayed(request):
     user = request.user
     if user.is_authenticated:
-        # try:
+        try:
             ordermanage = OrderManagement.objects.get(user=user,status='Wpay')
             orderitems = OrderItem.objects.filter(order=ordermanage.order)
             for orderitem in orderitems:
@@ -87,8 +87,8 @@ def orderpayed(request):
             ordermanage.order.status = 'Processing'
             ordermanage.order.save()
             ordermanage.save()
-        # except:
-        #     return redirect('product:products')
+        except:
+            return redirect('product:products')
         
     
                 

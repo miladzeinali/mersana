@@ -176,17 +176,17 @@ def UserLogout(request):
 
 def Dashboard(request):
     user = request.user
-    orderitems = []
     ordermanages = []
     if user.is_authenticated:
         try:
-            orders = Order.objects.filter(user=user,status='Processing')
+            orders = Order.objects.filter(user=user,status='Wpay')
             for order in orders:
-                orderitem = OrderItem.objects.filter(order=order)
-                ordermanage = OrderManagement.objects.filter()
-                orderitems.append(orderitem)
+                ordermanage = OrderManagement.objects.filter(order=order)
                 ordermanages.append(ordermanage)
         except:
             pass
+        return render(request,'dashboard.html',{'ordermanages':ordermanages})
 
-        return render(request,'dashboard.html',{'ordermanages':ordermanages,'orderitems':orderitems})
+def DetailOrder(request):
+    user = request.user
+    if user.is_authenticated:
