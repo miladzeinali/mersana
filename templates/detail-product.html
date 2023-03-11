@@ -116,11 +116,17 @@
 							<div class="select-custom">
 								<select name="size" id="size" class="form-control">
 									<option value="#" selected="selected">سایز را انتخاب کنید</option>
+                                    {%  if product.Capacity1 %}
 									<option value="s">{{ product.Capacity1 }}</option>
+                                    {% elif product.Capacity2 %}
 									<option value="s">{{ product.Capacity2 }}</option>
+                                    {% elif product.Capacity3 %}
 									<option value="s">{{ product.Capacity3 }}</option>
+                                    {% elif product.Capacity4 %}
 									<option value="s">{{ product.Capacity4 }}</option>
+                                    {% elif product.Capacity5 %}
 									<option value="s">{{ product.Capacity5 }}</option>
+                                    {% endif %}
 								</select>
 							</div><!-- End .select-custom -->
 
