@@ -85,7 +85,8 @@
 								<th>تاریخ </th>
 								<th>زمان</th>
 								<th>جزییات</th>
-								<th></th>
+                                <th></th>
+								<th>پیگیری </th>
 							</tr>
 						</thead>
 
@@ -114,6 +115,7 @@
 								{# <td class="total-col">84,000</td>#}
 								<td class="remove-col"><a href="{% url 'account:detailorder' detail.id %}" class="btn-remove">مشاهده</a>
 								</td>
+                                    <td><a href="{% url 'account:trackorder' detail.id %}"> وضعیت سفارش </a></td>
                                 {% endfor %}
                                 {% endfor %}
 

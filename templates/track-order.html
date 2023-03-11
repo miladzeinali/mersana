@@ -31,16 +31,16 @@
             <div class="trackorder-inner">
                 <div class="trackorder-top">
                     <div class="trackorder-detail">
-                        <div>بازه زمانی تحویل سفارش : 1401/09/20 - 12:00 تا 15:00</div>
-                        <div>نام تحویل گیرنده سفارش : <span>امیر سبحانی</span></div>
+                        <div>بازه زمانی تحویل سفارش : ۲ الی ۳ روز کاری پس از ثبت سفارش</div>
+                        <div>نام تحویل گیرنده سفارش : <span>{{ ordermanage.first_name }} {{ ordermanage.last_name }} </span></div>
                     </div>
-                    <h2 class="trackorder-id">سفارش 24032#</h2>
+                    <h2 class="trackorder-id">سفارش {{ordermanage.id}}#</h2>
                 </div>
                 <div class="trackorder-bottom">
                     <div class="trackorder-progress">
                         <ul class="trackorder-progressbar">
                             <li class="trackorder-step active"><span class="track-icon"> <img
-                                        src="assets/images/track order/processed.png"
+                                        src="static/images/track order/processed.png"
                                         alt="track_order"></span><span
                                     class="progressbar-track"></span><span class="track-title">سفارش
                                     <br>پردازش شد</span></li>
@@ -48,17 +48,33 @@
                                         src="assets/images/track order/packing.png"
                                         alt="track_order"></span><span
                                     class="progressbar-track"></span><span class="track-title">سفارش
-                                    <br>بسته بندی شد</span></li>
+                                    <br>وارد بخش بسته بندی شد </span></li>
+                            {% if ordermanage.sended %}
+                            <li class="trackorder-step active"><span class="track-icon"> <img
+                                        src="assets/images/track order/shipped.png"
+                                        alt="track_order"></span><span
+                                    class="progressbar-track"></span><span class="track-title">سفارش
+                                    <br>ارسال شد</span></li>
+                            {% else %}
                             <li class="trackorder-step"><span class="track-icon"> <img
                                         src="assets/images/track order/shipped.png"
                                         alt="track_order"></span><span
                                     class="progressbar-track"></span><span class="track-title">سفارش
                                     <br>ارسال شد</span></li>
+                            {% endif %}
+                            {% if ordermanage.delivered %}
+                            <li class="trackorder-step active"><span class="track-icon"> <img
+                                        src="assets/images/track order/deliveried.png"
+                                        alt="track_order"></span><span
+                                    class="progressbar-track"></span><span class="track-title">سفارش
+                                    <br>تحویل داده شد</span></li>
+                            {% else %}
                             <li class="trackorder-step"><span class="track-icon"> <img
                                         src="assets/images/track order/deliveried.png"
                                         alt="track_order"></span><span
                                     class="progressbar-track"></span><span class="track-title">سفارش
                                     <br>تحویل داده شد</span></li>
+                        {% endif %}
 
                         </ul>
                     </div>

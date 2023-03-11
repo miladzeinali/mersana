@@ -203,3 +203,15 @@ def DetailOrder(request,id):
     else:
         return redirect('account:register')
 
+def TrackingOrder(request,id):
+    user = request.user
+    if user.is_authenticated:
+        try:
+            ordermanage = OrderManagement.objects.get(id=id)
+            return render(request,'track-order.html',{'ordermanage':ordermanage})
+        except:
+            return redirect('account:dashboard')
+    else:
+        return redirect('account:register')
+
+

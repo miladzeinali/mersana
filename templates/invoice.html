@@ -115,8 +115,8 @@
                             <table class="invoice-table ">
                                 <thead>
                                     <tr>
-                                        <th>شماره</th>
-                                        <th>جزئیات آیتم</th>
+                                        <th>کد محصول</th>
+                                        <th>نام آیتم</th>
                                         <th>تعداد</th>
                                         <th>قیمت</th>
                                         <th>مجموع</th>
@@ -124,53 +124,57 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>1</td>
+                                        {% for orderitem in orderitems %}
+
+
+                                        <td>{{ orderitem.product.id }}</td>
                                         <td>
                                             <h3>
-                                                پیراهن زنانه
+                                                {{ orderitem.product.title }}
                                             </h3>
-                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</p>
+{#                                            <p> alaki </p>#}
                                         </td>
-                                        <td>5</td>
-                                        <td>70,000 تومان</td>
-                                        <td>350,000 تومان</td>
+                                        <td>{{orderitem.quantity}}</td>
+                                        <td>{{orderitem.price}} تومان</td>
+                                        <td>{{orderitem.total}} تومان</td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>
-                                            <h3>
-                                                گوشی هوشمند سامسونگ
-                                            </h3>
-                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</p>
-                                        </td>
-                                        <td>1</td>
-                                        <td>4,150,000 تومان</td>
-                                        <td>4,150,000 تومان</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>
-                                            <h3>
-                                                کیف زنانه مشکی
-                                            </h3>
-                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</p>
-                                        </td>
-                                        <td>3</td>
-                                        <td>250,000 تومان</td>
-                                        <td>750,000 تومان</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>
-                                            <h3>
-                                                صندلی اداری
-                                            </h3>
-                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</p>
-                                        </td>
-                                        <td>10</td>
-                                        <td>300,000 تومان</td>
-                                        <td>3,000,000 تومان</td>
-                                    </tr>
+                                    {% endfor %}
+{#                                    <tr>#}
+{#                                        <td>2</td>#}
+{#                                        <td>#}
+{#                                            <h3>#}
+{#                                                گوشی هوشمند سامسونگ#}
+{#                                            </h3>#}
+{#                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</p>#}
+{#                                        </td>#}
+{#                                        <td>1</td>#}
+{#                                        <td>4,150,000 تومان</td>#}
+{#                                        <td>4,150,000 تومان</td>#}
+{#                                    </tr>#}
+{#                                    <tr>#}
+{#                                        <td>4</td>#}
+{#                                        <td>#}
+{#                                            <h3>#}
+{#                                                کیف زنانه مشکی#}
+{#                                            </h3>#}
+{#                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</p>#}
+{#                                        </td>#}
+{#                                        <td>3</td>#}
+{#                                        <td>250,000 تومان</td>#}
+{#                                        <td>750,000 تومان</td>#}
+{#                                    </tr>#}
+{#                                    <tr>#}
+{#                                        <td>5</td>#}
+{#                                        <td>#}
+{#                                            <h3>#}
+{#                                                صندلی اداری#}
+{#                                            </h3>#}
+{#                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</p>#}
+{#                                        </td>#}
+{#                                        <td>10</td>#}
+{#                                        <td>300,000 تومان</td>#}
+{#                                        <td>3,000,000 تومان</td>#}
+{#                                    </tr>#}
                                 </tbody>
                             </table>
                             <div class="invoice-total">
@@ -178,17 +182,17 @@
                                     <div class="col-md-4 offset-8">
                                         <div class="total-right">
                                             <ul>
+{#                                                <li>#}
+{#                                                    جمع فاکتور#}
+{#                                                    <span>{{ordermanage.totalprice}} تومان</span>#}
+{#                                                </li>#}
                                                 <li>
-                                                    جمع فاکتور
-                                                    <span>8,250,000 تومان</span>
-                                                </li>
-                                                <li>
-                                                    مالیات بر ارزش افزوده
-                                                    <span>120,000 تومان</span>
+                                                    مالیات و ارزش افزوده
+                                                    <span>{{ ordermanage.tax }} تومان</span>
                                                 </li>
                                                 <li>
                                                     مبلغ نهایی
-                                                    <span>8,370,000 تومان</span>
+                                                    <span>{{ordermanage.totalprice}} تومان</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -201,6 +205,9 @@
                                         <button id="printinvoice" class="btn btn-solid btn-md ">
                                             چاپ فاکتور
                                         </button>
+                                        <a href="{% url 'account:trackorder' ordermanage.id %}" class="btn btn-warning btn-md ">
+                                            پیگیری سفارش
+                                        </a>
                                     </div>
                                 </div>
                             </div>
