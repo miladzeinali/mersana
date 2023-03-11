@@ -68,4 +68,4 @@ def about(request):
    return render(request,'about.html')
 
 def contact(request):
-    return render(request,'detail-product.html')
+    return render(request,'contact.html')
