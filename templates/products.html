@@ -119,11 +119,7 @@
 										<a href="{% url 'account:favorits' product.code %}  "
 											class="btn-product-icon btn-wishlist btn-expandable"><span>افزودن
 												به لیست علاقه مندی</span></a>
-										<a href="popup/quickView.html"
-											class="btn-product-icon btn-quickview"
-											title="مشاهده سریع محصول"><span>مشاهده سریع</span></a>
-										<a href="#" class="btn-product-icon btn-compare"
-											title="مقایسه"><span>مقایسه</span></a>
+										
 									</div><!-- End .product-action-vertical -->
 
 									<div class="product-action">
@@ -250,7 +246,6 @@
 												id="brand-{{brand.Brand}}" value="{{brand.Brand}}">
 											<label class="custom-control-label" for="brand-{{brand.Brand}}"> {{brand.Brand}}</label>
 										</div><!-- End .custom-checkbox -->
-										<span class="item-count">{{brand.BrandEnglish}}</span>
 									</div><!-- End .filter-item -->
 									{% endfor %}
 								
