@@ -34,7 +34,6 @@ def checkout(request):
             totaltax = (total*0.09) + total
         else:
             return redirect('account:register')
-        print(user)
         return render(request,'checkout.html',{'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
                                        'total':total,'totaltax':totaltax,'tax':tax})
     else:
@@ -45,8 +44,6 @@ def ordertopay(request):
     if request.method == 'POST':
         try:
             form = request.POST
-            date = 'emrooz'
-            time = 'zaman'
             print(form)
             if user.is_authenticated and form['first_name'] :
                 r = requests.get('https://api.keybit.ir/time/')
@@ -60,14 +57,10 @@ def ordertopay(request):
                     oldorder.delete()
                 except:
                     pass 
-                OrderManagement.objects.create(order=order,user=user,province=form['province'],city=form['city'],
+                OrderManagement.objects.create(order=order,user=user,province=form['province'],city=form['city'],status='Wpay',
                                             district=form['district'],postcode=form['postcode'],first_name=form['first_name'],last_name=form['last_name'],
                                             totalprice=form['totalprice'],tax=form['tax'],extramobile=form['extramobile'],telephone=form['telephone'],
                                             explain=form['explain'],time=time,date=date,email=form['email'],season=season)
-                r = {
-                            'amount': form['totalprice'],
-                    }
-                request.session['r'] = r
                 return redirect('zarinpal:request')
         except:
             return redirect('web:dashbord')

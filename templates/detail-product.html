@@ -71,15 +71,19 @@
 						</div><!-- End .rating-container -->
 
 						<div class="product-price">
-							{{product.price |intcomma}} تومان
-
+                            {% if product.Sale %}
+						<div style="margin: 15px"><s>{{ product.price |intcomma }}تومان</s></div><div>{{product.sale_price |intcomma}} تومان</div>
+                            {% else %}
+                            {{ product.price | intcomma }}
+                            {% endif %}
+							
 						</div><!-- End .product-price -->
 
-						<div class="product-content">
-							<p>
-								{{product.about}}
-							</p>
-						</div><!-- End .product-content -->
+{#						<div class="product-content">#}
+{#							<p>#}
+{#                                {{product.about}}#}
+{#							</p>#}
+{#						</div><!-- End .product-content -->#}
 
 						<div class="details-filter-row details-row-size">
 							<label>رنگ : </label>
@@ -95,21 +99,21 @@
 							<div class="select-custom">
 								<select name="size" id="size" class="form-control">
 									<option value="#" selected="selected">سایز را انتخاب کنید</option>
-									{% if product.Capacity1 %}
+                                    {%  if product.Capacity1 %}
 									<option value="s">{{ product.Capacity1 }}</option>
-									{% elif product.Capacity2 %}
+                                    {% elif product.Capacity2 %}
 									<option value="s">{{ product.Capacity2 }}</option>
-									{% elif product.Capacity3 %}
+                                    {% elif product.Capacity3 %}
 									<option value="s">{{ product.Capacity3 }}</option>
-									{% elif product.Capacity4 %}
+                                    {% elif product.Capacity4 %}
 									<option value="s">{{ product.Capacity4 }}</option>
-									{% elif product.Capacity5 %}
+                                    {% elif product.Capacity5 %}
 									<option value="s">{{ product.Capacity5 }}</option>
-									{% endif %}
+                                    {% endif %}
 								</select>
 							</div><!-- End .select-custom -->
 
-							<a href="#" class="size-guide"><i class="icon-th-list"></i>راهنمای اندازه</a>
+{#							<a href="#" class="size-guide"><i class="icon-th-list"></i>راهنمای اندازه</a>#}
 						</div><!-- End .details-filter-row -->
 
 						<div class="details-filter-row details-row-size">

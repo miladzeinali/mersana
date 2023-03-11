@@ -89,12 +89,14 @@ def UserVerify(request):
                         user = Userprofile.objects.get(mobile=mobile).user
                         login(request,user)
                         messages.success(request,'به مرسانا خوش آمدید!','success')
+                        del request.session['r']
                         return redirect('web:home')
                     except:
                         user = User.objects.create_user(username=mobile,password=code)
                         Userprofile.objects.create(user=user,mobile=mobile)
                         user.save()
                         login(request,user)
+                        del request.session['r']
                         return redirect('web:home')
                 except:
                     messages.success(request,'رمز به صورت صحیح وارد نشده است !','error')
@@ -174,17 +176,18 @@ def UserLogout(request):
 
 def Dashboard(request):
     user = request.user
-    orderitems = []
     ordermanages = []
     if user.is_authenticated:
         try:
-            orders = Order.objects.filter(user=user,status='Processing')
+            orders = Order.objects.filter(user=user,status='Wpay')
             for order in orders:
-                orderitem = OrderItem.objects.filter(order=order)
-                ordermanage = OrderManagement.objects.filter()
-                orderitems.append(orderitem)
+                ordermanage = OrderManagement.objects.filter(order=order)
                 ordermanages.append(ordermanage)
         except:
             pass
+        return render(request,'dashboard.html',{'ordermanages':ordermanages})
 
-        return render(request,'dashboard.html',{'ordermanages':ordermanages,'orderitems':orderitems})
+def DetailOrder(request):
+    user = request.user
+    if user.is_authenticated:
+        pass

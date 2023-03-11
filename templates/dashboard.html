@@ -36,10 +36,10 @@
                                             href="#tab-dashboard" role="tab" aria-controls="tab-dashboard"
                                             aria-selected="true">داشبورد</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders"
-                                            role="tab" aria-controls="tab-orders" aria-selected="false">سفارشات</a>
-                                    </li>
+{#                                    <li class="nav-item">#}
+{#                                        <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders"#}
+{#                                            role="tab" aria-controls="tab-orders" aria-selected="false">سفارشات</a>#}
+{#                                    </li>#}
 {#                                    <li class="nav-item">#}
 {#                                        <a class="nav-link" id="tab-downloads-link" data-toggle="tab"#}
 {#                                            href="#tab-downloads" role="tab" aria-controls="tab-downloads"#}
@@ -55,7 +55,7 @@
 {#                                            کاربری</a>#}
 {#                                    </li>#}
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">خروج از حساب کاربری</a>
+                                        <a class="nav-link" href="{% url 'account:logout' %}">خروج از حساب کاربری</a>
                                     </li>
                                 </ul>
                             </aside><!-- End .col-lg-3 -->
@@ -73,20 +73,63 @@
 {#                                                class="tab-trigger-link">می توانید رمز عبور یا جزئیات حساب کاربری خود را#}
 {#                                                ویرایش کنید </a>.</p>#}
                                         <p>
-                                            {% for ordermanage in ordermanages %}
-                                                <a href="#">{{ ordermanage.id }}</a>
-                                                <a href="#">{{ ordermanage.province }}</a>
+                                            <div class="cart">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9">
+					<table class="table table-cart table-mobile">
+						<thead>
+							<tr>
+								<th>کد سفارش </th>
+								<th>جمع فاکتور</th>
+								<th>تاریخ </th>
+								<th>زمان</th>
+								<th>جزییات</th>
+								<th></th>
+							</tr>
+						</thead>
 
-                                            {% endfor %}
-                                        </p>
+						<tbody>
+							<tr>
+                                {% for ordermanage in ordermanages %}
+                                {% for detail in ordermanage %}
+
+								<td class="product-col">
+									<div class="product">
+
+										<h3 class="product-title">
+											<a>{{ detail.id }}</a>
+										</h3><!-- End .product-title -->
+								</td>
+								<td class="price-col">{{detail.totalprice}}</td>
+									<td class="quantity-col">
+                                                {{detail.date}}
+									</td>
+									<td>
+                                    {{ detail.time }}
+
+										<!-- End .cart-product-quantity -->
+									</td>
+
+								{# <td class="total-col">84,000</td>#}
+								<td class="remove-col"><a href="{% url '' %}" class="btn-remove">مشاهده</a>
+								</td>
+                                {% endfor %}
+                                {% endfor %}
+
+							</tr>
+						</tbody>
+
+					</table><!-- End .table table-wishlist -->
+                </div>
                                     </div><!-- .End .tab-pane -->
 
-                                    <div class="tab-pane fade" id="tab-orders" role="tabpanel"
-                                        aria-labelledby="tab-orders-link">
-                                        <p>سفارش جدیدی وجود ندارد</p>
-                                        <a href="category.html" class="btn btn-outline-primary-2"><span>رفتن به
-                                                فروشگاه</span><i class="icon-long-arrow-left"></i></a>
-                                    </div><!-- .End .tab-pane -->
+{#                                    <div class="tab-pane fade" id="tab-orders" role="tabpanel"#}
+{#                                        aria-labelledby="tab-orders-link">#}
+{#                                        <p>سفارش جدیدی وجود ندارد</p>#}
+{#                                        <a href="category.html" class="btn btn-outline-primary-2"><span>رفتن به#}
+{#                                                فروشگاه</span><i class="icon-long-arrow-left"></i></a>#}
+{#                                    </div><!-- .End .tab-pane -->#}
 
                                     <div class="tab-pane fade" id="tab-downloads" role="tabpanel"
                                         aria-labelledby="tab-downloads-link">

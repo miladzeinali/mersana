@@ -14,7 +14,11 @@ CallbackURL = 'http://127.0.0.1:8000/zarinpal/verify/' # Important: need to edit
 
 
 def send_request(request):
-    amount = request.session['r']['amount']
+    from cart.models import OrderManagement
+    user = request.user
+    if user.is_authenticated:
+        ordermanage = OrderManagement.objects.get(user=user,status='Wpay')
+        amount = ordermanage.totalprice
     result = client.service.PaymentRequest(MERCHANT, amount, description, email, mobile, CallbackURL)
     if result.Status == 100:
         return redirect('https://www.zarinpal.com/pg/StartPay/' + str(result.Authority))
@@ -23,7 +27,6 @@ def send_request(request):
 
 
 def verify(request):
-    amount = request.session['r']['amount']
     from cart.views.ordermange import orderpayed
     if request.GET.get('Status') == 'OK':
         result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], amount)
