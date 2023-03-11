@@ -4,6 +4,7 @@ from .models import Product,Brand,Category
 from account.models import Favorits
 from cart.models import Order,OrderItem
 from django.template.loader import render_to_string
+from django.core.paginator import Paginator
 
 def Products(request):
     products = Product.objects.all()
@@ -17,6 +18,9 @@ def Products(request):
     countFave = len(favorits)
     brands = Brand.objects.all()
     categorys = Category.objects.all()
+    paginator = Paginator(products,1)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     if user.is_authenticated:
         try:
             favorits = Favorits.objects.filter(user=user)
@@ -31,7 +35,7 @@ def Products(request):
                 total += item.quantity*item.price
         except:
             pass
-    return render(request,'products.html',{'products':products,'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
+    return render(request,'products.html',{'products':page_obj,'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
                                        'total':total,'brands':brands,'categorys':categorys})
 
 def SaleProducts(request):
