@@ -11,4 +11,5 @@ urlpatterns = [
     path('deletefave/<str:code>/', deleteFavorits, name='deletefave'),
     
     path('dashboard/', Dashboard, name='dashboard'),
+    path('detailorder/<int:id>/', DetailOrder, name='detailorder'),
 ]

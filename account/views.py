@@ -179,14 +179,27 @@ def Dashboard(request):
     ordermanages = []
     if user.is_authenticated:
         try:
-            orders = Order.objects.filter(user=user,status='Wpay')
+            orders = Order.objects.filter(user=user)
             for order in orders:
-                ordermanage = OrderManagement.objects.filter(order=order)
-                ordermanages.append(ordermanage)
+                if order.status != 'Wpay':
+                    ordermanage = OrderManagement.objects.filter(order=order)
+                    ordermanages.append(ordermanage)
         except:
             pass
         return render(request,'dashboard.html',{'ordermanages':ordermanages})
+    else:
+        return redirect('account:register')
 
-def DetailOrder(request):
+def DetailOrder(request,id):
     user = request.user
     if user.is_authenticated:
+        try:
+            ordermanage = OrderManagement.objects.get(id=id)
+            order = ordermanage.order
+            orderitems = OrderItem.objects.filter(order=order)
+            return render(request,'invoice.html',{'ordermanage':ordermanage,'orderitems':orderitems})
+        except:
+            return redirect('account:dashboard')
+    else:
+        return redirect('account:register')
+
