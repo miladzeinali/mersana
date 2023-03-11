@@ -1,81 +1,4 @@
-<section class="footer-section">
-{#    <div class="container">#}
-{#        <div class="footer-logo text-center">#}
-{#            <a href="index.html"><img src="./img/logo-light.png" alt=""></a>#}
-{#        </div>#}
-{#        <div class="row">#}
-{#            <div class="col-lg-3 col-sm-6">#}
-{#                <div class="footer-widget about-widget">#}
-{#                    <h2>درباره ی ما</h2>#}
-{#                    <p>Donec vitae purus nunc. Morbi faucibus erat sit amet congue mattis. Nullam frin-gilla#}
-{#                        faucibus urna, id dapibus erat iaculis ut. Integer ac sem.</p>#}
-{#                    <img src="img/cards.png" alt="">#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="col-lg-3 col-sm-6">#}
-{#                <div class="footer-widget about-widget">#}
-{#                    <h2>مشتریان</h2>#}
-{#                    <ul>#}
-{#                        <li><a href="">About Us</a></li>#}
-{#                        <li><a href="">Track Orders</a></li>#}
-{#                        <li><a href="">Returns</a></li>#}
-{#                #}
-{#                    </ul>#}
-{#                    <ul>#}
-{#                        <li><a href="">Partners</a></li>#}
-{#                        <li><a href="">Bloggers</a></li>#}
-{#                        <li><a href="">Support</a></li>#}
-{#                      #}
-{#                    </ul>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="col-lg-3 col-sm-6">#}
-{#                <div class="footer-widget about-widget">#}
-{#                    <h2>پشتیبانی</h2>#}
-{#                    <div class="fw-latest-post-widget">#}
-{#                        <div class="lp-item">#}
-{#                            <div class="lp-thumb set-bg" data-setbg="img/blog-thumbs/1.jpg"></div>#}
-{#                            <div class="lp-content">#}
-{#                                <h6>what shoes to wear</h6>#}
-{#                                <span>Oct 21, 2018</span>#}
-{#                                <a href="#" class="readmore">Read More</a>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div class="lp-item">#}
-{#                            <div class="lp-thumb set-bg" data-setbg="img/blog-thumbs/2.jpg"></div>#}
-{#                            <div class="lp-content">#}
-{#                                <h6>trends this year</h6>#}
-{#                                <span>Oct 21, 2018</span>#}
-{#                                <a href="#" class="readmore">Read More</a>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="col-lg-3 col-sm-6">#}
-{#                <div class="footer-widget contact-widget">#}
-{#                    <h2>راه های ارتباطی</h2>#}
-{#                    <div class="con-info">#}
-{#                        <span>C.</span>#}
-{#                        <p>Your Company Ltd </p>#}
-{#                    </div>#}
-{#                    <div class="con-info">#}
-{#                        <span>B.</span>#}
-{#                        <p>1481 Creekside Lane Avila Beach, CA 93424, P.O. BOX 68 </p>#}
-{#                    </div>#}
-{#                    <div class="con-info">#}
-{#                        <span>T.</span>#}
-{#                        <p>+53 345 7953 32453</p>#}
-{#                    </div>#}
-{#                    <div class="con-info">#}
-{#                        <span>E.</span>#}
-{#                        <p>office@youremail.com</p>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-    <div class="social-links-warp">
+
 <footer class="footer">
     <div class="footer-middle">
         <div class="container">
@@ -104,11 +27,11 @@
                         <h4 class="widget-title">لینک های مفید</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
-                            <li><a href="about.html">درباره ما</a></li>
-                            <li><a href="#">خدمات</a></li>
+                            <li><a href="{% url 'web:about'%}">درباره ما</a></li>
+                            <!-- <li><a href="#">خدمات</a></li>
                             <li><a href="#">نحوه خرید</a></li>
-                            <li><a href="faq.html">سوالات متداول</a></li>
-                            <li><a href="contact.html">تماس با ما</a></li>
+                            <li><a href="faq.html">سوالات متداول</a></li> -->
+                            <li><a href="{% url 'web:contact'%}">تماس با ما</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-6 col-lg-3 -->
@@ -132,10 +55,10 @@
                         <h4 class="widget-title">حساب کاربری</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
-                            <li><a href="#">ورود</a></li>
-                            <li><a href="cart.html">سبد خرید</a></li>
-                            <li><a href="#">لیست علاقه مندی ها</a></li>
-                            <li><a href="#">پیگیری سفارشات</a></li>
+                            <li><a href="{% url 'account:register'%}">ورود</a></li>
+                            <li><a href="{% url 'web:dashbord'%}">سبد خرید</a></li>
+                            <li><a href="{% url 'account:favelist'%}">لیست علاقه مندی ها</a></li>
+                            <li><a href="{% url 'account:dashboard'%}">پیگیری سفارشات</a></li>
                             <li><a href="#">راهنما</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->

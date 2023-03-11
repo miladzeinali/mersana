@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 <div class="row justify-content-start">
 {% for  product in data %}
 						<div class="col-6 col-md-4 col-lg-4">
@@ -14,11 +15,7 @@
 										<a href="{% url 'account:favorits' product.code %}  "
 											class="btn-product-icon btn-wishlist btn-expandable"><span>افزودن
 												به لیست علاقه مندی</span></a>
-										<a href="popup/quickView.html"
-											class="btn-product-icon btn-quickview"
-											title="مشاهده سریع محصول"><span>مشاهده سریع</span></a>
-										<a href="#" class="btn-product-icon btn-compare"
-											title="مقایسه"><span>مقایسه</span></a>
+										
 									</div><!-- End .product-action-vertical -->
 
 									<div class="product-action">
@@ -39,9 +36,15 @@
 									</div><!-- End .product-cat -->
 									<h3 class="product-title text-center"><a href% ="{urlproductproduct', product.id}" %>{{ product.title }}
 											</a></h3><!-- End .product-title -->
-									<div class="product-price">
-										 تومان{{ product.price }}
-									</div><!-- End .product-price -->
+											{% if product.Sale %}
+											<div class="product-price">
+												<span><s>{{ product.price |intcomma }}</s></span>  <span style="padding-right: 10%">{{ product.sale_price | intcomma }} تومان</span>	 
+											</div><!-- End .product-price -->
+										{% else %}
+											<div class="product-price">
+												 تومان {{ product.price |intcomma }}
+											</div><!-- End .product-price -->
+										{% endif %}
 									<div class="ratings-container">
 										<div class="ratings">
 											<div class="ratings-val" style="width: 40%;"></div>

@@ -11926,18 +11926,20 @@ a:focus {
 .product-media {
   position: relative;
   display: block;
-  background-color: #d7d7d7;
+  background-color: #fff;
   margin-bottom: 0;
   overflow: hidden;
+  border: 1px solid beige
 }
 
 .product-media>a {
-  display: block;
+  display: flex;
+  justify-content: center;
 }
 
 .product-image {
   display: block;
-  width: 100%;
+  width: 70%;
   height: auto;
 }
 

@@ -2,6 +2,7 @@
 
  {%  extends 'base.html' %}
  {%  load static %}
+ {% load humanize %}
  {%  block header %}
      {%  include 'partials/header.html' %}
  {%  endblock %}
@@ -75,8 +76,8 @@
                             <h3 class="product-title text-center"><a href="product.html"> {{ sale.title }}</a>
                             </h3><!-- End .product-title -->
                             <div class="product-price">
-                                <span class="new-price">{{sale.sale_price}} تومان</span>
-                                <span class="old-price"><s>{{ sale.price }}</s></span>
+                                <span class="new-price">{{sale.sale_price | intcomma}} تومان</span>
+                                <span class="old-price"><s>{{ sale.price | intcomma}}</s></span>
                             </div><!-- End .product-price -->
                         </div><!-- End .product-body -->
                         <a href="category.html" class="action">خرید</a>
