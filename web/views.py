@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from account.models import Address
 
 def Home(request):
-    newest = Product.objects.all()
+    sales = Product.objects.filter(Sale=True)
     orderitems = []
     countitems = []
     total = 0
@@ -28,7 +28,7 @@ def Home(request):
                 total += item.quantity*item.price
         except:
             pass
-    return render(request,'home.html',{'newest':newest,'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
+    return render(request,'home.html',{'sales':sales,'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
                                        'total':total})
 
 def Shop(request):

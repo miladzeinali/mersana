@@ -18,7 +18,7 @@ def Products(request):
     countFave = len(favorits)
     brands = Brand.objects.all()
     categorys = Category.objects.all()
-    paginator = Paginator(products,1)
+    paginator = Paginator(products,9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     if user.is_authenticated:
@@ -40,6 +40,7 @@ def Products(request):
 
 def SaleProducts(request):
     products = Product.objects.filter(Sale = True)
+    paginator = Paginator(products,9)
     orderitems = []
     countitems = []
     favorits = []

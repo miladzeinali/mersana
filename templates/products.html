@@ -2,6 +2,7 @@
 
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block header %}
 {% include 'partials/header.html' %}
 {% endblock %}
@@ -106,7 +107,9 @@
 						<div class="col-6 col-md-4 col-lg-4">
 							<div class="product product-7 text-center">
 								<figure class="product-media">
-									<span class="product-label label-new">جدید</span>
+                                    {% if product.Sale %}
+									<span class="product-label label-new">تخفیف امروز</span>
+                                    {% endif %}
 									<a href="{% url 'product:product' product.id %}">
 										<img src="{{product.image.url}}" href="" alt="تصویر محصول"
 											class="product-image">
@@ -141,9 +144,15 @@
 									</div><!-- End .product-cat -->
 									<h3 class="product-title text-center"><a href="{% url 'product:product' product.id %}">{{ product.title }}
 											</a></h3><!-- End .product-title -->
-									<div class="product-price">
-										 تومان{{ product.price }}
+                                {% if product.Sale %}
+                                	<div class="product-price">
+										<span><s>{{ product.price |intcomma }}</s></span>  <span style="padding-right: 10%">{{ product.sale_price | intcomma }} تومان</span>	 
 									</div><!-- End .product-price -->
+                                {% else %}
+									<div class="product-price">
+										 تومان{{ product.price |intcomma }}
+									</div><!-- End .product-price -->
+                                {% endif %}
 									<div class="ratings-container">
 										<div class="ratings">
 											<div class="ratings-val" style="width: 40%;"></div>
