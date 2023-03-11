@@ -4,11 +4,11 @@
 {% load static %}
 {% load humanize %}
 {% block header %}
-    {% include 'partials/header.html' %}
+{% include 'partials/header.html' %}
 {% endblock %}
 {% block hero%}
 
-    {% endblock %}
+{% endblock %}
 {% block content %}
 
 <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
@@ -19,7 +19,7 @@
 			<li class="breadcrumb-item active" aria-current="page">{{product.title}}</li>
 		</ol>
 
-		
+
 	</div><!-- End .container -->
 </nav><!-- End .breadcrumb-nav -->
 
@@ -32,8 +32,7 @@
 						<div class="row">
 							<figure class="product-main-image">
 								<img id="product-zoom" src="{{product.image.url}}"
-									data-zoom-image="assets/images/products/single/1-big.jpg"
-									alt="تصویر محصول">
+									data-zoom-image="{% static '' %}/images/products/single/1-big.jpg" alt="تصویر محصول">
 
 								<a href="#" id="btn-product-gallery" class="btn-product-gallery">
 									<i class="icon-arrows"></i>
@@ -41,32 +40,16 @@
 							</figure><!-- End .product-main-image -->
 
 							<div id="product-zoom-gallery" class="product-image-gallery">
-								<a class="product-gallery-item active" href="#"
-									data-image="assets/images/products/single/1.jpg"
-									data-zoom-image="assets/images/products/single/1-big.jpg">
-									<img src="assets/images/products/single/1-small.jpg"
-										alt="توضیحات تصویر">
-								</a>
+								 <!-- The grid: four columns -->
 
-								<a class="product-gallery-item" href="#"
-									data-image="assets/images/products/single/2.jpg"
-									data-zoom-image="assets/images/products/single/2-big.jpg">
-									<img src="assets/images/products/single/2-small.jpg"
-										alt="توضیحات تصویر">
+								{% for image in images %}
+								<a class="product-gallery-item "
+								 data-image="{{image.img.url}}"
+								  data-zoom-image="{{image.img.url}}">
+									<img src="{{image.img.url}}" alt="توضیحات تصویر">
 								</a>
-
-								<a class="product-gallery-item" href="#"
-									data-image="assets/images/products/single/3.jpg"
-									data-zoom-image="assets/images/products/single/3-big.jpg">
-									<img src="assets/images/products/single/3-small.jpg"
-										alt="توضیحات تصویر">
-								</a>
-
-								<a class="product-gallery-item" href="#"
-									data-image="assets/images/products/single/4.jpg"
-									data-zoom-image="assets/images/products/single/4-big.jpg">
-									<img src="assets/images/products/single/4-small.jpg" alt="product back">
-								</a>
+								{% endfor %}
+								
 							</div><!-- End .product-image-gallery -->
 						</div><!-- End .row -->
 					</div><!-- End .product-gallery -->
@@ -82,18 +65,19 @@
 								<div class="ratings-val" style="width: 40%;"></div>
 								<!-- End .ratings-val -->
 							</div><!-- End .ratings -->
-							<a class="ratings-text" href="#product-review-link" id="review-link">( {{product.count_sell}}  فروش
+							<a class="ratings-text" href="#product-review-link" id="review-link">(
+								{{product.count_sell}} فروش
 								)</a>
 						</div><!-- End .rating-container -->
 
 						<div class="product-price">
 							{{product.price |intcomma}} تومان
-							
+
 						</div><!-- End .product-price -->
 
 						<div class="product-content">
 							<p>
-                                {{product.about}}
+								{{product.about}}
 							</p>
 						</div><!-- End .product-content -->
 
@@ -101,13 +85,8 @@
 							<label>رنگ : </label>
 
 							<div class="product-nav product-nav-thumbs">
-                                {{ product.color }}
-{#								<a href="#" class="active">#}
-{#									<img src="assets/images/products/single/1-thumb.jpg" alt="product desc">#}
-{#								</a>#}
-{#								<a href="#">#}
-{#									<img src="assets/images/products/single/2-thumb.jpg" alt="product desc">#}
-{#								</a>#}
+								{{ product.color }}
+							
 							</div><!-- End .product-nav -->
 						</div><!-- End .details-filter-row -->
 
@@ -116,11 +95,17 @@
 							<div class="select-custom">
 								<select name="size" id="size" class="form-control">
 									<option value="#" selected="selected">سایز را انتخاب کنید</option>
+									{% if product.Capacity1 %}
 									<option value="s">{{ product.Capacity1 }}</option>
+									{% elif product.Capacity2 %}
 									<option value="s">{{ product.Capacity2 }}</option>
+									{% elif product.Capacity3 %}
 									<option value="s">{{ product.Capacity3 }}</option>
+									{% elif product.Capacity4 %}
 									<option value="s">{{ product.Capacity4 }}</option>
+									{% elif product.Capacity5 %}
 									<option value="s">{{ product.Capacity5 }}</option>
+									{% endif %}
 								</select>
 							</div><!-- End .select-custom -->
 
@@ -136,7 +121,8 @@
 						</div><!-- End .details-filter-row -->
 
 						<div class="product-details-action">
-							<a href="{% url 'cart:ordercontrol' product.code %}" class="btn-product btn-cart"><span>افزودن به سبد خرید</span></a>
+							<a href="{% url 'cart:ordercontrol' product.code %}"
+								class="btn-product btn-cart"><span>افزودن به سبد خرید</span></a>
 							<!-- <input type="hidden" value="{{product.code}}" id="product-code">
 							<button id="addtocart"  class="btn-product btn-cart"><span>افزودن به سبد خرید</span></button> -->
 
@@ -145,42 +131,68 @@
 									title="لیست علاقه مندی"><span>افزودن
 										به
 										علاقه مندی</span></a>
-								
+
 							</div><!-- End .details-action-wrapper -->
 						</div><!-- End .product-details-action -->
 
 						<div class="product-details-footer">
-							<!-- <div class="product-cat text-center">
-								<span>دسته بندی : </span>
-								<a href="#">زنانه</a>،
-								<a href="#">لباس</a>،
-								<a href="#">زرد</a>
-							</div> -->
-							<!-- End .product-cat -->
+							<div class="product-details-tab">
+								<ul class="nav nav-pills justify-content-center" role="tablist">
+									<li class="nav-item">
+										<a class="nav-link active" id="product-desc-link" data-toggle="tab"
+											href="#product-desc-tab" role="tab" aria-controls="product-desc-tab"
+											aria-selected="true">توضیحات</a>
+									</li>
 
-							<!-- <div class="social-icons social-icons-sm">
-								<span class="social-label">اشتراک گذاری : </span>
-								<a href="#" class="social-icon" title="فیسبوک" target="_blank"><i
-										class="icon-facebook-f"></i></a>
-								<a href="#" class="social-icon" title="توییتر" target="_blank"><i
-										class="icon-twitter"></i></a>
-								<a href="#" class="social-icon" title="اینستاگرام" target="_blank"><i
-										class="icon-instagram"></i></a>
-								<a href="#" class="social-icon" title="پینترست" target="_blank"><i
-										class="icon-pinterest"></i></a>
-							</div> -->
-						</div>
-						<!-- End .product-details-footer -->
-					</div><!-- End .product-details -->
-				</div><!-- End .col-md-6 -->
-			</div><!-- End .row -->
-		</div><!-- End .product-details-top -->
+									<li class="nav-item">
+										<a class="nav-link" id="product-shipping-link" data-toggle="tab"
+											href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab"
+											aria-selected="false">ارسال و بازگشت</a>
+									</li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel"
+										aria-labelledby="product-desc-link">
+										<div class="product-desc-content">
+											<h3>اطلاعات محصول</h3>
+											<p>{{ product.about }}</p>
+											
 
-		
+								
+										</div><!-- End .product-desc-content -->
+									</div><!-- .End .tab-pane -->
+									<div class="tab-pane fade" id="product-info-tab" role="tabpanel"
+										aria-labelledby="product-info-link">
+										<div class="product-desc-content">
+											<h3>اطلاعات</h3>
+											<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن </p>
+
+										</div><!-- End .product-desc-content -->
+									</div><!-- .End .tab-pane -->
+									<div class="tab-pane fade" id="product-shipping-tab" role="tabpanel"
+										aria-labelledby="product-shipping-link">
+										<div class="product-desc-content">
+											<h3>ارسال و بازگشت</h3>
+											<p></a>
+											</p>
+										</div><!-- End .product-desc-content -->
+									</div><!-- .End .tab-pane -->
+
+
+
+								</div><!-- End .col-auto -->
+							</div><!-- End .row -->
+						</div><!-- End .review -->
+					</div><!-- End .نظر -->
+				</div><!-- .End .tab-pane -->
+			</div><!-- End .tab-content -->
+		</div><!-- End .product-details-tab -->
+
+
 		<!-- End .product-details-tab -->
 
 
-	
+
 	</div><!-- End .container -->
 </div><!-- End .page-content -->
 {% endblock %}

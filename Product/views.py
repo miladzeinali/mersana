@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render,redirect
-from .models import Product,Brand,Category
+from .models import Product,Brand,Category,ProductImages
 from account.models import Favorits
 from cart.models import Order,OrderItem
 from django.template.loader import render_to_string
@@ -87,12 +87,13 @@ def ProductDetail(request,id):
                 except:
                     pass
                 countitems = len(orderitems)
+                images = ProductImages.objects.filter(product=product)
                 for item in orderitems:
                     total += item.quantity*item.price
             except:
                 pass
         return render(request,'detail-product.html',{'product':product,'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
-                                       'total':total})
+                                       'total':total,'images':images})
     except:
         return redirect('web:home')
 
