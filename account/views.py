@@ -89,12 +89,14 @@ def UserVerify(request):
                         user = Userprofile.objects.get(mobile=mobile).user
                         login(request,user)
                         messages.success(request,'به مرسانا خوش آمدید!','success')
+                        del request.session['r']
                         return redirect('web:home')
                     except:
                         user = User.objects.create_user(username=mobile,password=code)
                         Userprofile.objects.create(user=user,mobile=mobile)
                         user.save()
                         login(request,user)
+                        del request.session['r']
                         return redirect('web:home')
                 except:
                     messages.success(request,'رمز به صورت صحیح وارد نشده است !','error')

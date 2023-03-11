@@ -46,7 +46,7 @@ def Dashbord(request):
     countFave = len(favorits)
     user = request.user
     if user.is_authenticated:
-        try:
+        # try:
             favorits = Favorits.objects.filter(user=user)
             countFave = len(favorits)
             try:
@@ -57,9 +57,9 @@ def Dashbord(request):
             countitems = len(orderitems)
             for item in orderitems:
                 total += item.quantity*item.price
-        except:
-            pass
-        return render(request,'cart.html',{'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
+        # except:
+        #     pass
+            return render(request,'cart.html',{'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
                                        'total':total})
     else:
         return redirect('account:register')

@@ -73,12 +73,64 @@
 {#                                                class="tab-trigger-link">می توانید رمز عبور یا جزئیات حساب کاربری خود را#}
 {#                                                ویرایش کنید </a>.</p>#}
                                         <p>
-                                            {% for ordermanage in ordermanages %}
-                                                <a href="#">{{ ordermanage.id }}</a>
-                                                <a href="#">{{ ordermanage.province }}</a>
+                                            <div class="cart">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9">
+					<table class="table table-cart table-mobile">
+						<thead>
+							<tr>
+								<th>کد سفارش </th>
+								<th>جمع فاکتور</th>
+								<th>تاریخ | زمان</th>
+								<th>جزییات</th>
+								<th></th>
+							</tr>
+						</thead>
 
-                                            {% endfor %}
-                                        </p>
+						<tbody>
+							<tr>
+								{% for item in orderitems %}
+								<td class="product-col">
+									<div class="product">
+										<figure class="product-media">
+											<a href="#">
+												<img src="{{ item.product.image.url }}" alt="تصویر محصول">
+											</a>
+										</figure>
+
+										<h3 class="product-title">
+											<a href="{% url 'product:product' item.product.id %}">{{ item.product.title}}</a>
+										</h3><!-- End .product-title -->
+									</div><!-- End .product -->
+								</td>
+								<td class="price-col">{{ item.price }}</td>
+								<form action="{% url 'cart:orderchange' item.product.id %}" class="form-inline">
+									<td class="quantity-col">
+
+										<div class="cart-product-quantity">
+											{% csrf_token %}
+											<input type="hidden" name="id" value="{{item.product.id}}">
+											<input class="form-control" name="qty" value={{item.quantity}}>
+
+										</div>
+									</td>
+									<td>
+										<button type="submit" class="btn btn-outline-dark-2">اعمال</button>
+
+										<!-- End .cart-product-quantity -->
+									</td>
+								</form>
+
+								{# <td class="total-col">84,000</td>#}
+								<td class="remove-col"><a href={% url 'cart:deleteitem' item.id %} class="btn-remove"><i class="icon-close"></i></a>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+
+					</table><!-- End .table table-wishlist -->
+                </div>
                                     </div><!-- .End .tab-pane -->
 
                                     <div class="tab-pane fade" id="tab-orders" role="tabpanel"
