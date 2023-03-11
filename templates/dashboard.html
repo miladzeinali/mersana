@@ -40,20 +40,20 @@
                                         <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders"
                                             role="tab" aria-controls="tab-orders" aria-selected="false">سفارشات</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="tab-downloads-link" data-toggle="tab"
-                                            href="#tab-downloads" role="tab" aria-controls="tab-downloads"
-                                            aria-selected="false">دانلود ها</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address"
-                                            role="tab" aria-controls="tab-address" aria-selected="false">آدرس</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account"
-                                            role="tab" aria-controls="tab-account" aria-selected="false">جزئیات حساب
-                                            کاربری</a>
-                                    </li>
+{#                                    <li class="nav-item">#}
+{#                                        <a class="nav-link" id="tab-downloads-link" data-toggle="tab"#}
+{#                                            href="#tab-downloads" role="tab" aria-controls="tab-downloads"#}
+{#                                            aria-selected="false">دانلود ها</a>#}
+{#                                    </li>#}
+{#                                    <li class="nav-item">#}
+{#                                        <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address"#}
+{#                                            role="tab" aria-controls="tab-address" aria-selected="false">آدرس</a>#}
+{#                                    </li>#}
+{#                                    <li class="nav-item">#}
+{#                                        <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account"#}
+{#                                            role="tab" aria-controls="tab-account" aria-selected="false">جزئیات حساب#}
+{#                                            کاربری</a>#}
+{#                                    </li>#}
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">خروج از حساب کاربری</a>
                                     </li>
@@ -64,14 +64,21 @@
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel"
                                         aria-labelledby="tab-dashboard-link">
-                                        <p>سلام <span class="font-weight-normal text-dark">کاربر</span>
-                                            <br>
-                                            شما در اینجا میتوانید <a href="#tab-orders"
-                                                class="tab-trigger-link link-underline">سفارشات خود را ببینید</a>، وضعیت
-                                            ارسال <a href="#tab-address" class="tab-trigger-link">سفارشات خود را مشاهده
-                                                کنید وآدرس خود را تغییر دهید</a>، و همچنین <a href="#tab-account"
-                                                class="tab-trigger-link">می توانید رمز عبور یا جزئیات حساب کاربری خود را
-                                                ویرایش کنید </a>.</p>
+{#                                        <p>سلام <span class="font-weight-normal text-dark">کاربر</span>#}
+{#                                            <br>#}
+{#                                            شما در اینجا میتوانید <a href="#tab-orders"#}
+{#                                                class="tab-trigger-link link-underline">سفارشات خود را ببینید</a>، وضعیت#}
+{#                                            ارسال <a href="#tab-address" class="tab-trigger-link">سفارشات خود را مشاهده#}
+{#                                                کنید وآدرس خود را تغییر دهید</a>، و همچنین <a href="#tab-account"#}
+{#                                                class="tab-trigger-link">می توانید رمز عبور یا جزئیات حساب کاربری خود را#}
+{#                                                ویرایش کنید </a>.</p>#}
+                                        <p>
+                                            {% for ordermanage in ordermanages %}
+                                                <a href="#">{{ ordermanage.id }}</a>
+                                                <a href="#">{{ ordermanage.province }}</a>
+
+                                            {% endfor %}
+                                        </p>
                                     </div><!-- .End .tab-pane -->
 
                                     <div class="tab-pane fade" id="tab-orders" role="tabpanel"
