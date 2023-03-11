@@ -29,6 +29,7 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     price = models.FloatField(default=0)
+    total = models.FloatField(default=0)
 
 
 class OrderManagement(models.Model):
@@ -67,6 +68,9 @@ class OrderManagement(models.Model):
     explain = models.TextField(max_length=300,null=True,blank=True)
     email = models.CharField(max_length=50,null=True,blank=True)
     tax = models.CharField(max_length=20,null=True,blank=True)
+    sended = models.BooleanField(default=False)
+    delivered = models.BooleanField(default=False)
+
 
 
 class Transaction(models.Model):

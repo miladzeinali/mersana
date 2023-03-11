@@ -36,7 +36,7 @@ def OrderControl(request,code):
                 price = product.price
                 if product.Sale == True:
                     price = product.sale_price
-                OrderItem.objects.create(order=order, product=product, quantity=1,price=price)
+                OrderItem.objects.create(order=order, product=product, quantity=1,price=price,total=price)
                 return render(request,'detail-product.html',{'product':product})
             else:
                 return render(request,'detail-product.html',{'product':product})
@@ -50,6 +50,9 @@ def OrderItemChange(request,id):
     try:
         order = Order.objects.get(user=user, status='Wpay')
         product = Product.objects.get(id=id)
+        price = Product.price
+        if product.Sale:
+            price = product.sale_price
         orderitem = OrderItem.objects.get(order=order, product=product)
         if orderitem.quantity == 1 and qty < 1:
             orderitem.delete()
@@ -60,6 +63,7 @@ def OrderItemChange(request,id):
             return redirect('web:dashbord')
         if product.count > orderitem.quantity:
             orderitem.quantity += qty
+            orderitem.total = price*orderitem.quantity
             if orderitem.quantity > product.count:
                 return redirect('web:dashbord')
             orderitem.save()
