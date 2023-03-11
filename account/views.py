@@ -6,7 +6,7 @@ from random import randint
 import requests
 from django.contrib.auth import login,logout
 from django.contrib.auth.models import User
-from cart.models import Order,OrderItem
+from cart.models import Order,OrderItem,OrderManagement
 import re
 
 def UserVerify(request):
@@ -89,13 +89,13 @@ def UserVerify(request):
                         user = Userprofile.objects.get(mobile=mobile).user
                         login(request,user)
                         messages.success(request,'به مرسانا خوش آمدید!','success')
-                        return redirect('web:dashbord')
+                        return redirect('web:home')
                     except:
                         user = User.objects.create_user(username=mobile,password=code)
                         Userprofile.objects.create(user=user,mobile=mobile)
                         user.save()
                         login(request,user)
-                        return redirect('account:register')
+                        return redirect('web:home')
                 except:
                     messages.success(request,'رمز به صورت صحیح وارد نشده است !','error')
                     return redirect('account:register')
@@ -150,16 +150,18 @@ def FavoriteReport(request):
                 for favorit in favorits:
                     product = Product.objects.get(code=favorit.code)
                     products.append(product)
-                favorits = Favorits.objects.filter(user=user)
                 countFave = len(favorits)
-                order = Order.objects.get(user=user,status='Wpay')
-                orderitems = OrderItem.objects.filter(order=order)
+                try:
+                    order = Order.objects.get(user=user,status='Wpay')
+                    orderitems = OrderItem.objects.filter(order=order)
+                except:
+                    pass
                 countitems = len(orderitems)
                 for item in orderitems:
                     total += item.quantity*item.price
                 return render(request,'wishlist.html',{'products':products,'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
                                        'total':total})            
-            except:  
+            except:
                 return redirect('product:products')
         else:
             return redirect('account:register')
@@ -172,5 +174,17 @@ def UserLogout(request):
 
 def Dashboard(request):
     user = request.user
+    orderitems = []
+    ordermanages = []
     if user.is_authenticated:
-        return render(request,'dashboard.html')
+        try:
+            orders = Order.objects.filter(user=user,status='Processing')
+            for order in orders:
+                orderitem = OrderItem.objects.filter(order=order)
+                ordermanage = OrderManagement.objects.filter()
+                orderitems.append(orderitem)
+                ordermanages.append(ordermanage)
+        except:
+            pass
+
+        return render(request,'dashboard.html',{'ordermanages':ordermanages,'orderitems':orderitems})
