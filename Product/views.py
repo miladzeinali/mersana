@@ -114,10 +114,13 @@ def GenFemale(request):
 def filter_data (request):
     categoris = request.GET.getlist('category[]')
     brands = request.GET.getlist('brand[]')
+    # gender = request.GET.getlist('gender[]')
     allProducts = Product.objects.all()
     if len(brands) > 0:
         allProducts = allProducts.filter(brand__Brand__in = brands).distinct()
     if len(categoris) > 0:
         allProducts = allProducts.filter(category__Category__in = categoris).distinct()
+    # if len(gender) > 0:
+    #     allProducts = allProducts.filter(category__Category__in = categoris).distinct()
     t = render_to_string('ajax/product-list.html',{'data':allProducts})
     return JsonResponse({'data': t})

@@ -11,7 +11,7 @@
 {% endblock %}
 {% block content %}
 
-            <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+            <div class="page-header text-center" style="background-image: url('static/images/page-header-bg.jpg')">
                 <div class="container">
                     <h1 class="page-title">داشبورد<span>فروشگاه</span></h1>
                 </div><!-- End .container -->
@@ -92,9 +92,9 @@
 						</thead>
 
 						<tbody>
-							<tr>
                                 {% for ordermanage in ordermanages %}
                                 {% for detail in ordermanage %}
+							<tr>
 
 								<td class="product-col">
 									<div class="product">
@@ -103,7 +103,7 @@
 											<a>{{ detail.id }}</a>
 										</h3><!-- End .product-title -->
 								</td>
-								<td class="price-col">{{detail.totalprice}}</td>
+								<td class="price-col">{{detail.totalprice | intcomma}}</td>
 									<td class="quantity-col">
                                                 {{detail.date}}
 									</td>
@@ -117,10 +117,11 @@
 								<td class="remove-col"><a href="{% url 'account:detailorder' detail.id %}" class="btn-remove">مشاهده</a>
 								</td>
                                     <td><a href="{% url 'account:trackorder' detail.id %}"> وضعیت سفارش </a></td>
+                                    							</tr>
+
                                 {% endfor %}
                                 {% endfor %}
 
-							</tr>
 						</tbody>
 
 					</table><!-- End .table table-wishlist -->

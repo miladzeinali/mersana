@@ -28,14 +28,19 @@ def send_request(request):
 
 def verify(request):
     from cart.views.ordermange import orderpayed
+    from cart.models import OrderManagement
+    user = request.user
+    if user.is_authenticated:
+        ordermanage = OrderManagement.objects.get(user=user,status='Wpay')
+        amount = ordermanage.totalprice
     if request.GET.get('Status') == 'OK':
         result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], amount)
         if result.Status == 100:
             orderpayed(request)
-            return redirect('web:dashbord')
+            return redirect('account:dashboard')
         elif result.Status==101:
             orderpayed(request)
-            return redirect('web:dashbord')
+            return redirect('account:dashboard')
         else:
             messages.error(request,'فرآیند پرداخت موفقیت آمیز نبود !','error')
             return redirect('web:dashbord')

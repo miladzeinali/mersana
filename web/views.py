@@ -8,6 +8,7 @@ from account.models import Address
 
 def Home(request):
     sales = Product.objects.filter(Sale=True)
+    news = Product.objects.all()
     orderitems = []
     countitems = []
     total = 0
@@ -28,7 +29,7 @@ def Home(request):
                 total += item.quantity*item.price
         except:
             pass
-    return render(request,'home.html',{'sales':sales,'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
+    return render(request,'home.html',{'sales':sales,'news':news,'orderitems':orderitems,'countfave':countFave,'countitems':countitems,
                                        'total':total})
 
 def Shop(request):
@@ -68,4 +69,4 @@ def about(request):
    return render(request,'about.html')
 
 def contact(request):
-    return render(request,'detail-product.html')
+    return render(request,'contact.html')

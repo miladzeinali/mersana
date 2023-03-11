@@ -80,7 +80,7 @@ def orderpayed(request):
                 product.save()
             mobile = user
             # send sms to user
-            params = (('receptor', f'{mobile}'), ('token', f'{ordermanage.id}'), ('template', 'sendmersana'))
+            params = (('receptor', f'{mobile}'), ('token', f'{ordermanage.first_name}'),('token2', f'{ordermanage.id}'), ('template', 'orderpayed'))
             requests.post('https://api.kavenegar.com/v1/7335726878564E2F506C4A3857457773624F70634C466A7A586F456D345A78544F7845446B3263635832773D/verify/lookup.json',
                                       params = params)
             ordermanage.status = 'Processing'

@@ -41,18 +41,18 @@
                     <div class="trackorder-progress">
                         <ul class="trackorder-progressbar">
                             <li class="trackorder-step active"><span class="track-icon"> <img
-                                        src="static/images/track order/processed.png"
+                                        src="{% static 'images/track order/processed.png' %}"
                                         alt="track_order"></span><span
                                     class="progressbar-track"></span><span class="track-title">سفارش
                                     <br>پردازش شد</span></li>
                             <li class="trackorder-step active"><span class="track-icon"> <img
-                                        src="assets/images/track order/packing.png"
+                                        src="{% static 'images/track order/packing.png' %}"
                                         alt="track_order"></span><span
                                     class="progressbar-track"></span><span class="track-title">سفارش
                                     <br>وارد بخش بسته بندی شد </span></li>
                             {% if ordermanage.sended %}
                             <li class="trackorder-step active"><span class="track-icon"> <img
-                                        src="assets/images/track order/shipped.png"
+                                        src="{% static 'images/track order/shipped.png' %}"
                                         alt="track_order"></span><span
                                     class="progressbar-track"></span><span class="track-title">سفارش
                                     <br>ارسال شد</span></li>
