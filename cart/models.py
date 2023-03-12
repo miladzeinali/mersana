@@ -30,6 +30,7 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
     price = models.FloatField(default=0)
     total = models.FloatField(default=0)
+    variety = models.CharField(max_length=10,null=True,blank=True)
 
 
 class OrderManagement(models.Model):

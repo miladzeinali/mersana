@@ -32,7 +32,8 @@
 						<div class="row">
 							<figure class="product-main-image">
 								<img id="product-zoom" src="{{product.image.url}}"
-									data-zoom-image="{% static 'images/products/single/1-big.jpg' %}" style="width: 80%;" alt="تصویر محصول">
+									data-zoom-image="{% static 'images/products/single/1-big.jpg' %}"
+									style="width: 80%;" alt="تصویر محصول">
 
 								<a href="#" id="btn-product-gallery" class="btn-product-gallery">
 									<i class="icon-arrows"></i>
@@ -40,164 +41,195 @@
 							</figure><!-- End .product-main-image -->
 
 							<div id="product-zoom-gallery" class="product-image-gallery">
-								 <!-- The grid: four columns -->
+								<!-- The grid: four columns -->
 
 								{% for image in images %}
-								<a class="product-gallery-item "
-								 data-image="{{image.img.url}}"
-								  data-zoom-image="{{image.img.url}}">
+								<a class="product-gallery-item " data-image="{{image.img.url}}"
+									data-zoom-image="{{image.img.url}}">
 									<img src="{{image.img.url}}" alt="توضیحات تصویر">
 								</a>
 								{% endfor %}
-								
+
 							</div><!-- End .product-image-gallery -->
 						</div><!-- End .row -->
 					</div><!-- End .product-gallery -->
 				</div><!-- End .col-md-6 -->
+				<form action="{% url 'cart:ordercontrol' product.code %}" method="post">
+					{% csrf_token %}
+					<div class="col-md-6">
+						<div class="product-details">
+							<h1 class="product-title">{{ product.title }}</h1>
+							<!-- End .product-title -->
 
-				<div class="col-md-6">
-					<div class="product-details">
-						<h1 class="product-title">{{ product.title }}</h1>
-						<!-- End .product-title -->
+							<div class="ratings-container">
+								<div class="ratings">
+									<div class="ratings-val" style="width: 40%;"></div>
+									<!-- End .ratings-val -->
+								</div><!-- End .ratings -->
+								<a class="ratings-text" href="#product-review-link" id="review-link">(
+									{{product.count_sell}} فروش
+									)</a>
+							</div><!-- End .rating-container -->
 
-						<div class="ratings-container">
-							<div class="ratings">
-								<div class="ratings-val" style="width: 40%;"></div>
-								<!-- End .ratings-val -->
-							</div><!-- End .ratings -->
-							<a class="ratings-text" href="#product-review-link" id="review-link">(
-								{{product.count_sell}} فروش
-								)</a>
-						</div><!-- End .rating-container -->
+							<div class="product-price">
+								{% if product.Sale %}
+								<div style="margin: 15px"><s>{{ product.price |intcomma }}تومان</s></div>
+								<div>{{product.sale_price |intcomma}} تومان</div>
+								{% else %}
+								{{ product.price | intcomma }}
+								{% endif %}
 
-						<div class="product-price">
-                            {% if product.Sale %}
-						<div style="margin: 15px"><s>{{ product.price |intcomma }}تومان</s></div><div>{{product.sale_price |intcomma}} تومان</div>
-                            {% else %}
-                            {{ product.price | intcomma }}
-                            {% endif %}
-							
-						</div><!-- End .product-price -->
+							</div><!-- End .product-price -->
 
-{#						<div class="product-content">#}
-{#							<p>#}
-{#                                {{product.about}}#}
-{#							</p>#}
-{#						</div><!-- End .product-content -->#}
+							{# <div class="product-content">#}
+								{# <p>#}
+									{# {{product.about}}#}
+									{# </p>#}
+								{# </div><!-- End .product-content -->#}
 
-						<div class="details-filter-row details-row-size">
-							<label>رنگ : </label>
+							<div class="details-filter-row details-row-size">
+								<label>رنگ : </label>
 
-							<div class="product-nav product-nav-thumbs">
-								{{ product.color }}
-							
-							</div><!-- End .product-nav -->
-						</div><!-- End .details-filter-row -->
+								<div class="product-nav product-nav-thumbs">
+									{{ product.color }}
 
-						<div class="details-filter-row details-row-size">
-							<label for="size">سایز : </label>
-							<div class="select-custom">
-								<select name="size" id="size" class="form-control">
-									<option value="#" selected="selected">سایز را انتخاب کنید</option>
-                                    {%  if product.Capacity1 %}
-									<option value="s">{{ product.Capacity1 }}</option>
-                                    {% elif product.Capacity2 %}
-									<option value="s">{{ product.Capacity2 }}</option>
-                                    {% elif product.Capacity3 %}
-									<option value="s">{{ product.Capacity3 }}</option>
-                                    {% elif product.Capacity4 %}
-									<option value="s">{{ product.Capacity4 }}</option>
-                                    {% elif product.Capacity5 %}
-									<option value="s">{{ product.Capacity5 }}</option>
-                                    {% endif %}
-								</select>
-							</div><!-- End .select-custom -->
+								</div>
+								<!-- End .product-nav -->
+							</div><!-- End .details-filter-row -->
+							<div class="details-filter-row details-row-size ">
+								<!-- <form action="{% url 'cart:ordercontrol' product.code %}" method="post">
+									{% csrf_token %} -->
+									<div class="form-check" style="padding-left: 3.2rem;">
+										<input class="form-check-input" type="radio" value="1" name="variety"
+											id="flexRadioDefault1">
+										<label style="width: 20px;" class="form-check-label" for="flexRadioDefault1">
+											20
+										</label>
+									</div>
+									<div class="form-check" style="padding-left: 3.2rem;">
+										<input class="form-check-input" type="radio" name="variety"
+											id="flexRadioDefault2" value="2" >
+										<label style="width: 20px;" class="form-check-label" for="flexRadioDefault2">
+											30
+										</label>
+									</div>
+									<!-- <button type="submit">انتخاب</button> -->
+								<!-- </form> -->
+								<!-- End .product-nav -->
+							</div>
+							<!-- <div class="details-filter-row details-row-size">
+								<label for="size">سایز : </label>
+								<div class="select-custom">
+									<select id="size" class="form-control" required>
+										{# <option selected="selected">سایز را انتخاب کنید</option>#}
+										{% if product.variety1 %}
+										<option value="{{ product.variety1 }}" name="variety">{{ product.variety1 }}
+										</option>
+										{% endif %}
+										{% if product.variety2 %}
+										<option value="{{ product.variety2 }}" name="variety">{{ product.variety2 }}
+										</option>
+										{% endif %}
+										{% if product.variety3 %}
+										<option value="{{ product.variety3 }}" name="variety">{{ product.variety3 }}
+										</option>
+										{% endif %}
+										{% if product.variety4 %}
+										<option value="{{ product.variety4 }}" name="variety">{{ product.variety4 }}
+										</option>
+										{% endif %}
+										{% if product.variety5 %}
+										<option value="{{ product.variety5 }}" name="variety">{{ product.variety5 }}
+										</option>
+										{% endif %}
 
-{#							<a href="#" class="size-guide"><i class="icon-th-list"></i>راهنمای اندازه</a>#}
-						</div><!-- End .details-filter-row -->
+									</select>
+								</div>
 
-						<div class="details-filter-row details-row-size">
-							<label for="qty">تعداد : </label>
-							<div class="product-details-quantity">
-								<input type="number" id="qty" class="form-control product-quantity" value="1" min="1"
-									max="10" step="1" data-decimals="0" name="qty" required>
-							</div><!-- End .product-details-quantity -->
-						</div><!-- End .details-filter-row -->
+							</div> -->
+							<!-- End .details-filter-row -->
 
-						<div class="product-details-action">
-							<a href="{% url 'cart:ordercontrol' product.code %}"
-								class="btn-product btn-cart"><span>افزودن به سبد خرید</span></a>
-							<!-- <input type="hidden" value="{{product.code}}" id="product-code">
+							<div class="details-filter-row details-row-size">
+								<label for="qty">تعداد : </label>
+								<div class="product-details-quantity">
+									<input type="number" id="qty" class="form-control product-quantity" value="1"
+										min="1" max="10" step="1" data-decimals="0" name="qty" required>
+								</div><!-- End .product-details-quantity -->
+							</div><!-- End .details-filter-row -->
+
+							<div class="product-details-action">
+								<button type="submit" class="btn-product btn-cart"><span>افزودن به سبد
+										خرید</span></button>
+								<!-- <input type="hidden" value="{{product.code}}" id="product-code">
 							<button id="addtocart"  class="btn-product btn-cart"><span>افزودن به سبد خرید</span></button> -->
+				</form>
+				<div class="details-action-wrapper">
+					<a href="{% url 'account:favorits' product.code %}" class="btn-product btn-wishlist"
+						title="لیست علاقه مندی"><span>افزودن
+							به
+							علاقه مندی</span></a>
 
-							<div class="details-action-wrapper">
-								<a href="{% url 'account:favorits' product.code %}" class="btn-product btn-wishlist"
-									title="لیست علاقه مندی"><span>افزودن
-										به
-										علاقه مندی</span></a>
+				</div><!-- End .details-action-wrapper -->
+			</div><!-- End .product-details-action -->
 
-							</div><!-- End .details-action-wrapper -->
-						</div><!-- End .product-details-action -->
+			<div class="product-details-footer">
+				<div class="product-details-tab">
+					<ul class="nav nav-pills justify-content-center" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab"
+								role="tab" aria-controls="product-desc-tab" aria-selected="true">توضیحات</a>
+						</li>
 
-						<div class="product-details-footer">
-							<div class="product-details-tab">
-								<ul class="nav nav-pills justify-content-center" role="tablist">
-									<li class="nav-item">
-										<a class="nav-link active" id="product-desc-link" data-toggle="tab"
-											href="#product-desc-tab" role="tab" aria-controls="product-desc-tab"
-											aria-selected="true">توضیحات</a>
-									</li>
-
-									<li class="nav-item">
-										<a class="nav-link" id="product-shipping-link" data-toggle="tab"
-											href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab"
-											aria-selected="false">ارسال و بازگشت</a>
-									</li>
-								</ul>
-								<div class="tab-content">
-									<div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel"
-										aria-labelledby="product-desc-link">
-										<div class="product-desc-content">
-											<h3>اطلاعات محصول</h3>
-											<p>{{ product.about }}</p>
-											
-
-								
-										</div><!-- End .product-desc-content -->
-									</div><!-- .End .tab-pane -->
-									<div class="tab-pane fade" id="product-info-tab" role="tabpanel"
-										aria-labelledby="product-info-link">
-										<div class="product-desc-content">
-											<h3>اطلاعات</h3>
-											<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن </p>
-
-										</div><!-- End .product-desc-content -->
-									</div><!-- .End .tab-pane -->
-									<div class="tab-pane fade" id="product-shipping-tab" role="tabpanel"
-										aria-labelledby="product-shipping-link">
-										<div class="product-desc-content">
-											<h3>ارسال و بازگشت</h3>
-											<p></a>
-											</p>
-										</div><!-- End .product-desc-content -->
-									</div><!-- .End .tab-pane -->
+						<li class="nav-item">
+							<a class="nav-link" id="product-shipping-link" data-toggle="tab"
+								href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab"
+								aria-selected="false">ارسال و بازگشت</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel"
+							aria-labelledby="product-desc-link">
+							<div class="product-desc-content">
+								<h3>اطلاعات محصول</h3>
+								<p>{{ product.about }}</p>
 
 
 
-								</div><!-- End .col-auto -->
-							</div><!-- End .row -->
-						</div><!-- End .review -->
-					</div><!-- End .نظر -->
-				</div><!-- .End .tab-pane -->
-			</div><!-- End .tab-content -->
-		</div><!-- End .product-details-tab -->
+							</div><!-- End .product-desc-content -->
+						</div><!-- .End .tab-pane -->
+						<div class="tab-pane fade" id="product-info-tab" role="tabpanel"
+							aria-labelledby="product-info-link">
+							<div class="product-desc-content">
+								<h3>اطلاعات</h3>
+								<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن </p>
+
+							</div><!-- End .product-desc-content -->
+						</div><!-- .End .tab-pane -->
+						<div class="tab-pane fade" id="product-shipping-tab" role="tabpanel"
+							aria-labelledby="product-shipping-link">
+							<div class="product-desc-content">
+								<h3>ارسال و بازگشت</h3>
+								<p></a>
+								</p>
+							</div><!-- End .product-desc-content -->
+						</div><!-- .End .tab-pane -->
 
 
-		<!-- End .product-details-tab -->
+
+					</div><!-- End .col-auto -->
+				</div><!-- End .row -->
+			</div><!-- End .review -->
+		</div><!-- End .نظر -->
+	</div><!-- .End .tab-pane -->
+</div><!-- End .tab-content -->
+</div><!-- End .product-details-tab -->
+
+
+<!-- End .product-details-tab -->
 
 
 
-	</div><!-- End .container -->
+</div><!-- End .container -->
 </div><!-- End .page-content -->
 {% endblock %}
 {% block footer %}

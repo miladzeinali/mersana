@@ -44,7 +44,6 @@ def ordertopay(request):
     if request.method == 'POST':
         try:
             form = request.POST
-            print(form)
             if user.is_authenticated and form['first_name'] :
                 r = requests.get('https://api.keybit.ir/time/')
                 resp = r.json()

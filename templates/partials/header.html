@@ -102,7 +102,7 @@
                                         <img src="{{ orderitem.product.image.url }}" alt="محصول">
                                     </a>
                                 </figure>
-                                <a href="#" class="btn-remove" title="حذف محصول"><i class="icon-close"></i></a>
+                                <a href="{% url 'cart:deleteitem' orderitem.id %}" class="btn-remove" title="حذف محصول"><i class="icon-close"></i></a>
                             </div><!-- End .product -->
                             {% endfor %}
 {#                            <div class="product">#}
@@ -133,8 +133,8 @@
                         </div><!-- End .dropdown-cart-total -->
 
                         <div class="dropdown-cart-action">
-                            <a href="{% url 'web:dashbord' %}" class="btn btn-primary">مشاهده سبد خرید</a>
-                            <a href="checkout.html" class="btn btn-outline-primary-2"><span>پرداخت</span><i
+                            <a></a>
+                            <a href="{% url 'web:dashbord' %}" class="btn btn-outline-primary-2"><span>پرداخت</span><i
                                     class="icon-long-arrow-left"></i></a>
                         </div><!-- End .dropdown-cart-total -->
                     </div><!-- End .dropdown-menu -->

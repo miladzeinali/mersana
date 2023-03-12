@@ -58,20 +58,20 @@
                                     <br>ارسال شد</span></li>
                             {% else %}
                             <li class="trackorder-step"><span class="track-icon"> <img
-                                        src="assets/images/track order/shipped.png"
+                                        src="{% static 'images/track order/shipped.png' %}"
                                         alt="track_order"></span><span
                                     class="progressbar-track"></span><span class="track-title">سفارش
                                     <br>ارسال شد</span></li>
                             {% endif %}
                             {% if ordermanage.delivered %}
                             <li class="trackorder-step active"><span class="track-icon"> <img
-                                        src="assets/images/track order/deliveried.png"
+                                        src="{% static 'images/track order/deliveried.png' %}"
                                         alt="track_order"></span><span
                                     class="progressbar-track"></span><span class="track-title">سفارش
                                     <br>تحویل داده شد</span></li>
                             {% else %}
                             <li class="trackorder-step"><span class="track-icon"> <img
-                                        src="assets/images/track order/deliveried.png"
+                                        src="{% static 'images/track order/deliveried.png' %}"
                                         alt="track_order"></span><span
                                     class="progressbar-track"></span><span class="track-title">سفارش
                                     <br>تحویل داده شد</span></li>
