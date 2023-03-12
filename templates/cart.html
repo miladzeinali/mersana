@@ -36,7 +36,7 @@
 								<th>محصول</th>
 								<th>قیمت</th>
 								<th>تعداد</th>
-								<th>به روز رسانی</th>
+{#								<th>به روز رسانی</th>#}
 								<th>حذف</th>
 								<th></th>
 							</tr>
@@ -65,15 +65,15 @@
 										<div class="cart-product-quantity">
 											{% csrf_token %}
 											<input type="hidden" name="id" value="{{item.product.id}}">
-											<input class="form-control" name="qty" value={{item.quantity}}>
+											{{ item.quantity }}
 
 										</div>
 									</td>
-									<td>
-										<button type="submit" class="btn btn-outline-dark-2">اعمال</button>
-
-										<!-- End .cart-product-quantity -->
-									</td>
+{#									<td>#}
+{#										<button type="submit" class="btn btn-outline-dark-2">اعمال</button>#}
+{##}
+{#										<!-- End .cart-product-quantity -->#}
+{#									</td>#}
 								</form>
 
 								{# <td class="total-col">84,000</td>#}
@@ -107,7 +107,7 @@
 
 				<aside class="col-lg-3">
 					<div class="summary summary-cart">
-						<h3 class="summary-title">جمع سبد خرید</h3><!-- End .summary-title -->
+{#						<h3 class="summary-title">جمع سبد خرید</h3><!-- End .summary-title -->#}
 
 						<table class="table table-summary">
 							<tbody>

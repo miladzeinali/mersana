@@ -20,12 +20,14 @@ def OrderControl(request,code):
                     orderitem = OrderItem.objects.get(order=order, product=product)
                     if product.count > orderitem.quantity:
                         orderitem.quantity += 1
+                        total = orderitem.quantity * float(price)
+                        orderitem.total = total
                         orderitem.save()
                     else:
                         return render(request, 'detail-product.html', {'product': product})
                 except:
                     OrderItem.objects.create(order=order, product=product,
-                                            quantity=1, price=price)
+                                            quantity=1, price=price,total=price)
                 return render(request,'detail-product.html',{'product':product})
             else:
                 return render(request,'detail-product.html',{'product':product})
@@ -39,7 +41,7 @@ def OrderControl(request,code):
                 OrderItem.objects.create(order=order, product=product, quantity=1,price=price,total=price)
                 return render(request,'detail-product.html',{'product':product})
             else:
-                return render(request,'detail-product.html',{'product':product})
+                return redirect('product:products')
     else:
         return redirect('account:register')
 
@@ -85,4 +87,5 @@ def OrderItemDelete(request,id):
         pass
     return redirect('web:dashbord')
 
-    
+
+

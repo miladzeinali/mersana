@@ -49,7 +49,7 @@ class Product(models.Model):
     hashtag = models.TextField(max_length=60, null=True, blank=True)
     point = models.PositiveSmallIntegerField(default=0)
     Sale = models.BooleanField()
-    sale_price = models.CharField(max_length=35, null=True, blank=True)
+    sale_price = models.PositiveSmallIntegerField(default=0, null=True, blank=True)
     date_created = models.DateField(auto_now=True)
     date_edited = models.DateField(auto_now=True)
     gender = models.BooleanField(default=False)

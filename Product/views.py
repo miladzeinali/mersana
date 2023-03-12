@@ -77,11 +77,11 @@ def ProductDetail(request,id):
         user = request.user
         countitems = len(orderitems)
         countFave = len(favorits)
-        if user.is_authenticated:
+        if product:
             try:
-                favorits = Favorits.objects.filter(user=user)
-                countFave = len(favorits)
                 try:
+                    favorits = Favorits.objects.filter(user=user)
+                    countFave = len(favorits)
                     order = Order.objects.get(user=user,status='Wpay')
                     orderitems = OrderItem.objects.filter(order=order)
                 except:
