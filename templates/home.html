@@ -76,8 +76,8 @@
                             <h3 class="product-title text-center"><a href="product.html"> {{ sale.title }}</a>
                             </h3><!-- End .product-title -->
                             <div class="product-price">
-                                <span class="new-price">{{sale.sale_price | intcomma}} تومان</span>
-                                <span class="old-price"><s>{{ sale.price | intcomma}}</s></span>
+                                <span class="new-price">{{sale.variety1price | intcomma}} تومان</span>
+{#                                <span class="old-price"><s>{{ sale.va | intcomma}}</s></span>#}
                             </div><!-- End .product-price -->
                         </div><!-- End .product-body -->
                         <a href="{% url 'product:product' sale.id %}" class="action">خرید</a>

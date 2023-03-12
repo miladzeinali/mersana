@@ -80,12 +80,12 @@
 										</a></h3><!-- End .product-title -->
 									{% if product.Sale %}
 									<div class="product-price">
-										<span><s>{{ product.price |intcomma }}</s></span> <span
+										<span><s>{{ product.variety1price |intcomma }}</s></span> <span
 											style="padding-right: 10%">{{ product.sale_price | intcomma }} تومان</span>
 									</div><!-- End .product-price -->
 									{% else %}
 									<div class="product-price">
-										تومان {{ product.price |intcomma }}
+										تومان {{ product.variety1price |intcomma }}
 									</div><!-- End .product-price -->
 									{% endif %}
 									<div class="ratings-container">
@@ -238,7 +238,6 @@
 
 				</div><!-- End .widget -->
 		</div><!-- End .sidebar sidebar-shop -->
-		</aside><!-- End .col-lg-3 -->
 	</div><!-- End .row -->
 </div><!-- End .container -->
 </div><!-- End .page-content -->
