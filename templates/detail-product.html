@@ -97,22 +97,63 @@
 								<!-- End .product-nav -->
 							</div><!-- End .details-filter-row -->
 							<div class="details-filter-row details-row-size ">
-								<!-- <form action="{% url 'cart:ordercontrol' product.code %}" method="post">
-									{% csrf_token %} -->
-									<div class="form-check" style="padding-left: 3.2rem;">
-										<input class="form-check-input" type="radio" value="1" name="variety"
+								 <form action="{% url 'cart:ordercontrol' product.code %}" method="post">
+									{% csrf_token %}
+
+                                     {% if product.variety1price %}
+                                     <div class="form-check" style="padding-left: 3.2rem;">
+										<input class="form-check-input" type="radio" checked value="{{ product.variety1 }}" name="variety"
 											id="flexRadioDefault1">
 										<label style="width: 20px;" class="form-check-label" for="flexRadioDefault1">
-											20
+											{{product.variety1}}
 										</label>
 									</div>
-									<div class="form-check" style="padding-left: 3.2rem;">
-										<input class="form-check-input" type="radio" name="variety"
-											id="flexRadioDefault2" value="2" >
-										<label style="width: 20px;" class="form-check-label" for="flexRadioDefault2">
-											30
+                                     {% endif %}
+                                   {% if product.variety2price %}
+                                     <div class="form-check" style="padding-left: 3.2rem;">
+										<input class="form-check-input" type="radio" value="{{ product.variety2 }}" name="variety"
+											id="flexRadioDefault1">
+										<label style="width: 20px;" class="form-check-label" for="flexRadioDefault1">
+											{{product.variety2}}
 										</label>
 									</div>
+                                     {% endif %}
+                                   {% if product.variety3price %}
+                                     <div class="form-check" style="padding-left: 3.2rem;">
+										<input class="form-check-input" type="radio" value="{{ product.variety3 }}" name="variety"
+											id="flexRadioDefault1">
+										<label style="width: 20px;" class="form-check-label" for="flexRadioDefault1">
+											{{ product.variety3 }}
+										</label>
+									</div>
+                                     {% endif %}
+                                     {% if product.variety4price %}
+                                        <div class="form-check" style="padding-left: 3.2rem;">
+										<input class="form-check-input" type="radio" value="{{ product.variety4 }}" name="variety"
+											id="flexRadioDefault1">
+										<label style="width: 20px;" class="form-check-label" for="flexRadioDefault1">
+											{{ product.variety4 }}
+										</label>
+									    </div>
+                                     {% endif %}
+                                     {% if product.variety5price %}
+                                        <div class="form-check" style="padding-left: 3.2rem;">
+										<input class="form-check-input" type="radio" value="{{ product.variety5 }}" name="variety"
+											id="flexRadioDefault1">
+										<label style="width: 20px;" class="form-check-label" for="flexRadioDefault1">
+											{{ product.variety5 }}
+										</label>
+									    </div>
+                                     {% endif %}
+
+{#									<div class="form-check" style="padding-left: 3.2rem;">#}
+{#										<input class="form-check-input" type="radio" name="variety"#}
+{#											id="flexRadioDefault2" value="2" >#}
+{#										<label style="width: 20px;" class="form-check-label" for="flexRadioDefault2">#}
+{#											30#}
+{#										</label>#}
+{#									</div>#}
+                                 </form>
 									<!-- <button type="submit">انتخاب</button> -->
 								<!-- </form> -->
 								<!-- End .product-nav -->

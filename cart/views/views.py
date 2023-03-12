@@ -9,16 +9,21 @@ from django.http import JsonResponse
 def OrderControl(request,code):
     user = request.user
     print(request.POST)
+    form = request.POST
+    product = Product.objects.get(code=code)
+    if request.POST:
+        variety = form['variety']
+    else:
+        variety = product.variety1
     if user.is_authenticated:
         if request.method == 'POST':
-            variety = request.POST['variety']
-        try:
-            if request.method == 'POST':
-                variety = request.POST['variety']
-            else:
-                return redirect('web:home')
-            order = Order.objects.get(user=user, status='Wpay')
             product = Product.objects.get(code=code)
+            if form['variety']:
+                variety = form['variety']
+            else:
+                variety = product.variety1
+        try:
+            order = Order.objects.get(user=user, status='Wpay')
             if product.count != 0 and product.count >= 1:
                 if variety == product.variety1:
                     price = product.variety1price
@@ -33,7 +38,7 @@ def OrderControl(request,code):
                 if product.Sale == True:
                     price = price - (price*product.off_percent/100)
                 try:
-                    orderitem = OrderItem.objects.get(order=order, product=product)
+                    orderitem = OrderItem.objects.get(order=order, product=product,variety=variety)
                     if product.count > orderitem.quantity:
                         orderitem.quantity += 1
                         total = orderitem.quantity * float(price)
@@ -43,7 +48,7 @@ def OrderControl(request,code):
                         return render(request, 'detail-product.html', {'product': product})
                 except:
                     OrderItem.objects.create(order=order, product=product,
-                                            quantity=1, price=price,total=price)
+                                            quantity=1, price=price,total=price,variety=variety)
                 return render(request,'detail-product.html',{'product':product})
             else:
                 return render(request,'detail-product.html',{'product':product})
@@ -65,7 +70,7 @@ def OrderControl(request,code):
                         price = product.variety5price
                     elif product.Sale == True:
                         price = price - (price * product.off_percent / 100)
-                    OrderItem.objects.create(order=order, product=product, quantity=1,price=price,total=price)
+                    OrderItem.objects.create(order=order, product=product, quantity=1,price=price,total=price,variety=variety)
                     return render(request,'detail-product.html',{'product':product})
             else:
                 return redirect('product:products')
